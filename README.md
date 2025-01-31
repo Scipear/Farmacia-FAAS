@@ -41,6 +41,7 @@ Ejecuta los siguientes comandos uno a uno.
 ```bash
 npm install
 npm run build
+composer install
 php artisan migrate
 ```
 Para abrir el servidor (probar el proyecto) utiliza el comando
