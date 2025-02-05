@@ -17,4 +17,6 @@ class Medicamento extends Model
     public function med_productos(){
         return $this->hasMany(Medicamento_Producto::class());
     }
+
+    //Alargar a medida que se vaya creando mas tablas y relaciones en la base de datos
 }

@@ -29,4 +29,6 @@ class Medicamento_Producto extends Model
     public function presentacion(){
         return $this->belongsTo(Presentacion::class());
     }
+
+    //Alargar a medida que se vaya creando mas tablas y relaciones en la base de datos
 }
