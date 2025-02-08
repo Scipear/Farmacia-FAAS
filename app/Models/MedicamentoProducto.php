@@ -9,7 +9,7 @@ class Medicamento_Producto extends Model
 {
     use HasFactory;
 
-    protected $table = 'medicamento_producto';
+    protected $table = 'medicamentoProducto';
     protected $fillable = [
         'descripcion',
         'precio_venta',

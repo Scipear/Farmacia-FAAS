@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('telefonos_laboratorios', function (Blueprint $table) {
+        Schema::create('telefonosLaboratorios', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('laboratorio_id')
@@ -26,13 +26,24 @@ return new class extends Migration
         Schema::create('telefonosSucursales', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('sucursalesId')
-                ->constrained()
+            $table->foreignId('sucursales_id')
+                ->constrained('sucursales')
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();
 
             $table->bigInteger('numero');
             $table->string('tipo');
+        });
+
+        Schema::create('telefonosEmpleados', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('empleados_id')
+                ->constrained()
+                ->cascadeOnUpdateon()
+                ->cascadeOnDelete();
+
+            $table->Integer('numero');
         });
     }
 
@@ -43,5 +54,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('telefonos_laboratorios');
         Schema::dropIfExists('telefonosSucursales');
+        Schema::dropIfExists('telefonosEmpleados');
     }
 };

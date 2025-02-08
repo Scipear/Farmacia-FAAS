@@ -20,7 +20,7 @@ class Laboratorio extends Model
     }
 
     public function telefonos(){
-        return $this->hasMany(Telefono_Laboratorio::class());
+        return $this->hasMany(TelefonoLaboratorio::class());
     }
 
     //Alargar a medida que se vaya creando mas tablas y relaciones en la base de datos

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sucursalId')->constrained();
-            $table->foreignId('empleadoId')->constrained();
-            $table->foreignId('laboratorioId')->constrained();
+            $table->foreignId('sucursal_id')->constrained('sucursales');
+            $table->foreignId('empleado_id')->constrained();
+            $table->foreignId('laboratorio_id')->constrained();
             $table->float('precioTotal');
             $table->string('tipoPago');
             $table->string('status');
