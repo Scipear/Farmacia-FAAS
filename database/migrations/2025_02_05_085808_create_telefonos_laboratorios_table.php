@@ -19,7 +19,20 @@ return new class extends Migration
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();
 
-            $table->string('numero');
+            $table->bigInteger('numero');
+            $table->string('tipo');
+        });
+
+        Schema::create('telefonosSucursales', function (Blueprint $table) {
+            $table->id();
+
+            $table->foreignId('sucursalesId')
+                ->constrained()
+                ->cascadeOnUpdateon()
+                ->cascadeOnDelete();
+
+            $table->bigInteger('numero');
+            $table->string('tipo');
         });
     }
 
@@ -29,5 +42,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('telefonos_laboratorios');
+        Schema::dropIfExists('telefonosSucursales');
     }
 };
