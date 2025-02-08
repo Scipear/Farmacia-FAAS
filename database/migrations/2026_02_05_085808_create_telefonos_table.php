@@ -43,7 +43,7 @@ return new class extends Migration
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();
 
-            $table->Integer('numero');
+            $table->bigInteger('numero');
         });
     }
 

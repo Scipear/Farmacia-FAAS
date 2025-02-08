@@ -23,4 +23,9 @@ class Empleado extends Model
     public function telefonos(){
     return $this->hasMany(TelefonoEmpleado::class());
     }
+
+    //Relacion Muchos a muchos
+    public function cargo(){
+        return $this->belongsToMany(cargo::class());
+    }
 }
