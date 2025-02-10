@@ -31,4 +31,12 @@ class Empleado extends Model
     public function cargo(){
         return $this->hasMany(CargoEmpleado::class());
     }
+
+
+    // Relacion Muchos a muchos
+
+    public function  cargos(){
+
+        return $this->belongsToMany(Cargo::class());
+    }
 }

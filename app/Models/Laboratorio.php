@@ -16,15 +16,15 @@ class Laboratorio extends Model
     
     // Relaciones uno a muchos
     public function med_productos(){
-        return $this->hasMany(Medicamento::class());
+        return $this->hasMany(Medicamento::class);
     }
 
     public function telefonos(){
-        return $this->hasMany(TelefonoLaboratorio::class());
+        return $this->hasMany(TelefonoLaboratorio::class);
     }
 
     public function pedidos(){
-        return $this->hasMany(Pedido::class());
+        return $this->hasMany(Pedido::class);
     }
 
     //Alargar a medida que se vaya creando mas tablas y relaciones en la base de datos

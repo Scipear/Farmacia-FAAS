@@ -5,18 +5,39 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Medicamento extends Model
+class Medicamento_Producto extends Model
 {
     use HasFactory;
-    protected $table = 'medicamentos';
+
+    protected $table = 'medicamentoProducto';
     protected $fillable = [
-        'nombre',
+        'descripcion',
+        'precio_venta',
+        'precio_compra',
     ];
 
-    //Relaciones uno a muchos
-    public function med_productos(){
-        return $this->hasMany(Medicamento_Producto::class());
+    //Relaciones muchos a uno
+
+    public function laboratorio(){
+        return $this->belongsTo(Laboratorio::class);
     }
 
-    //Alargar a medida que se vaya creando mas tablas y relaciones en la base de datos
+    public function medicamento(){
+        return $this->belongsTo(Medicamento::class);
+    }
+
+    public function presentacion(){
+        return $this->belongsTo(Presentacion::class);
+    }
+
+
+    //Relacion Muchos a muchos
+
+    public function monodrogas(){
+    return $this->belongsToMany(Monodroga::class);
+    }
+
+    public function accionTerapeutica(){
+    return $this->belongsToMany(AccionTerapeutica::class);
+    }
 }

@@ -14,8 +14,9 @@ class Cargo extends Model
         'nombre'
     ];
 
-    //Relacion uno a muchos
-    public function empleado(){
-        return $this->hasMany(cargoEmpleado::class);
+    //Relacion Muchos a muchos 
+
+    public function empleados(){
+        return $this->belongsToMany(Empleado::class);
     }
 }
