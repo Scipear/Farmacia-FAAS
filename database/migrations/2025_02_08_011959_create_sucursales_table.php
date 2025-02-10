@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('estado');
             $table->string('ciudad');
+            $table->string('zona');
             $table->text('direccion');
             $table->string('correo')->unique();
             $table->string('status');

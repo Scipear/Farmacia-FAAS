@@ -44,6 +44,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->bigInteger('numero');
+            $table->string('tipo');
         });
     }
 

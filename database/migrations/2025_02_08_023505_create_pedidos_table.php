@@ -13,14 +13,24 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sucursal_id')->constrained('sucursales');
-            $table->foreignId('empleado_id')->constrained();
-            $table->foreignId('laboratorio_id')->constrained();
+
+            $table->foreignId('sucursal_id')
+            ->constrained('sucursales')
+            ->onDelete('cascade');
+
+            $table->foreignId('empleado_id')
+            ->constrained('empleados')
+            ->onDelete('cascade');
+
+            $table->foreignId('laboratorio_id')
+            ->constrained('laboratorios')
+            ->onDelete('cascade');
+            
             $table->float('precioTotal');
             $table->string('tipoPago');
             $table->string('status');
             $table->text('observaciones');
-            $table->timestamps();
+            $table->date('fecha_emitida');
         });
     }
 

@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pedido_id')->constrained();
+            $table->foreignId('pedido_id')
+            ->constrained('pedidos')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->float('precioPagar');
             $table->text('observaciones');
             $table->string('status');
-            $table->timestamps();
+            $table->date('fechaLlegada');
         });
     }
 

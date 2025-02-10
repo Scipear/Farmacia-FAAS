@@ -24,8 +24,11 @@ class Empleado extends Model
     return $this->hasMany(TelefonoEmpleado::class());
     }
 
-    //Relacion Muchos a muchos
+    public function pedidos(){
+        return $this->hasMany(Pedido::class());
+    }
+
     public function cargo(){
-        return $this->belongsToMany(cargo::class());
+        return $this->hasMany(CargoEmpleado::class());
     }
 }

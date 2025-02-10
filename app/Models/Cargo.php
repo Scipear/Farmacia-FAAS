@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Cargo extends Model
@@ -13,8 +14,8 @@ class Cargo extends Model
         'nombre'
     ];
 
-    //Relacion Muchos a muchos
+    //Relacion uno a muchos
     public function empleado(){
-        return $this->belongsToMany(empleado::class());
+        return $this->hasMany(cargoEmpleado::class);
     }
 }
