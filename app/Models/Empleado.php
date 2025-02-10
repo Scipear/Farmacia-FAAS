@@ -28,11 +28,6 @@ class Empleado extends Model
         return $this->hasMany(Pedido::class());
     }
 
-    public function cargo(){
-        return $this->hasMany(CargoEmpleado::class());
-    }
-
-
     // Relacion Muchos a muchos
 
     public function  cargos(){

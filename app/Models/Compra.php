@@ -17,9 +17,9 @@ class Compra extends Model
         return $this->belongsTo(Pedido::class);
     }
 
-    //relacion uno a muchos
     public function medicinas()
     {
-        return $this->hasMany(Medicina_compra::class);
+        return $this->belongsToMany(Medicina::class, 'medicina_compra');
     }
+    
 }

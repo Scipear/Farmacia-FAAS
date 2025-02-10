@@ -28,14 +28,13 @@ class Pedido extends Model
     {
         return $this->belongsTo(Laboratorio::class);
     }
-    
-    
-    //relacion uno a muchos
+
     public function medicinas()
     {
-        return $this->hasMany(Medicina_pedido::class);
+        return $this->belongsToMany(Medicina::class);
     }
     
+    //relacion uno a muchos
     public function compras()
     {
         return $this->hasMany(Compra::class);
