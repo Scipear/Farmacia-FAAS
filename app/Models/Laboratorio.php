@@ -15,8 +15,8 @@ class Laboratorio extends Model
         'correo'];
     
     // Relaciones uno a muchos
-    public function med_productos(){
-        return $this->hasMany(Medicamento::class);
+    public function medicinas(){
+        return $this->hasMany(Medicina::class);
     }
 
     public function telefonos(){
@@ -27,5 +27,9 @@ class Laboratorio extends Model
         return $this->hasMany(Pedido::class);
     }
 
-    //Alargar a medida que se vaya creando mas tablas y relaciones en la base de datos
+    //Relaciones muchos a muchos
+
+    public function sucursales(){
+        return $this->belongsToMany(Sucursal::class, 'sucursal_laboratorio');
+    }
 }

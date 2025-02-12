@@ -34,9 +34,9 @@ class Pedido extends Model
         return $this->belongsToMany(Medicina::class);
     }
     
-    //relacion uno a muchos
+    //relacion uno a uno
     public function compras()
     {
-        return $this->hasMany(Compra::class);
+        return $this->hasOne(Compra::class);
     }
 }

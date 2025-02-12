@@ -21,17 +21,19 @@ class Empleado extends Model
     //Relacion uno a Muchos
 
     public function telefonos(){
-    return $this->hasMany(TelefonoEmpleado::class());
+    return $this->hasMany(TelefonoEmpleado::class);
     }
 
     public function pedidos(){
-        return $this->hasMany(Pedido::class());
+        return $this->hasMany(Pedido::class);
     }
 
     // Relacion Muchos a muchos
-
     public function  cargos(){
+        return $this->belongsToMany(Cargo::class);
+    }
 
-        return $this->belongsToMany(Cargo::class());
+    public function sucursales(){
+        return $this->belongsToMany(Sucursal::class, 'empleado_sucursal');
     }
 }

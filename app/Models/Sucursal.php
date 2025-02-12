@@ -23,4 +23,18 @@ class Sucursal extends Model
     public function pedidos(){
         return $this->hasMany(Pedido::class);
     }
+
+    // relaciones muchos a muchos
+
+    public function empleados(){
+        return $this->belongsToMany(Empleado::class, 'empleado_sucursal');
+    }
+
+    public function laboratorios(){
+        return $this->belongsToMany(Laboratorio::class, 'sucurcal_laboratorio');
+    }
+
+    public function medicinas(){
+        return $this->belongsToMany(Medicina::class, 'medicina_sucursal');
+    }
 }
