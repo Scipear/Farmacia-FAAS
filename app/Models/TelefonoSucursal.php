@@ -10,7 +10,8 @@ class TelefonoSucursal extends Model
     use HasFactory;
 
     protected $table = 'telefonosSucursales';
-    protected $fillable = ['numero', 'sucursales_id', 'tipo'];
+    protected $fillable = ['numero', 'sucursal_id', 'tipo'];
+    public $timestamps = false;
 
     public function sucursal()
     {

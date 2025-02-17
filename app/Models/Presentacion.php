@@ -15,6 +15,7 @@ class Presentacion extends Model
         'medida',
         'unidades',
     ];
+    public $timestamps = false;
 
     //Relacion uno a muchos
     public function medicinas(){

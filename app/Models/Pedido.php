@@ -11,6 +11,7 @@ class Pedido extends Model
 
     protected $table = 'pedidos';
     protected $fillable = ['sucursal_id', 'empleado_id', 'laboratorio_id', 'fecha_emitida', 'precioTotal', 'tipoPago', 'status', 'observaciones'];
+    public $timestamps = false;
 
 
     

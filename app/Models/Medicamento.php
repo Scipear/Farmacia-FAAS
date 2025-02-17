@@ -13,6 +13,7 @@ class Medicamento extends Model
     protected $fillable = [
         'nombre',
     ];
+    public $timestamps = false;
 
     // Relaciones uno a muchos
     public function medicina(){

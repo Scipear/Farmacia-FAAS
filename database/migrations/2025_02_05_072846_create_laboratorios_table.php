@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('ciudad');
             $table->longText('direccion');
-            $table->string('correo');
+            $table->string('correo')->unique();
         });
     }
 

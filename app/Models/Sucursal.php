@@ -11,6 +11,7 @@ class Sucursal extends Model
 
     protected $table = 'sucursales';
     protected $fillable = ['nombre', 'direccion', 'correo', 'estado', 'ciudad', 'zona', 'status'];
+    public $timestamps = false;
 
 
     //relaciones uno a muchos

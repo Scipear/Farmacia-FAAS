@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('cedula');
+            $table->unsignedBigInteger('cedula')->unique();
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('correo');
-            $table->string('direccion');
+            $table->string('correo')->unique();
+            $table->text('direccion');
         });
     }
 

@@ -14,6 +14,7 @@ class Medicina_sucursal extends Model
         'cantidad',
         'observacion',
     ];
+    public $timestamps = false;
 
     // Relaciones
 

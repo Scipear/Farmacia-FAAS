@@ -13,6 +13,7 @@ class Sucursal_laboratorio extends Model
     protected $fillable = [
         'fecha_final',
     ];
+    public $timestamps = false;
 
     //Relaciones
 

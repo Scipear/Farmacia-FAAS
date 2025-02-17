@@ -15,6 +15,7 @@ class Medicina extends Model
         'precio_venta',
         'precio_compra',
     ];
+    public $timestamps = false;
 
     //Relaciones muchos a uno
     public function laboratorio(){

@@ -13,6 +13,7 @@ class Empleado_sucursal extends Model
     protected $fillable= [
         'fecha_final',
     ];
+    public $timestamps = false;
 
     // Relaciones
 

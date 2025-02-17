@@ -17,6 +17,7 @@ class Empleado extends Model
         'correo',
         'direccion'
     ];
+    public $timestamps = false;
 
     //Relacion uno a Muchos
 

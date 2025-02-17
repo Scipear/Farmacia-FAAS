@@ -12,7 +12,9 @@ class Laboratorio extends Model
     protected $fillable = [
         'nombre', 
         'direccion', 
-        'correo'];
+        'correo'
+    ];
+    public $timestamps = false;
     
     // Relaciones uno a muchos
     public function medicinas(){
