@@ -14,14 +14,11 @@ return new class extends Migration
         Schema::create('accion_medicamento', function (Blueprint $table) {
             $table->id();
             
-            
-            
             $table->foreignId('accion_id')
                 ->constrained('accionTerapeutica')
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();
 
-            
             $table->foreignId('medicamento_id')
                 ->constrained('medicamentos')
                 ->cascadeOnUpdateon()
