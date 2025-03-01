@@ -11,6 +11,7 @@ class Pedido extends Model
 
     protected $table = 'pedidos';
     protected $fillable = ['sucursal_id', 'empleado_id', 'laboratorio_id', 'fecha_emitida', 'precioTotal', 'tipoPago', 'status', 'observaciones'];
+    public $timestamps = false;
 
 
     
@@ -34,9 +35,9 @@ class Pedido extends Model
         return $this->belongsToMany(Medicina::class);
     }
     
-    //relacion uno a muchos
+    //relacion uno a uno
     public function compras()
     {
-        return $this->hasMany(Compra::class);
+        return $this->hasOne(Compra::class);
     }
 }

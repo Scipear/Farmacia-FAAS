@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medicamento', function (Blueprint $table) {
+        Schema::create('medicinas', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('laboratorio_id')

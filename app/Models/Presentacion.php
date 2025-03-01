@@ -15,9 +15,10 @@ class Presentacion extends Model
         'medida',
         'unidades',
     ];
+    public $timestamps = false;
 
     //Relacion uno a muchos
-    public function med_productos(){
-        return $this->hasMany(Medicamento_Producto::class());
+    public function medicinas(){
+        return $this->hasMany(Medicina::class());
     }
 }

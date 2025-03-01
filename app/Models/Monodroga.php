@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Monodroga extends Model
@@ -10,6 +11,7 @@ class Monodroga extends Model
 
     protected $table = 'monodrogas';
     protected $fillable = ['nombre'];
+    public $timestamps = false;
 
 
     //Relacion Muchos a muchos

@@ -11,10 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medicinas', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
 
         Schema::create('medicina_pedido', function (Blueprint $table) {
             $table->id();
@@ -28,7 +24,6 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->integer('cantidad');
             $table->float('precio');
-            $table->timestamps();
         });
 
         Schema::create('medicina_compra', function (Blueprint $table) {
@@ -43,7 +38,6 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->integer('cantidad');
             $table->float('precio');
-            $table->timestamps();
         });
     }
 
@@ -52,7 +46,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('medicinas');
         Schema::dropIfExists('medicina_pedido');
         Schema::dropIfExists('medicina_compra');
     }

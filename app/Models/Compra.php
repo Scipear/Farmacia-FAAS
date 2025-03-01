@@ -11,6 +11,7 @@ class Compra extends Model
 
     protected $table = 'compras';
     protected $fillable = ['pedido_id', 'precioPagar', 'observaciones', 'status', 'fechaLlegada'];
+    public $timestamps = false;
 
     public function pedido()
     {

@@ -13,6 +13,7 @@ class Cargo extends Model
     protected $fillable=[
         'nombre'
     ];
+    public $timestamps = false;
 
     //Relacion Muchos a muchos 
 

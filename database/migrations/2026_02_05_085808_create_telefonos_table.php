@@ -26,7 +26,7 @@ return new class extends Migration
         Schema::create('telefonosSucursales', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('sucursales_id')
+            $table->foreignId('sucursal_id')
                 ->constrained('sucursales')
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();
@@ -38,7 +38,7 @@ return new class extends Migration
         Schema::create('telefonosEmpleados', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('empleados_id')
+            $table->foreignId('empleado_id')
                 ->constrained()
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();

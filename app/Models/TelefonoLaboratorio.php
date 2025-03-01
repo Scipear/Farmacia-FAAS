@@ -12,6 +12,7 @@ class TelefonoLaboratorio extends Model
     protected $fillable = [
         'numero',
     ];
+    public $timestamps = false;
 
     //Relacion muchos a uno
     public function laboratorio(){
