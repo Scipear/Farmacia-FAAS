@@ -23,10 +23,6 @@ Route::get('/', function () {
      return view('inicio');
  });
 
-Route::get('/', function () {
-    return view('admin.iniciogerente');
-});
-
 Route::get('/inicio', function () {
     return view('inicio');
 });
