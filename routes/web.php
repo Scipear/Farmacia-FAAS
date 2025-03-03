@@ -19,15 +19,34 @@ use Illuminate\Support\Facades\Route;
 
 
 
+//  Route::get('/', function () {
+//      return view('inicio');
+// });
+
+// Route::get('/', function () {
+//     return view('admin.cuentasxpagar');
+//  });
+
+
+// Route::get('/', function () {
+//     return view('admin.inicioadmin');
+// });
+
+//  Route::get('/', function () {
+//      return view('admin.inicioanalista');
+// });
+
 Route::get('/', function () {
-    return view('inicio');
+    return view('admin.iniciogerente');
 });
+
 Route::get('/inicio', function () {
     return view('inicio');
 });
 Route::get('/greet', function () {
     return view('master');
 });
+
 Route::get('/buscar', function (Request $request) {
     $busqueda = $request->query('query');
     return view('resultados', compact('busqueda'));

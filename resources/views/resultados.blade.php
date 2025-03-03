@@ -27,15 +27,15 @@
                 <td>10</td>
                 <td>20</td>
         </table>
-
+<!-- 
          <p>Para saber en que ciudad y sede esta disponible, por favor seleccione la id del medicamento, ciudad y sede</p><br>
          <label>ID  <select></select></label><br><br>
         <label>Ciudad  <select></select></label><br><br>
         <label>Sede  <select></select></label><br><br>
-        <!-- if($ciudad){
+        if($ciudad){
             <b>Precio (Bs): </b><br><br>
             <b>Cantidad disponible: </b><br> 
-        }  -->
+        }  --> 
 
    @else
         <p>No ingresaste un término de búsqueda.</p>
