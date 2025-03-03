@@ -75,6 +75,8 @@
             border-radius: 4px;
             margin-top: 20px;
         }
+
+
     </style>
 
     <div class="register-container">

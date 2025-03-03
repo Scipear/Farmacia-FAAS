@@ -12,6 +12,15 @@
             padding: 0;
             background-color: #f4f4f4;
         }
+
+        h2{
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        } 
+
         header {
             background: #29a15f;
             color: white;
@@ -21,6 +30,7 @@
              justify-content: space-between; /* Added */
              align-items: center;        /* Added */
         }
+
         .container {
             margin-top: 50px;
         }
@@ -44,6 +54,38 @@
         button:hover {
             background: #29a15f;
         }
+
+        select{
+            width: 15%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background:rgb(228, 255, 222);
+        }
+
+        table, th, td{
+            width: 90%;
+            font-size: 20px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+            margin: 60px;
+        }
+
+        th
+        {
+            background:rgb(57, 139, 39);
+            color: white;
+        }
+
+        td{
+            background:rgb(219, 219, 219);
+            color: black;
+        }
+
+
+
 
     </style>
 
