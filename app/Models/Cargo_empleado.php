@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Empleado_sucursal extends Model
+class Cargo_empleado extends Model
 {
     use HasFactory;
 
-    protected $table = 'empleado_sucursal';
+    protected $table = 'cargo_empleado';
     protected $fillable= [
-        'sucursal_id',
+        'cargo_id',
         'empleado_id',
-        'fecha_final',
+        'fechaFin',
     ];
     public $timestamps = false;
 
@@ -23,7 +22,7 @@ class Empleado_sucursal extends Model
         return $this->belongsTo(Empleado::class);
     }
 
-    public function sucursal(){
-        return $this->belongsTo(Sucursal::class);
+    public function cargo(){
+        return $this->belongsTo(Cargo::class);
     }
 }

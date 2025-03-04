@@ -11,6 +11,8 @@ class Sucursal_laboratorio extends Model
 
     protected $table = 'sucursal_laboratorio';
     protected $fillable = [
+        'sucursal_id',
+        'laboratorio_id',
         'fecha_final',
     ];
     public $timestamps = false;

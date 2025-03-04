@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Medicina_sucursal extends Model
+class Medicina_compra extends Model
 {
     use HasFactory;
 
-    protected $table = 'medicina_sucursal';
+    protected $table = 'medicina_compra';
     protected $fillable = [
         'medicina_id',
-        'sucursal_id',
+        'pedido_id',
         'cantidad',
-        'observacion',
+        'precio',
     ];
     public $timestamps = false;
 
@@ -24,7 +23,7 @@ class Medicina_sucursal extends Model
         return $this->belongsTo(Medicina::class);
     }
 
-    public function sucursales(){
-        return $this->belongsTo(Sucursal::class);
+    public function compras(){
+        return $this->belongsTo(Pedido::class);
     }
 }

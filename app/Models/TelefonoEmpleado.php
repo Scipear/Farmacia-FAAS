@@ -19,7 +19,7 @@ class TelefonoEmpleado extends Model
     //Relacion Muchos a uno
 
     public function empleado(){
-        return $this->belongsTo(Empleado::class());
+        return $this->belongsTo(Empleado::class);
     }
 
 }

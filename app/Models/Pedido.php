@@ -30,9 +30,10 @@ class Pedido extends Model
         return $this->belongsTo(Laboratorio::class);
     }
 
+    //Relacion muchos a muchos
     public function medicinas()
     {
-        return $this->belongsToMany(Medicina::class);
+        return $this->belongsToMany(Medicina::class)->using(Medicina_compra::class)->withPivot('cantidad', 'precio');
     }
     
     //relacion uno a uno

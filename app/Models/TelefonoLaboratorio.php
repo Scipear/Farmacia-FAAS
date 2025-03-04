@@ -16,6 +16,6 @@ class TelefonoLaboratorio extends Model
 
     //Relacion muchos a uno
     public function laboratorio(){
-        return $this->belongsTo(Laboratorio::class());
+        return $this->belongsTo(Laboratorio::class);
     }
 }

@@ -28,14 +28,14 @@ class Sucursal extends Model
     // relaciones muchos a muchos
 
     public function empleados(){
-        return $this->belongsToMany(Empleado::class, 'empleado_sucursal');
+        return $this->belongsToMany(Empleado::class)->using(Empleado_sucursal::class)->withPivot('fecha_inicio', 'fecha_salida');
     }
 
     public function laboratorios(){
-        return $this->belongsToMany(Laboratorio::class, 'sucurcal_laboratorio');
+        return $this->belongsToMany(Laboratorio::class)->using(Sucursal_laboratorio::class)->withPivot('fecha_inicio', 'fecha_final');
     }
 
     public function medicinas(){
-        return $this->belongsToMany(Medicina::class, 'medicina_sucursal');
+        return $this->belongsToMany(Medicina::class)->using(Medicina_sucursal::class)->withPivot('cantidad', 'observacion');
     }
 }

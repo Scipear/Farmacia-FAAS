@@ -16,21 +16,24 @@ return new class extends Migration
 
             $table->foreignId('sucursal_id')
             ->constrained('sucursales')
-            ->onDelete('cascade');
+            ->cascadeOnUpdateon()
+            ->cascadeOnDelete();
 
             $table->foreignId('empleado_id')
             ->constrained('empleados')
-            ->onDelete('cascade');
+            ->cascadeOnUpdateon()
+            ->cascadeOnDelete();
 
             $table->foreignId('laboratorio_id')
             ->constrained('laboratorios')
-            ->onDelete('cascade');
+            ->cascadeOnUpdateon()
+            ->cascadeOnDelete();
             
             $table->float('precioTotal');
             $table->string('tipoPago');
             $table->string('status');
             $table->text('observaciones');
-            $table->date('fecha_emitida');
+            $table->date('fecha_emitida')->default(now()->toDateString());
         });
     }
 

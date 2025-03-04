@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cargoEmpleado', function (Blueprint $table) {
+        Schema::create('cargo_empleado', function (Blueprint $table) {
             $table->id();
             
             $table->foreignId('cargo_id')
@@ -25,7 +25,7 @@ return new class extends Migration
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();
 
-            $table->date('fechaInicio');
+            $table->date('fechaInicio')->default(now()->toDateString());;
             $table->date('fechaFin')->nullable();
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cargoEmpleado');
+        Schema::dropIfExists('cargo_empleado');
     }
 };
