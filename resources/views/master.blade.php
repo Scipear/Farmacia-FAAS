@@ -67,10 +67,11 @@
         table, th, td{
             width: 90%;
             font-size: 20px;
-            border: 1px solid black;
             border-collapse: collapse;
             padding: 10px;
-            margin: 60px;
+            margin: 60px; 
+            border: none;
+            border-radius: 5px;
         }
 
         th
@@ -83,9 +84,6 @@
             background:rgb(219, 219, 219);
             color: black;
         }
-
-
-
 
     </style>
 
@@ -125,26 +123,26 @@
     .content {
         margin-top: 20px; /* Space between tabs and content */
     }
+
+    /* .imag{
+        width: 200px;
+        display: block;
+    } */
+
+    .cards{
+        display: flex;
+    }
+
+    .card{
+        margin: 10px;
+        background-color:rgb(209, 235, 220); /* Modified */
+        border: 2px solid white;
+        border-radius: 5px;
+    }
+
 </style>
 
 <body>
-
-<header>
-    @yield('header', 'Farmacias FAAS')
-
-    <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
-        <li class="nav-item">
-            <a class="nav-link active" href="/">Inicio</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.login.form') }}">Login</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.register.form') }}">Registro</a>
-        </li>
-        
-    </ul>
-</header>
 
 <div class="container">
     @yield('contenido')

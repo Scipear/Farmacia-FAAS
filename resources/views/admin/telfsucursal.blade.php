@@ -14,15 +14,19 @@
 </header>
 @section('contenido')
         <div class="container">
-            <h1>Bienvenido al Panel de Administración</h1>
-            <p>¡Has iniciado sesión como administrador!</p>
-        </div>
-        <b>Gestionar Surcursales</b>
-        <button>Ir</button><br><br>
-        <b>Gestionar Laboratorios</b>
-        <button>Ir</button><br><br>
-        <b>Gestionar Empleados</b>
-        <button>Ir</button><br><br>
-        <b>Gestionar Medicina</b>
-        <button>Ir</button><br><br>
+            <h1>Información de los teléfonos afiliados a las surcursales</h1>
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>SucursalID</th>
+                    <th>Número de teléfono</th>
+                    <th>Opciones</th>
+                </tr>
+                <tr>
+                    <td>123</td>
+                    <td>Acetf</td>
+                    <td>Genvem</td>
+                </tr>
+            </table>
 @endsection
