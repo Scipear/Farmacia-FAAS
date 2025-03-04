@@ -22,7 +22,7 @@ class Empleado extends Model
     //Relacion uno a Muchos
 
     public function telefonos(){
-    return $this->hasMany(TelefonoEmpleado::class);
+        return $this->hasMany(TelefonoEmpleado::class);
     }
 
     public function pedidos(){

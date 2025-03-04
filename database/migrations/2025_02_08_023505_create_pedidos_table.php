@@ -32,7 +32,7 @@ return new class extends Migration
             $table->float('precioTotal');
             $table->string('tipoPago');
             $table->string('status');
-            $table->text('observaciones');
+            $table->text('observaciones')->nullable;
             $table->date('fecha_emitida')->default(now()->toDateString());
         });
     }

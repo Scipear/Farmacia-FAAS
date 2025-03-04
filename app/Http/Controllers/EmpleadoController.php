@@ -14,6 +14,12 @@ class EmpleadoController extends Controller
         return response()->json($empleados, 200);
     }
 
+    public function obtenerEmpleadoID($id){
+        $empleado = Empleado::find($id);
+        
+        return response()->json($empleado, 200);
+    }
+
     // Crea un nuevo registro de empleado a traves de una peticion
     public function crearEmpleado(Request $request){
         $request->validate([
@@ -22,25 +28,27 @@ class EmpleadoController extends Controller
             'apellido' => 'required',
             'correo' => 'required|unique:empleados',
             'direccion' => 'required',
+            'cargo' => 'required|exists:cargos,id',
+            'sucursal' => 'required|exists:sucursales,id',
         ]); // Validaciones para los campos del registro
 
-        $empleado = new Empleado();
+        $empleado = Empleado::create($request->only(['cedula', 'nombre', 'apellido', 'correo', 'direccion']));
 
-        $empleado->cedula = $request->cedula;
-        $empleado->nombre = $request->nombre;
-        $empleado->apellido = $request->apellido;
-        $empleado->correo = $request->correo;
-        $empleado->direccion = $request->direccion;
-
-        $empleado->save(); // Guarda el registro en la tabla
-
+        if($request->has('cargo')){
+            asignarCargo($request->cargo, $empleado);
+        }
+    
+        if($request->has('sucursal')){
+            asignarSucursal($request->sucursal, $empleado);
+        }
+    
         return response()->json($empleado, 200); // Respuesta en formato JSON implementada por ahora
     }
 
     // Actualiza los datos de un empleado
-    public function actualizarEmpleado(Request $request, $empleado){
+    public function actualizarEmpleado(Request $request, $id){
 
-        $empleado = Empleado::find($empleado); // Busca a un empleado por su ID
+        $empleado = Empleado::find($id); // Busca a un empleado por su ID
 
         $request->validate([
             'cedula' => 'required|unique:empleados|max:8',
@@ -50,18 +58,23 @@ class EmpleadoController extends Controller
             'direccion' => 'required',
         ]);
 
-        $empleado->cedula = $request->cedula;
-        $empleado->nombre = $request->nombre;
-        $empleado->apellido = $request->apellido;
-        $empleado->correo = $request->correo;
-        $empleado->direccion = $request->direccion;
+        $empleado->update($request->all());
 
         return response()->json($empleado, 200);
     }
 
+
+    public function asignarCargo($cargo_id, Empleado $empleado){
+        $empleado->cargos()->attach([$request->cargo_id]);
+    }
+
+    public function asignarSucursal($sucursal_id, Empleado $empleado){
+        $empleado->sucursales()->attach([$request->sucursal_id]);
+    }
+
     // Elimina un empleado de la tabla
-    public function eliminarEmpleado($empleado){
-        $empleado = Empleado::find($empleado);
+    public function eliminarEmpleado($id){
+        $empleado = Empleado::find($id);
         $empleado->delete();
 
         return response()->json([], 204);

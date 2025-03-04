@@ -6,10 +6,33 @@ use Illuminate\Http\Request;
 
 //Rutas para los controladores de la base de datos
 
+
+// RUTAS PARA EMPLEADOS
 Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados']); // Ruta para obtener todos los empleados
+Route::get('/empleado/{id}', [EmpleadoController::class, 'obtenerEmpleadoID']); //Ruta para obtener un empleado por ID
 Route::post('/empleado', [EmpleadoController::class, 'crearEmpleado']); // Ruta para crear empleados
-Route::put('/empleado/{empleado}', [EmpleadoController::class, 'actualizarEmpleado']); // Ruta para actualizar un empleado
-Route::delete('/empleado/{empleado}', [EmpleadoController::class, 'eliminarEmpleado']); // Ruta para eliminar un empleado 
+Route::put('/empleado/{id}', [EmpleadoController::class, 'actualizarEmpleado']); // Ruta para actualizar un empleado
+Route::delete('/empleado/{id}', [EmpleadoController::class, 'eliminarEmpleado']); // Ruta para eliminar un empleado 
+
+
+// RUTAS PARA MEDICINAS
+Route::get('/medicinas', [MedicinaController::class, 'mostrarMedicinas']); // Ruta para obtener todas las medicinas
+Route::get('/medicina/{id}', [MedicinaController::class, 'obtenerMedicinaID']); //Ruta para obtener una medicina por ID
+Route::post('/medicina', [MedicinaController::class, 'crearMedicina']); // Ruta para crear medicinas
+Route::put('/medicina/{id}', [MedicinaController::class, 'actualizarMedicina']); // Ruta para actualizar una medicina
+Route::delete('/medicina/{id}', [MedicinaController::class, 'eliminarMedicina']); // Ruta para eliminar una medicina
+
+// RUTAS PARA PEDIDOS
+Route::get('/pedidos', [PedidoController::class, 'mostrarPedidos']); // Ruta para obtener todos los pedidos
+Route::get('/pedido/{id}', [MedicinaController::class, 'obtenerPedidoID']); //Ruta para obtener un pedido por ID
+Route::post('/pedido', [MedicinaController::class, 'crearPedido']); // Ruta para crear pedidos
+Route::put('/pedido/{id}', [MedicinaController::class, 'actualizarPedido']); // Ruta para actualizar un pedido
+
+// RUTAS PARA COMPRAS
+Route::get('/compras', [PedidoController::class, 'mostrarCompras']); // Ruta para obtener todos los pedidos
+Route::get('/compra/{id}', [MedicinaController::class, 'obtenerCompraID']); //Ruta para obtener un pedido por ID
+Route::post('/compra', [MedicinaController::class, 'crearCompra']); // Ruta para crear pedidos
+Route::put('/compra/{id}', [MedicinaController::class, 'actualizarCompra']); // Ruta para actualizar un pedido
 
 // Rutas para las vistas
 Route::get('/', function () {

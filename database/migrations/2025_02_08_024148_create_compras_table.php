@@ -18,7 +18,7 @@ return new class extends Migration
             ->cascadeOnUpdateon()
             ->cascadeOnDelete();
             $table->float('precioPagar');
-            $table->text('observaciones');
+            $table->text('observaciones')->nullable;
             $table->string('status');
             $table->date('fechaLlegada');
         });
