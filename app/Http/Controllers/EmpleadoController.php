@@ -15,7 +15,7 @@ class EmpleadoController extends Controller
     }
 
     public function obtenerEmpleadoID($id){
-        $empleado = Empleado::find($id);
+        $empleado = Empleado::findOrFail($id);
         
         return response()->json($empleado, 200);
     }
@@ -28,18 +28,19 @@ class EmpleadoController extends Controller
             'apellido' => 'required',
             'correo' => 'required|unique:empleados',
             'direccion' => 'required',
+            'status' => 'required',
             'cargo' => 'required|exists:cargos,id',
             'sucursal' => 'required|exists:sucursales,id',
         ]); // Validaciones para los campos del registro
 
-        $empleado = Empleado::create($request->only(['cedula', 'nombre', 'apellido', 'correo', 'direccion']));
+        $empleado = Empleado::create($request->only(['cedula', 'nombre', 'apellido', 'correo', 'direccion', 'status']));
 
         if($request->has('cargo')){
-            asignarCargo($request->cargo, $empleado);
+            $this->asignarCargo($request->cargo, $empleado);
         }
     
         if($request->has('sucursal')){
-            asignarSucursal($request->sucursal, $empleado);
+            $this->asignarSucursal($request->sucursal, $empleado);
         }
     
         return response()->json($empleado, 200); // Respuesta en formato JSON implementada por ahora
@@ -48,35 +49,56 @@ class EmpleadoController extends Controller
     // Actualiza los datos de un empleado
     public function actualizarEmpleado(Request $request, $id){
 
-        $empleado = Empleado::find($id); // Busca a un empleado por su ID
+        $empleado = Empleado::findOrFail($id); // Busca a un empleado por su ID
 
         $request->validate([
-            'cedula' => 'required|unique:empleados|max:8',
+            'cedula' => "required|unique:empleados,cedula,{$id}|max:8",
             'nombre' => 'required',
             'apellido' => 'required',
-            'correo' => "required|unique:empleados,correo,{$empleado->correo}",
+            'correo' => "required|unique:empleados,correo,{$id}",
             'direccion' => 'required',
+            'status' => 'required',
+            'cargo' => 'required|exists:cargos,id',
+            'sucursal' => 'required|exists:sucursales,id',
         ]);
 
-        $empleado->update($request->all());
+        $cargoActual = $empleado->cargos()->whereNull('cargo_empleado.fechaFin')->first();
+        
+        if($cargoActual && ($cargoActual->id !== $request->cargo)){
+            $empleado->cargos()->updateExistingPivot($cargoActual->id, ['fechaFin' => now()]);
+            
+            $this->asignarCargo($request->cargo, $empleado);
+        }
+        
+        $sucursalActual = $empleado->sucursales()->whereNull('empleado_sucursal.fecha_salida')->first();
+
+        if($sucursalActual && ($sucursalActual->id !== $request->sucursal)){
+            $empleado->sucursales()->updateExistingPivot($sucursalActual->id, ['fecha_salida' => now()]);
+            
+            $this->asignarSucursal($request->sucursal, $empleado);
+        }
+
+        $empleado->update($request->only(['cedula', 'nombre', 'apellido', 'correo', 'direccion', 'status']));
 
         return response()->json($empleado, 200);
     }
 
+    // Crear aqui funcion para cuando se despide o renuncia un empleado
 
-    public function asignarCargo($cargo_id, Empleado $empleado){
-        $empleado->cargos()->attach([$request->cargo_id]);
-    }
-
-    public function asignarSucursal($sucursal_id, Empleado $empleado){
-        $empleado->sucursales()->attach([$request->sucursal_id]);
-    }
-
+    
     // Elimina un empleado de la tabla
     public function eliminarEmpleado($id){
-        $empleado = Empleado::find($id);
+        $empleado = Empleado::findOrFail($id);
         $empleado->delete();
-
+        
         return response()->json([], 204);
+    }
+
+    public function asignarCargo($cargo_id, $empleado){
+        $empleado->cargos()->sync([$cargo_id]);
+    }
+
+    public function asignarSucursal($sucursal_id, $empleado){
+        $empleado->sucursales()->sync([$sucursal_id]);
     }
 }
