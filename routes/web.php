@@ -1,10 +1,20 @@
 <?php
 
-use App\Http\Controllers\EmpleadoController; 
+// ##################################################
+//Rutas hacia los controladores de la base de datos 
+// ###############################################
+
+use App\Http\Controllers\EmpleadoController;
+use app\Http\Controllers\MedicinaController;
+use app\Http\Controllers\PedidoController;
+
+use App\Http\Controllers\LaboratorioController;
+
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
-//Rutas para los controladores de la base de datos
+###########################################################
 
 
 // RUTAS PARA EMPLEADOS
@@ -34,9 +44,20 @@ Route::get('/compra/{id}', [MedicinaController::class, 'obtenerCompraID']); //Ru
 Route::post('/compra', [MedicinaController::class, 'crearCompra']); // Ruta para crear pedidos
 Route::put('/compra/{id}', [MedicinaController::class, 'actualizarCompra']); // Ruta para actualizar un pedido
 
-// Rutas para las vistas
+
+//RUTAS PARA LABORATORIOS//
+
+Route::get('/laboratorios', [LaboratorioController::class, 'mostrarLaboratorios']); //Ruta para obtener laboratorios
+
+
+
+////////////////////////////////////////////////////////
+///////////////// RUTAS PARA LAS VISTAS /////////////////
+///////////////////////////////////////////////////////
+
+
 Route::get('/', function () {
-     return view('inicio');
+    return view('inicio');
 });
 
 //Route::get('/inicio', function () {
@@ -81,19 +102,16 @@ Route::get('/admin/dashboard', function () {
         return view('admin.dashboard'); // Create a basic admin dashboard view
     } else {
         return redirect('/admin/login'); // Redirect to login if not authenticated
-    }});
+    }
+});
 
-    Route::get('/admin/logout', function () {
-        session()->forget('admin'); // Remove the admin session variable
-        return redirect('/admin/login');
-    });
+Route::get('/admin/logout', function () {
+    session()->forget('admin'); // Remove the admin session variable
+    return redirect('/admin/login');
+});
 
 //Get:Redirigir hacia pagina
 //Mandar info no visible desde un formulario
 //Put
 //Patch
 //Delete
-
-
-
-
