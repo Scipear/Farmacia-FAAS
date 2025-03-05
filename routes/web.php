@@ -9,7 +9,10 @@ use app\Http\Controllers\MedicinaController;
 use app\Http\Controllers\PedidoController;
 
 use App\Http\Controllers\LaboratorioController;
-
+use App\Http\Controllers\TelefonoLaboratorioController;
+use App\Http\Controllers\AccionTerapeuticaController;
+use App\Http\Controllers\MedicamentoController;
+use App\Http\Controllers\MonodrogaController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -38,6 +41,7 @@ Route::get('/pedido/{id}', [MedicinaController::class, 'obtenerPedidoID']); //Ru
 Route::post('/pedido', [MedicinaController::class, 'crearPedido']); // Ruta para crear pedidos
 Route::put('/pedido/{id}', [MedicinaController::class, 'actualizarPedido']); // Ruta para actualizar un pedido
 
+
 // RUTAS PARA COMPRAS
 Route::get('/compras', [PedidoController::class, 'mostrarCompras']); // Ruta para obtener todos los pedidos
 Route::get('/compra/{id}', [MedicinaController::class, 'obtenerCompraID']); //Ruta para obtener un pedido por ID
@@ -46,8 +50,44 @@ Route::put('/compra/{id}', [MedicinaController::class, 'actualizarCompra']); // 
 
 
 //RUTAS PARA LABORATORIOS//
-
 Route::get('/laboratorios', [LaboratorioController::class, 'mostrarLaboratorios']); //Ruta para obtener laboratorios
+Route::get('/laboratorio/{id}', [LaboratorioController::class, 'obtenerLaboratorioID']); // Ruta para obtener Laboratorios  x ID
+Route::post('/laboratorio', [LaboratorioController::class, 'crearLaboratorio']); // Ruta para crear medicinas
+Route::put('/laboratorio/{id}', [LaboratorioController::class, 'actualizarLaboratorio']); // Ruta para actualizar 
+Route::delete('/laboratorio/{id}', [LaboratorioController::class, 'eliminarLaboratorio']); // Ruta para eliminar 
+
+
+//RUTAS PARA TELEFONO LABORATORIO//
+Route::get('/laboratorio/telefonos', [TelefonoLaboratorioController::class, 'mostrarTelefonosLab']); //Ruta para obtener telefonos  de loslaboratorios
+Route::get('/laboratorio/telefono/{id}', [TelefonoLaboratorioController::class, 'obtenerTelefonoID']); // Ruta para obtener telefono x ID
+Route::post('/laboratorio/telefonos/crear', [TelefonoLaboratorioController::class, 'crearTelefono']); // Ruta para crear 
+Route::put('/laboratorio/telefono/actualizar/{id
+}', [TelefonoLaboratorioController::class, 'actualizarTelefono']); // Ruta para actualizar 
+Route::delete('/laboratorio/telefono/eliminar/{id}', [TelefonoLaboratorioController::class, 'eliminarTlf']); // Ruta para eliminar 
+
+
+//RUTAS PARA ACCIONTERAPEUITICA//
+Route::get('/accion/terapeutica', [AccionTerapeuticaController::class, 'mostrarAT']); //Ruta para obtener telefonos  de loslaboratorios
+Route::get('/accion/terapeutica/{id}', [AccionTerapeuticaController::class, 'obtenerAT']); // Ruta para obtener telefono x ID
+Route::post('/accion/terapeutica/crear', [AccionTerapeuticaController::class, 'crearAT']); // Ruta para crear 
+Route::put('/accion/terapeutica/actualizar/{id}', [AccionTerapeuticaController::class, 'actualizarAT']); // Ruta para actualizar 
+Route::delete('/accion/terapeutica/eliminar/{id}', [AccionTerapeuticaController::class, 'eliminarAT']); // Ruta para eliminar 
+
+
+//RUTAS PARA MONODROGA//
+Route::get('/monodrogas', [MonodrogaController::class, 'mostrarMonodroga']); //Ruta para obtener monodrogas
+Route::get('/monodroga/{id}', [MonodrogaController::class, 'obtenerMonodroga']); // Ruta para obtener x ID
+Route::post('/monodroga/crear', [MonodrogaController::class, 'crearMonodroga']); // Ruta para crear 
+Route::put('/monodroga/actualizar/{id}', [MonodrogaController::class, 'actualizarMonodroga']); // Ruta para actualizar 
+Route::delete('/monodroga/eliminar/{id}', [MonodrogaController::class, 'eliminarMonodroga']); // Ruta para eliminar 
+
+
+//RUTAS PARA MEDICAMENTO//
+Route::get('/medicamentos', [MedicamentoController::class, 'mostrarMedicamento']); //Ruta para obtener monodrogas
+Route::get('/medicamento/{id}', [MedicamentoController::class, 'obtenerMedicamento']); // Ruta para obtener x ID
+Route::post('/medicamento/crear', [MedicamentoController::class, 'crearMedicamento']); // Ruta para crear 
+Route::put('/medicamento/actualizar/{id}', [MedicamentoController::class, 'actualizarMedicamento']); // Ruta para actualizar 
+Route::delete('/medicamento/eliminar/{id}', [MedicamentoController::class, 'eliminarMedicamento']); // Ruta para eliminar 
 
 
 
