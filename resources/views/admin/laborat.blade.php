@@ -14,7 +14,7 @@
 </header>
 @section('contenido')
         <div class="container">
-            <h1>Información de los teléfonos de las sucursales</h1>
+            <h1>Información de Laboratorios</h1>
         </div>
         <div>        
         <!-- Hacer una ruta llamada m,,-->
@@ -31,13 +31,17 @@
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>SucursalID</th>
-                    <th>Número de teléfono</th>
-                    <th>Opciones</th>
+                    <th>Nombre</th>
+                    <th>Ciudad</th>
+                    <th>Dirección</th>
+                    <th>Correo</th>
+                    <th>Opción</th>
                 </tr>
                 <tr>
                     <td>123</td>
                     <td>Acetf</td>
+                    <td>Genvem</td>
+                    <td>Genvem</td>
                     <td>Genvem</td>
                     <td>
                     <div class="buttonCont">
@@ -47,4 +51,7 @@
                     </td>
                 </tr>
             </table>
+            <h1>Otros datos</h1>
+            <b>Teléfonos </b>
+            <a  class="botonIr" href="/admin/telfLab">Ir</a><br><br><br>
 @endsection

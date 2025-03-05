@@ -35,13 +35,22 @@ Route::post('/compra', [MedicinaController::class, 'crearCompra']); // Ruta para
 Route::put('/compra/{id}', [MedicinaController::class, 'actualizarCompra']); // Ruta para actualizar un pedido
 
 // Rutas para las vistas
-Route::get('/', function () {
+
+
+ Route::get('/', function () {
      return view('inicio');
-});
+ });
+
+
+
 
 //Route::get('/inicio', function () {
 //    return view('inicio');
 //});
+
+// Route::get('/', function () {
+//     return view('admin.telfsucursal');
+// });
 
 Route::get('/greet', function () {
     return view('master');
@@ -87,6 +96,46 @@ Route::get('/admin/dashboard', function () {
         session()->forget('admin'); // Remove the admin session variable
         return redirect('/admin/login');
     });
+
+
+    // RUTAS ADMINISTRADOR
+Route::get('/admin/sucursales', function () {
+        return view('admin.sucursales');
+});
+
+
+Route::get('/admin/dashboar', function () {
+    return view('admin.dashboard');
+});
+
+Route::get('/admin/telfsucursal', function () {
+    return view('admin.telfsucursal');
+});
+
+Route::get('/admin/laboratoriosA', function () {
+    return view('admin.laboratoriosA');
+});
+
+Route::get('/admin/laborat', function () {
+    return view('admin.laborat');
+});
+
+Route::get('/admin/telfLab', function () {
+    return view('admin.telfLab');
+});
+
+Route::get('/admin/empleados', function () {
+    return view('admin.empleados');
+});
+
+Route::get('/admin/telfEmpl', function () {
+    return view('admin.telfEmpl');
+});
+
+Route::get('/admin/cargo', function () {
+    return view('admin.cargo');
+});
+
 
 //Get:Redirigir hacia pagina
 //Mandar info no visible desde un formulario

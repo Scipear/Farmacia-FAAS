@@ -22,8 +22,6 @@
 
         <div class="content">
         <p>Filtrar por Ciudad o Sucursal </p>
-
-        <!-- Hacer una ruta llamada filtrar Y ACA CAMBIART-->
         <form action="{{ route('filtrar') }}" method="GET">
             <input type="text" name="query" placeholder="Filtrar...">
             <button type="submit">Buscar</button>

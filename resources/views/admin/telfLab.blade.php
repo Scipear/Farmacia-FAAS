@@ -14,7 +14,7 @@
 </header>
 @section('contenido')
         <div class="container">
-            <h1>Información de los teléfonos de las sucursales</h1>
+            <h1>Información de los teléfonos de los laboratorios</h1>
         </div>
         <div>        
         <!-- Hacer una ruta llamada m,,-->
@@ -31,7 +31,7 @@
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>SucursalID</th>
+                    <th>LaboratorioID</th>
                     <th>Número de teléfono</th>
                     <th>Opciones</th>
                 </tr>
