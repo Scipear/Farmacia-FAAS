@@ -4,6 +4,7 @@
 //Rutas hacia los controladores de la base de datos 
 // ###############################################
 
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\EmpleadoController;
 use app\Http\Controllers\MedicinaController;
 use app\Http\Controllers\PedidoController;
@@ -34,15 +35,15 @@ Route::delete('/medicina/{id}', [MedicinaController::class, 'eliminarMedicina'])
 
 // RUTAS PARA PEDIDOS
 Route::get('/pedidos', [PedidoController::class, 'mostrarPedidos']); // Ruta para obtener todos los pedidos
-Route::get('/pedido/{id}', [MedicinaController::class, 'obtenerPedidoID']); //Ruta para obtener un pedido por ID
-Route::post('/pedido', [MedicinaController::class, 'crearPedido']); // Ruta para crear pedidos
-Route::put('/pedido/{id}', [MedicinaController::class, 'actualizarPedido']); // Ruta para actualizar un pedido
+Route::get('/pedido/{id}', [PedidoController::class, 'obtenerPedidoID']); //Ruta para obtener un pedido por ID
+Route::post('/pedido', [PedidoController::class, 'crearPedido']); // Ruta para crear pedidos
+Route::put('/pedido/{id}', [PedidoController::class, 'actualizarPedido']); // Ruta para actualizar un pedido
 
 // RUTAS PARA COMPRAS
-Route::get('/compras', [PedidoController::class, 'mostrarCompras']); // Ruta para obtener todos los pedidos
-Route::get('/compra/{id}', [MedicinaController::class, 'obtenerCompraID']); //Ruta para obtener un pedido por ID
-Route::post('/compra', [MedicinaController::class, 'crearCompra']); // Ruta para crear pedidos
-Route::put('/compra/{id}', [MedicinaController::class, 'actualizarCompra']); // Ruta para actualizar un pedido
+Route::get('/compras', [CompraController::class, 'mostrarCompras']); // Ruta para obtener todos los pedidos
+Route::get('/compra/{id}', [CompraController::class, 'obtenerCompraID']); //Ruta para obtener un pedido por ID
+Route::post('/compra', [CompraController::class, 'crearCompra']); // Ruta para crear pedidos
+Route::put('/compra/{id}', [CompraController::class, 'actualizarCompra']); // Ruta para actualizar un pedido
 
 
 //RUTAS PARA LABORATORIOS//

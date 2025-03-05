@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Compra;
+use App\Models\Medicina_compra;
 use Illuminate\Http\Request;
 
 class CompraController extends Controller
@@ -15,9 +16,15 @@ class CompraController extends Controller
     }
 
     public function obtenerCompraID($id){
-        $compra = Compra::find($id);
+        $compra = Compra::findOrFail($id);
         
         return response()->json($compra, 200);
+    }
+
+    public function obtenerMedicinas($id){
+        $medicinas = Medicina_compra::where('compra_id', $id)->get();
+        
+        return response()->json($medicinas, 200);
     }
 
     // Crea un nuevo registro de compra a traves de una peticion
@@ -25,20 +32,20 @@ class CompraController extends Controller
         $request->validate([
             'pedido_id' => 'required|exists:pedido,id',
             'precioPagar' => 'required',
-            'observaciones',
+            'observaciones' => 'nullable',
             'status' => 'required',
             'fechaLlegada' => 'required',
         ]); // Validaciones para los campos del registro
 
         $compra= Compra::create($request->all());
     
-        return response()->json($pedido, 200); // Respuesta en formato JSON implementada por ahora
+        return response()->json($compra, 200); // Respuesta en formato JSON implementada por ahora
     }
 
     // Actualiza los datos de una compra
     public function actualizarCompra(Request $request, $id){
 
-        $compra = Compra::find($id); // Busca una medicina por su ID
+        $compra = Compra::findOrFail($id); // Busca una medicina por su ID
 
         $request->validate([
             'pedido_id' => 'required|exists:pedido,id',

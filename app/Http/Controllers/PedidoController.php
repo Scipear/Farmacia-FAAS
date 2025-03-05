@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\Medicina_pedido;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -18,6 +19,12 @@ class PedidoController extends Controller
         $pedido = Pedido::findOrFail($id);
         
         return response()->json($pedido, 200);
+    }
+
+    public function obtenerMedicinas($id){
+        $medicinas = Medicina_pedido::where('pedido_id', $id)->get();
+        
+        return response()->json($medicinas, 200);
     }
 
     // Crea un nuevo registro de pedido a traves de una peticion

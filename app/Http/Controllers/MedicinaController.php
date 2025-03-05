@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medicina;
+use App\Models\Medicina_sucursal;
 use Illuminate\Http\Request;
 
 class MedicinaController extends Controller
@@ -18,6 +19,15 @@ class MedicinaController extends Controller
         $medicina = Medicina::findOrFail($id);
         
         return response()->json($medicina, 200);
+    }
+
+    public function obtenerSucursales($id){
+        $sucursales = Medicina_sucursal::where([
+            ['sucursal_id', $id],
+            ['cantidad', '>', 0],
+        ])->get();
+
+        return response()->json($sucursales, 200);
     }
 
     // Crea un nuevo registro de medicina a traves de una peticion
