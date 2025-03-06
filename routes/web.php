@@ -100,9 +100,9 @@ Route::delete('/monodroga/{id}', [MonodrogaController::class, 'eliminarMonodroga
 //RUTAS PARA MEDICAMENTO//
 Route::get('/medicamentos', [MedicamentoController::class, 'mostrarMedicamento']); //Ruta para obtener monodrogas
 Route::get('/medicamento/{id}', [MedicamentoController::class, 'obtenerMedicamento']); // Ruta para obtener x ID
-Route::post('/medicamento/crear', [MedicamentoController::class, 'crearMedicamento']); // Ruta para crear 
-Route::put('/medicamento/actualizar/{id}', [MedicamentoController::class, 'actualizarMedicamento']); // Ruta para actualizar 
-Route::delete('/medicamento/eliminar/{id}', [MedicamentoController::class, 'eliminarMedicamento']); // Ruta para eliminar 
+Route::post('/medicamento', [MedicamentoController::class, 'crearMedicamento']); // Ruta para crear 
+Route::put('/medicamento/{id}', [MedicamentoController::class, 'actualizarMedicamento']); // Ruta para actualizar 
+Route::delete('/medicamento/{id}', [MedicamentoController::class, 'eliminarMedicamento']); // Ruta para eliminar 
 
 // RUTAS DE SUCURSALES
 Route::get('/sucursales/{id}', [SucursalController::class, 'mostrarSucursal']); // Ruta para obtener una sucursal por id
