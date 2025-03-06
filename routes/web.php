@@ -26,7 +26,6 @@ Route::post('/empleado', [EmpleadoController::class, 'crearEmpleado']); // Ruta 
 Route::put('/empleado/{id}', [EmpleadoController::class, 'actualizarEmpleado']); // Ruta para actualizar un empleado
 Route::delete('/empleado/{id}', [EmpleadoController::class, 'eliminarEmpleado']); // Ruta para eliminar un empleado 
 
-
 // RUTAS PARA MEDICINAS
 Route::get('/medicinas', [MedicinaController::class, 'mostrarMedicinas']); // Ruta para obtener todas las medicinas
 Route::get('/medicina/{id}', [MedicinaController::class, 'obtenerMedicinaID']); //Ruta para obtener una medicina por ID
@@ -46,9 +45,7 @@ Route::get('/compra/{id}', [CompraController::class, 'obtenerCompraID']); //Ruta
 Route::post('/compra', [CompraController::class, 'crearCompra']); // Ruta para crear pedidos
 Route::put('/compra/{id}', [CompraController::class, 'actualizarCompra']); // Ruta para actualizar un pedido
 
-
 //RUTAS PARA LABORATORIOS//
-
 Route::get('/laboratorios', [LaboratorioController::class, 'mostrarLaboratorios']); //Ruta para obtener laboratorios
 
 // RUTAS DE SUCURSALES
@@ -56,6 +53,7 @@ Route::get('/sucursales/{id}', [SucursalController::class, 'mostrarSucursal']); 
 Route::post('/sucursales', [SucursalController::class, 'guardarSucursal']); // Ruta para guardar sucursales
 Route::put('/sucursales/{id}', [SucursalController::class, 'actualizarSucursal']); // Ruta para actualizar una sucursal
 Route::delete('/sucursales/{id}', [SucursalController::class, 'eliminarSucursal']); // Ruta para eliminar una sucursal
+
 // RUTAS DE TELEFONOS DE SUCURSALES
 Route::get('/sucursales/tefonos/{id}', [SucursalController::class, 'mostrarTelefono']); // Ruta para obtener un telefono de una sucursal por id
 Route::post('/sucursales/tefonos', [SucursalController::class, 'guardarTelefono']); // Ruta para guardar telefonos de sucursales
