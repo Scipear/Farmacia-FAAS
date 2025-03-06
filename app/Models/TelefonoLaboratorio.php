@@ -10,6 +10,8 @@ class TelefonoLaboratorio extends Model
     use HasFactory;
     protected $table = 'telefonosLaboratorios';
     protected $fillable = [
+        'laboratorio_id',
+        'tipo',
         'numero',
     ];
     public $timestamps = false;

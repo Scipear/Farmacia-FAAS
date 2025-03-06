@@ -24,7 +24,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->unsignedInteger('cantidad');
-            $table->text('observacion');
+            $table->text('observacion')->nullable();
         });
     }
 

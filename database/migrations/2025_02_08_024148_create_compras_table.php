@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('precioPagar');
             $table->text('observaciones')->nullable;
             $table->string('status');
-            $table->date('fechaLlegada');
+            $table->date('fechaLlegada')->nullable();
         });
     }
 

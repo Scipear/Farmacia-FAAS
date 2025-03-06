@@ -12,6 +12,7 @@ class TelefonoEmpleado extends Model
     protected $table = 'telefonosEmpleados';
     protected $fillable =[
         'empleado_id',
+        'tipo',
         'numero'
     ];
     public $timestamps = false;

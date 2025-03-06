@@ -4,17 +4,23 @@
 //Rutas hacia los controladores de la base de datos 
 // ###############################################
 
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\EmpleadoController;
 use app\Http\Controllers\MedicinaController;
 use app\Http\Controllers\PedidoController;
 
 use App\Http\Controllers\LaboratorioController;
-use App\Http\Controllers\TelefonoLaboratorioController;
 use App\Http\Controllers\AccionTerapeuticaController;
-use App\Http\Controllers\MedicamentoController;
+use App\Http\Controllers\TelefonoLaboratorioController;
 use App\Http\Controllers\MonodrogaController;
+use App\Http\Controllers\MedicamentoController;
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\CargoController;
+use App\Http\Controllers\PresentacionController;
+use App\Http\Controllers\SucursalController;
+use App\Http\Controllers\TelefonoEmpleadoController;
 use Illuminate\Http\Request;
 
 ###########################################################
@@ -23,14 +29,23 @@ use Illuminate\Http\Request;
 // RUTAS PARA EMPLEADOS
 Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados']); // Ruta para obtener todos los empleados
 Route::get('/empleado/{id}', [EmpleadoController::class, 'obtenerEmpleadoID']); //Ruta para obtener un empleado por ID
+Route::get('/empleado/{id}/telefonos', [EmpleadoController::class, 'obtenerTelefonosdeEmpelado']); // Ruta para obtener los telefonos de un empleado
 Route::post('/empleado', [EmpleadoController::class, 'crearEmpleado']); // Ruta para crear empleados
 Route::put('/empleado/{id}', [EmpleadoController::class, 'actualizarEmpleado']); // Ruta para actualizar un empleado
+Route::put('/desasignarEmpleado/{id}', [EmpleadoController::class, 'desasignarEmpleado']); // Ruta para actualizar el estado de un empleado en caso de que renuncie o sea despedido
 Route::delete('/empleado/{id}', [EmpleadoController::class, 'eliminarEmpleado']); // Ruta para eliminar un empleado 
 
+// RUTAS PARA TELEFONO DE EMPLEADOS
+Route::get('/telefonosEmpleados', [TelefonoEmpleadoController::class, 'mostrarTelefonosEmpleados']);
+Route::get('/telefonoEmpleado/{id}', [TelefonoEmpleadoController::class, 'obtenerTelefonoEmpleadoID']);
+Route::post('/telefonoEmpelado', [TelefonoEmpleadoController::class, 'crearTelefonoEmpelado']);
+Route::put('/telefonoEmpleado/{id}', [TelefonoEmpleadoController::class, 'actualizarTelefonoEmpelado']);
+route::delete('telefonoEmpleado/{id}', [TelefonoEmpleadoController::class, 'eliminarTelefonoEmpelado']);
 
 // RUTAS PARA MEDICINAS
 Route::get('/medicinas', [MedicinaController::class, 'mostrarMedicinas']); // Ruta para obtener todas las medicinas
 Route::get('/medicina/{id}', [MedicinaController::class, 'obtenerMedicinaID']); //Ruta para obtener una medicina por ID
+Route::get('/medicina/{id}/sucursales', [MedicinaController::class, 'obtenerSucursales']); //Ruta para obtener todas las sucursales en las que se encuentra una medicina
 Route::post('/medicina', [MedicinaController::class, 'crearMedicina']); // Ruta para crear medicinas
 Route::put('/medicina/{id}', [MedicinaController::class, 'actualizarMedicina']); // Ruta para actualizar una medicina
 Route::delete('/medicina/{id}', [MedicinaController::class, 'eliminarMedicina']); // Ruta para eliminar una medicina
@@ -41,13 +56,13 @@ Route::get('/pedido/{id}', [MedicinaController::class, 'obtenerPedidoID']); //Ru
 Route::post('/pedido', [MedicinaController::class, 'crearPedido']); // Ruta para crear pedidos
 Route::put('/pedido/{id}', [MedicinaController::class, 'actualizarPedido']); // Ruta para actualizar un pedido
 
-
 // RUTAS PARA COMPRAS
-Route::get('/compras', [PedidoController::class, 'mostrarCompras']); // Ruta para obtener todos los pedidos
-Route::get('/compra/{id}', [MedicinaController::class, 'obtenerCompraID']); //Ruta para obtener un pedido por ID
-Route::post('/compra', [MedicinaController::class, 'crearCompra']); // Ruta para crear pedidos
-Route::put('/compra/{id}', [MedicinaController::class, 'actualizarCompra']); // Ruta para actualizar un pedido
-
+Route::get('/compras', [CompraController::class, 'mostrarCompras']); // Ruta para obtener todos los pedidos
+Route::get('/compra/{id}', [CompraController::class, 'obtenerCompraID']); //Ruta para obtener un pedido por ID
+Route::get('/compra/{id}/medicinas', [CompraController::class, 'obtenerMedicinas']); //Ruta para obtener todas las medicinas de una compra
+Route::post('/compra', [CompraController::class, 'crearCompra']); // Ruta para crear pedidos
+Route::post('/compra/{id}/medicinas', [CompraController::class, 'agregarMedicinas']); //Ruta para agregar las medicinas que llegaron a una compra, no estoy seguro de si es un metodo post o put, revisar luego
+Route::put('/compra/{id}', [CompraController::class, 'actualizarCompra']); // Ruta para actualizar un pedido
 
 //RUTAS PARA LABORATORIOS//
 Route::get('/laboratorios', [LaboratorioController::class, 'mostrarLaboratorios']); //Ruta para obtener laboratorios
@@ -69,17 +84,17 @@ Route::delete('/laboratorio/telefono/eliminar/{id}', [TelefonoLaboratorioControl
 //RUTAS PARA ACCIONTERAPEUITICA//
 Route::get('/accion/terapeutica', [AccionTerapeuticaController::class, 'mostrarAT']); //Ruta para obtener telefonos  de loslaboratorios
 Route::get('/accion/terapeutica/{id}', [AccionTerapeuticaController::class, 'obtenerAT']); // Ruta para obtener telefono x ID
-Route::post('/accion/terapeutica/crear', [AccionTerapeuticaController::class, 'crearAT']); // Ruta para crear 
-Route::put('/accion/terapeutica/actualizar/{id}', [AccionTerapeuticaController::class, 'actualizarAT']); // Ruta para actualizar 
-Route::delete('/accion/terapeutica/eliminar/{id}', [AccionTerapeuticaController::class, 'eliminarAT']); // Ruta para eliminar 
+Route::post('/accion/terapeutica', [AccionTerapeuticaController::class, 'crearAT']); // Ruta para crear 
+Route::put('/accion/terapeutica/{id}', [AccionTerapeuticaController::class, 'actualizarAT']); // Ruta para actualizar 
+Route::delete('/accion/terapeutica/{id}', [AccionTerapeuticaController::class, 'eliminarAT']); // Ruta para eliminar 
 
 
 //RUTAS PARA MONODROGA//
 Route::get('/monodrogas', [MonodrogaController::class, 'mostrarMonodroga']); //Ruta para obtener monodrogas
 Route::get('/monodroga/{id}', [MonodrogaController::class, 'obtenerMonodroga']); // Ruta para obtener x ID
-Route::post('/monodroga/crear', [MonodrogaController::class, 'crearMonodroga']); // Ruta para crear 
-Route::put('/monodroga/actualizar/{id}', [MonodrogaController::class, 'actualizarMonodroga']); // Ruta para actualizar 
-Route::delete('/monodroga/eliminar/{id}', [MonodrogaController::class, 'eliminarMonodroga']); // Ruta para eliminar 
+Route::post('/monodroga', [MonodrogaController::class, 'crearMonodroga']); // Ruta para crear 
+Route::put('/monodroga/{id}', [MonodrogaController::class, 'actualizarMonodroga']); // Ruta para actualizar 
+Route::delete('/monodroga/{id}', [MonodrogaController::class, 'eliminarMonodroga']); // Ruta para eliminar 
 
 
 //RUTAS PARA MEDICAMENTO//
@@ -89,7 +104,29 @@ Route::post('/medicamento/crear', [MedicamentoController::class, 'crearMedicamen
 Route::put('/medicamento/actualizar/{id}', [MedicamentoController::class, 'actualizarMedicamento']); // Ruta para actualizar 
 Route::delete('/medicamento/eliminar/{id}', [MedicamentoController::class, 'eliminarMedicamento']); // Ruta para eliminar 
 
+// RUTAS DE SUCURSALES
+Route::get('/sucursales/{id}', [SucursalController::class, 'mostrarSucursal']); // Ruta para obtener una sucursal por id
+Route::post('/sucursales', [SucursalController::class, 'guardarSucursal']); // Ruta para guardar sucursales
+Route::put('/sucursales/{id}', [SucursalController::class, 'actualizarSucursal']); // Ruta para actualizar una sucursal
+Route::delete('/sucursales/{id}', [SucursalController::class, 'eliminarSucursal']); // Ruta para eliminar una sucursal
 
+// RUTAS DE TELEFONOS DE SUCURSALES
+Route::get('/sucursales/tefonos/{id}', [SucursalController::class, 'mostrarTelefono']); // Ruta para obtener un telefono de una sucursal por id
+Route::post('/sucursales/tefonos', [SucursalController::class, 'guardarTelefono']); // Ruta para guardar telefonos de sucursales
+Route::put('/sucursales/tefonos/{id}', [SucursalController::class, 'actualizarTelefono']); // Ruta para actualizar un telefono de una sucursal
+Route::delete('/sucursales/tefonos/{id}', [SucursalController::class, 'eliminarTelefono']); // Ruta para eliminar un telefono de una sucursal
+
+// RUTAS DE PRESENTACIONES
+Route::get('/presentaciones/{id}', [PresentacionController::class, 'mostrarPresentacion']); // Ruta para obtener una presentacion por id
+Route::post('/presentaciones', [PresentacionController::class, 'guardarPresentacion']); // Ruta para guardar presentaciones
+Route::put('/presentaciones/{id}', [PresentacionController::class, 'actualizarPresentacion']); // Ruta para actualizar una presentacion
+Route::delete('/presentaciones/{id}', [PresentacionController::class, 'eliminarPresentacion']); // Ruta para eliminar una presentacion
+
+// RUTAS DE CARGOS
+Route::get('/cargos/{id}', [CargoController::class, 'mostrarCargo']); // Ruta para obtener un cargo por id
+Route::post('/cargos', [CargoController::class, 'guardarCargo']); // Ruta para guardar cargos
+Route::put('/cargos/{id}', [CargoController::class, 'actualizarCargo']); // Ruta para actualizar un cargo
+Route::delete('/cargos/{id}', [CargoController::class, 'eliminarCargo']); // Ruta para eliminar un cargo
 
 ////////////////////////////////////////////////////////
 ///////////////// RUTAS PARA LAS VISTAS /////////////////
@@ -97,6 +134,10 @@ Route::delete('/medicamento/eliminar/{id}', [MedicamentoController::class, 'elim
 
 
 Route::get('/', function () {
+    return view('inicio');
+});
+
+Route::get('/inicio', function () {
     return view('inicio');
 });
 
@@ -144,6 +185,16 @@ Route::get('/admin/dashboard', function () {
         return redirect('/admin/login'); // Redirect to login if not authenticated
     }
 });
+
+Route::get('/admin/logout', function () {
+    session()->forget('admin'); // Remove the admin session variable
+    return redirect('/admin/login');
+});
+////////////////////////////////////////////////////////REGISTER///////////////////////////////////
+
+Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register.form');
+Route::post('/admin/register', [AdminAuthController::class, 'register'])->name('admin.register');
+
 
 Route::get('/admin/logout', function () {
     session()->forget('admin'); // Remove the admin session variable

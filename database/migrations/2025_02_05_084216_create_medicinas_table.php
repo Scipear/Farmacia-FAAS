@@ -30,8 +30,8 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->longText('descripcion');
-            $table->decimal('precio_compra', 10, 2);
-            $table->decimal('precio_venta', 10, 2);
+            $table->float('precio_compra', 10, 2);
+            $table->float('precio_venta', 10, 2);
         });
     }
 
