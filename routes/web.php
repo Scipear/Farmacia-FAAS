@@ -105,24 +105,28 @@ Route::put('/medicamento/{id}', [MedicamentoController::class, 'actualizarMedica
 Route::delete('/medicamento/{id}', [MedicamentoController::class, 'eliminarMedicamento']); // Ruta para eliminar 
 
 // RUTAS DE SUCURSALES
+Route::get('/sucursales', [SucursalController::class, 'index']); // Ruta para obtener todas las sucursales
 Route::get('/sucursales/{id}', [SucursalController::class, 'mostrarSucursal']); // Ruta para obtener una sucursal por id
 Route::post('/sucursales', [SucursalController::class, 'guardarSucursal']); // Ruta para guardar sucursales
 Route::put('/sucursales/{id}', [SucursalController::class, 'actualizarSucursal']); // Ruta para actualizar una sucursal
 Route::delete('/sucursales/{id}', [SucursalController::class, 'eliminarSucursal']); // Ruta para eliminar una sucursal
 
 // RUTAS DE TELEFONOS DE SUCURSALES
+Route::get('/sucursales/tefonos', [SucursalController::class, 'index']); // Ruta para obtener todos los telefonos de sucursales
 Route::get('/sucursales/tefonos/{id}', [SucursalController::class, 'mostrarTelefono']); // Ruta para obtener un telefono de una sucursal por id
 Route::post('/sucursales/tefonos', [SucursalController::class, 'guardarTelefono']); // Ruta para guardar telefonos de sucursales
 Route::put('/sucursales/tefonos/{id}', [SucursalController::class, 'actualizarTelefono']); // Ruta para actualizar un telefono de una sucursal
 Route::delete('/sucursales/tefonos/{id}', [SucursalController::class, 'eliminarTelefono']); // Ruta para eliminar un telefono de una sucursal
 
 // RUTAS DE PRESENTACIONES
+Route::get('/presentaciones', [PresentacionController::class, 'index']); // Ruta para obtener todas las presentaciones
 Route::get('/presentaciones/{id}', [PresentacionController::class, 'mostrarPresentacion']); // Ruta para obtener una presentacion por id
 Route::post('/presentaciones', [PresentacionController::class, 'guardarPresentacion']); // Ruta para guardar presentaciones
 Route::put('/presentaciones/{id}', [PresentacionController::class, 'actualizarPresentacion']); // Ruta para actualizar una presentacion
 Route::delete('/presentaciones/{id}', [PresentacionController::class, 'eliminarPresentacion']); // Ruta para eliminar una presentacion
 
 // RUTAS DE CARGOS
+Route::get('/cargos', [CargoController::class, 'index']); // Ruta para obtener todos los cargos
 Route::get('/cargos/{id}', [CargoController::class, 'mostrarCargo']); // Ruta para obtener un cargo por id
 Route::post('/cargos', [CargoController::class, 'guardarCargo']); // Ruta para guardar cargos
 Route::put('/cargos/{id}', [CargoController::class, 'actualizarCargo']); // Ruta para actualizar un cargo
