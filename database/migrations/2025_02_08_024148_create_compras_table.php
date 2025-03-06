@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('pedido_id')
             ->constrained('pedidos')
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+            ->cascadeOnUpdateon()
+            ->cascadeOnDelete();
             $table->float('precioPagar');
-            $table->text('observaciones');
+            $table->text('observaciones')->nullable;
             $table->string('status');
             $table->date('fechaLlegada');
         });

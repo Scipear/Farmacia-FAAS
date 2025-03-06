@@ -20,7 +20,7 @@ class Compra extends Model
 
     public function medicinas()
     {
-        return $this->belongsToMany(Medicina::class, 'medicina_compra');
+        return $this->belongsToMany(Medicina::class)->using(Medicina_compra::class)->withPivot('cantidad', 'precio');
     }
     
 }

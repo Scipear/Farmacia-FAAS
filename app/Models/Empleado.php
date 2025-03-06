@@ -22,7 +22,7 @@ class Empleado extends Model
     //Relacion uno a Muchos
 
     public function telefonos(){
-    return $this->hasMany(TelefonoEmpleado::class);
+        return $this->hasMany(TelefonoEmpleado::class);
     }
 
     public function pedidos(){
@@ -30,12 +30,11 @@ class Empleado extends Model
     }
 
     // Relacion Muchos a muchos
-
-    public function  cargos(){
-        return $this->belongsToMany(Cargo::class);
+    public function cargos(){
+        return $this->belongsToMany(Cargo::class)->using(Cargo_empleado::class)->withPivot('fechaInicio', 'fechaFin');
     }
 
     public function sucursales(){
-        return $this->belongsToMany(Sucursal::class, 'empleado_sucursal');
+        return $this->belongsToMany(Sucursal::class)->using(Empleado_sucursal::class)->withPivot('fecha_inicio', 'fecha_salida');
     }
 }

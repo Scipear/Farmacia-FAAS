@@ -19,7 +19,7 @@ return new class extends Migration
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();
 
-            $table->bigInteger('numero');
+            $table->string('numero');
             $table->string('tipo');
         });
 
@@ -31,7 +31,7 @@ return new class extends Migration
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();
 
-            $table->bigInteger('numero');
+            $table->string('numero');
             $table->string('tipo');
         });
 
@@ -43,7 +43,7 @@ return new class extends Migration
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();
 
-            $table->bigInteger('numero');
+            $table->string('numero');
             $table->string('tipo');
         });
     }
@@ -53,7 +53,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('telefonos_laboratorios');
+        Schema::dropIfExists('telefonosLaboratorios');
         Schema::dropIfExists('telefonosSucursales');
         Schema::dropIfExists('telefonosEmpleados');
     }

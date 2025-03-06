@@ -23,7 +23,7 @@ return new class extends Migration
                 ->cascadeOnUpdateOn()
                 ->cascadeOnDelete();
 
-            $table->date('fecha_inicio');
+            $table->date('fecha_inicio')->default(now()->toDateString());
             $table->date('fecha_salida')->nullable();
         });
     }

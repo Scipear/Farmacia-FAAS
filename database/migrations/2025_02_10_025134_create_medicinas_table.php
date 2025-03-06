@@ -16,12 +16,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('medicina_id')
                 ->constrained('medicinas')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->cascadeOnUpdateon()
+                ->cascadeOnDelete();
             $table->foreignId('pedido_id')
                 ->constrained('pedidos')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->cascadeOnUpdateon()
+                ->cascadeOnDelete();
             $table->integer('cantidad');
             $table->float('precio');
         });

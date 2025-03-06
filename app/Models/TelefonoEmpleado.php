@@ -12,6 +12,7 @@ class TelefonoEmpleado extends Model
     protected $table = 'telefonosEmpleados';
     protected $fillable =[
         'empleado_id',
+        'tipo',
         'numero'
     ];
     public $timestamps = false;
@@ -19,7 +20,7 @@ class TelefonoEmpleado extends Model
     //Relacion Muchos a uno
 
     public function empleado(){
-        return $this->belongsTo(Empleado::class());
+        return $this->belongsTo(Empleado::class);
     }
 
 }

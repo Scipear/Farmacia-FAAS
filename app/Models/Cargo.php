@@ -18,6 +18,6 @@ class Cargo extends Model
     //Relacion Muchos a muchos 
 
     public function empleados(){
-        return $this->belongsToMany(Empleado::class);
+        return $this->belongsToMany(Empleado::class)->using(Cargo_empleado::class)->withPivot('fechaInicio', 'fechaFin');
     }
 }
