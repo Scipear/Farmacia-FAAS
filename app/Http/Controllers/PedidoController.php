@@ -43,7 +43,8 @@ class PedidoController extends Controller
             'medicinas.*.cantidad' => 'required|numeric',
         ]); // Validaciones para los campos del registro
 
-        $pedido = Pedido::create($request->only(['sucursal_id', 'empleado_id', 'laboratorio_id', 'precioTotal', 'tipoPago', 'status', 'observaciones']));
+        $pedido = Pedido::create($request->only(['sucursal_id', 'empleado_id', 'laboratorio_id', 
+        'precioTotal', 'tipoPago', 'status', 'observaciones']));
     
         $this->guardarMedicinas($request->medicinas, $pedido);
 

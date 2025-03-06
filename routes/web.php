@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CargoController;
 use App\Http\Controllers\PresentacionController;
 use App\Http\Controllers\SucursalController;
+use App\Http\Controllers\TelefonoEmpleadoController;
 use Illuminate\Http\Request;
 
 ###########################################################
@@ -22,13 +23,23 @@ use Illuminate\Http\Request;
 // RUTAS PARA EMPLEADOS
 Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados']); // Ruta para obtener todos los empleados
 Route::get('/empleado/{id}', [EmpleadoController::class, 'obtenerEmpleadoID']); //Ruta para obtener un empleado por ID
+Route::get('/empleado/{id}/telefonos', [EmpleadoController::class, 'obtenerTelefonosdeEmpelado']); // Ruta para obtener los telefonos de un empleado
 Route::post('/empleado', [EmpleadoController::class, 'crearEmpleado']); // Ruta para crear empleados
 Route::put('/empleado/{id}', [EmpleadoController::class, 'actualizarEmpleado']); // Ruta para actualizar un empleado
+Route::put('/desasignarEmpleado/{id}', [EmpleadoController::class, 'desasignarEmpleado']); // Ruta para actualizar el estado de un empleado en caso de que renuncie o sea despedido
 Route::delete('/empleado/{id}', [EmpleadoController::class, 'eliminarEmpleado']); // Ruta para eliminar un empleado 
+
+// RUTAS PARA TELEFONO DE EMPLEADOS
+Route::get('/telefonosEmpleados', [TelefonoEmpleadoController::class, 'mostrarTelefonosEmpleados']);
+Route::get('/telefonoEmpleado/{id}', [TelefonoEmpleadoController::class, 'obtenerTelefonoEmpleadoID']);
+Route::post('/telefonoEmpelado', [TelefonoEmpleadoController::class, 'crearTelefonoEmpelado']);
+Route::put('/telefonoEmpleado/{id}', [TelefonoEmpleadoController::class, 'actualizarTelefonoEmpelado']);
+route::delete('telefonoEmpleado/{id}', [TelefonoEmpleadoController::class, 'eliminarTelefonoEmpelado']);
 
 // RUTAS PARA MEDICINAS
 Route::get('/medicinas', [MedicinaController::class, 'mostrarMedicinas']); // Ruta para obtener todas las medicinas
 Route::get('/medicina/{id}', [MedicinaController::class, 'obtenerMedicinaID']); //Ruta para obtener una medicina por ID
+Route::get('/medicina/{id}/sucursales', [MedicinaController::class, 'obtenerSucursales']); //Ruta para obtener todas las sucursales en las que se encuentra una medicina
 Route::post('/medicina', [MedicinaController::class, 'crearMedicina']); // Ruta para crear medicinas
 Route::put('/medicina/{id}', [MedicinaController::class, 'actualizarMedicina']); // Ruta para actualizar una medicina
 Route::delete('/medicina/{id}', [MedicinaController::class, 'eliminarMedicina']); // Ruta para eliminar una medicina
@@ -36,13 +47,16 @@ Route::delete('/medicina/{id}', [MedicinaController::class, 'eliminarMedicina'])
 // RUTAS PARA PEDIDOS
 Route::get('/pedidos', [PedidoController::class, 'mostrarPedidos']); // Ruta para obtener todos los pedidos
 Route::get('/pedido/{id}', [PedidoController::class, 'obtenerPedidoID']); //Ruta para obtener un pedido por ID
+Route::get('/pedido/{id}/medicinas', [PedidoController::class, 'obtenerMedicinas']); //Ruta para obtener todas las medicinas de un pedido
 Route::post('/pedido', [PedidoController::class, 'crearPedido']); // Ruta para crear pedidos
 Route::put('/pedido/{id}', [PedidoController::class, 'actualizarPedido']); // Ruta para actualizar un pedido
 
 // RUTAS PARA COMPRAS
 Route::get('/compras', [CompraController::class, 'mostrarCompras']); // Ruta para obtener todos los pedidos
 Route::get('/compra/{id}', [CompraController::class, 'obtenerCompraID']); //Ruta para obtener un pedido por ID
+Route::get('/compra/{id}/medicinas', [CompraController::class, 'obtenerMedicinas']); //Ruta para obtener todas las medicinas de una compra
 Route::post('/compra', [CompraController::class, 'crearCompra']); // Ruta para crear pedidos
+Route::post('/compra/{id}/medicinas', [CompraController::class, 'agregarMedicinas']); //Ruta para agregar las medicinas que llegaron a una compra, no estoy seguro de si es un metodo post o put, revisar luego
 Route::put('/compra/{id}', [CompraController::class, 'actualizarCompra']); // Ruta para actualizar un pedido
 
 //RUTAS PARA LABORATORIOS//

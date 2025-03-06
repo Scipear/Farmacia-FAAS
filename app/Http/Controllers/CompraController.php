@@ -34,7 +34,7 @@ class CompraController extends Controller
             'precioPagar' => 'required',
             'observaciones' => 'nullable',
             'status' => 'required',
-            'fechaLlegada' => 'required',
+            'fechaLlegada' => 'nullable',
         ]); // Validaciones para los campos del registro
 
         $compra= Compra::create($request->all());
@@ -48,15 +48,35 @@ class CompraController extends Controller
         $compra = Compra::findOrFail($id); // Busca una medicina por su ID
 
         $request->validate([
-            'pedido_id' => 'required|exists:pedido,id',
-            'precioPagar' => 'required',
-            'observaciones',
+            'observaciones' => 'nullable',
             'status' => 'required',
-            'fechaLlegada' => 'required',
+            'fechaLlegada' => 'nullable',
         ]); // Validaciones para los campos del registro
 
         $compra->update($request->all());
 
         return response()->json($compra, 200);
+    }
+
+    public function agregarMedicinas(Request $request, $id){
+        $compra = Compra::findOrFail($id); // Busca una compra por su ID
+
+        $request->validate([
+            'medicinas' => 'required|array',
+            'medicinas.*.medicina_id' => 'required|exists:medicinas,id',
+            'medicinas.*.precio' => 'required|numeric',
+            'medicinas.*.cantidad' => 'required|numeric',
+        ]); // Validaciones para los campos del registro
+
+        $medicinasCompra = [];
+
+        foreach($request->medicinas as $medicina){
+            $medicinasCompra[$medicina['medicina_id']] = [
+                'precio' => $medicina['precio'],
+                'cantidad' => $medicina['cantidad']
+            ];
+        }
+
+        $compra->medicinas()->sync($medicinasCompra);
     }
 }

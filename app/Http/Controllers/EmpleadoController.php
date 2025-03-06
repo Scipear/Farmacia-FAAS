@@ -134,6 +134,8 @@ class EmpleadoController extends Controller
         return response()->json([], 204);
     }
 
+    // Crear funcion para mostrar la ficha de un trabajador
+
     public function asignarCargo($cargo_id, $empleado){
         $empleado->cargos()->sync([$cargo_id]);
     }
