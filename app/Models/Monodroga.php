@@ -11,13 +11,13 @@ class Monodroga extends Model
 
     protected $table = 'monodrogas';
     protected $fillable = ['nombre'];
-    public $timestamps = false;
+    // public $timestamps = false;
 
 
     //Relacion Muchos a muchos
 
-    public function medicamentos(){
-    return $this->belongsToMany(Medicamento::class);
+    public function medicamentos()
+    {
+        return $this->belongsToMany(Medicamento::class);
     }
-
 }
