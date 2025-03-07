@@ -11,6 +11,9 @@ class Medicina extends Model
 
     protected $table = 'medicinas';
     protected $fillable = [
+        'laboratorio_id',
+        'medicamento_id',
+        'presentacion_id',
         'descripcion',
         'precio_venta',
         'precio_compra',
@@ -27,7 +30,7 @@ class Medicina extends Model
     }
 
     public function presentacion(){
-        return $this->belongsTo(Presentacion::class);
+        return $this->belongsTo(Presentacion::class, 'presentacion_id');
     }
 
 

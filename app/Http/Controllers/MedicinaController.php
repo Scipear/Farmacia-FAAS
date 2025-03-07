@@ -16,16 +16,9 @@ class MedicinaController extends Controller
         return response()->json($medicinas, 200);
     }
 
-<<<<<<< HEAD
-    public function obtenerMedicinaID($id)
-    {
-        $medicina = Medicina::find($id);
-
-=======
     public function obtenerMedicinaID($id){
         $medicina = Medicina::findOrFail($id);
         
->>>>>>> 2fa57b3a5de93016ae47a73f1217c96d7cf8d541
         return response()->json($medicina, 200);
     }
 
@@ -96,14 +89,8 @@ class MedicinaController extends Controller
     }
 
     // Elimina una medicina de la tabla
-<<<<<<< HEAD
-    public function eliminarmedicina($id)
-    {
-        $medicina = Medicina::find($id);
-=======
     public function eliminarMedicina($id){
         $medicina = Medicina::findOrFail($id);
->>>>>>> 2fa57b3a5de93016ae47a73f1217c96d7cf8d541
         $medicina->delete();
 
         return response()->json([], 204);

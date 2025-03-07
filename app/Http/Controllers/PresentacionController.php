@@ -79,4 +79,11 @@ class PresentacionController extends Controller
 
         return redirect()->route('/presentaciones');
     }
+
+    //obtener todas las medicinas asociadas a una presentación
+    public function medicinasPorPresentacion($medicinaId){
+        $presentacion = Presentacion::findOrFail($medicinaId);
+        return $presentacion->medicinas;
+    }
+
 }
