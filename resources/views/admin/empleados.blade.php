@@ -18,8 +18,8 @@
         </div>
         <div>        
         <!-- Hacer una ruta llamada buscar sucursal Y ACA CAMBIART-->
-                <form action="{{ route('filtrar') }}" method="GET">
-            <input type="text" name="query" placeholder="Filtrar...">
+                <form action="{{ route('buscarE') }}" method="GET">
+            <input type="text" name="query" placeholder="Buscar empleado...">
             <button type="submit">Buscar</button>
         </form>
         </div>
@@ -33,6 +33,7 @@
                     <th>Cedula</th>
                     <th>Nombre</th>
                     <th>Apellido</th>
+                    <th>Teléfono(s)</th>
                     <th>Correo</th>
                     <th>Dirección</th>
                     <th>Opciones</th>
@@ -42,6 +43,10 @@
                     <td>Acetf</td>
                     <td>Genvem</td>
                     <td>20mg</td>
+                    <td>             
+                    <div class="buttonCont">
+                        <button>Ver</button>
+                     </div></td>
                     <td>Dolor </td>
                     <td>10</td>
                     <td>
@@ -54,10 +59,4 @@
                 </tr>
 
             </table>
-            <h1>Otros datos</h1>
-            <b>Teléfonos </b>
-            <a  class="botonIr" href="/admin/telfEmpl">Ir</a><br><br><br>
-            <b>Cargo </b>
-            <a  class="botonIr" href="/admin/cargo">Ir</a><br><br>
-
 @endsection

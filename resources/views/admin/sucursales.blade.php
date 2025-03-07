@@ -16,10 +16,11 @@
         <div class="container">
             <h1>Información de Surcursales</h1>
         </div>
-        <div>        
+        <div> 
+            <!-- ver como lo hice en resultados esto         -->
         <!-- Hacer una ruta llamada buscar sucursal Y ACA CAMBIART-->
-                <form action="{{ route('filtrar') }}" method="GET">
-            <input type="text" name="query" placeholder="Filtrar...">
+                <form action="{{ route('buscarS') }}" method="GET">
+            <input type="text" name="query" placeholder="Burcar sucursal...">
             <button type="submit">Buscar</button>
         </form>
         </div>
@@ -31,6 +32,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>Teléfono(s)</th>
                     <th>Estado</th>
                     <th>Ciudad</th>
                     <th>Zona</th>
@@ -42,6 +44,11 @@
                 <tr>
                     <td>123</td>
                     <td>Acetf</td>
+                    <td>
+                    <div class="buttonCont">
+                        <button>Ver</button>
+                     </div>
+                    </td>
                     <td>Genvem</td>
                     <td>20mg</td>
                     <td>Dolor </td>
@@ -54,14 +61,6 @@
                         <button>Eliminar</button>
                      </div>
                     </td>
-                    
                 </tr>
-
             </table>
-            <h1>Otros datos</h1>
-            <b>Teléfonos </b>
-            <a  class="botonIr" href="/admin/telfsucursal">Ir</a><br><br><br>
-            <b>Laboratorios afiliados </b>
-            <a  class="botonIr" href="/admin/laboratoriosA">Ir</a><br><br>
-
 @endsection

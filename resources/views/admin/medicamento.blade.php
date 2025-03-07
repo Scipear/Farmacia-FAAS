@@ -14,12 +14,12 @@
 </header>
 @section('contenido')
         <div class="container">
-            <h1>Información de los teléfonos de las sucursales</h1>
+            <h1>Información de los Medicamentos</h1>
         </div>
         <div>        
         <!-- Hacer una ruta llamada m,,-->
-                <form action="{{ route('filtrar') }}" method="GET">
-            <input type="text" name="query" placeholder="Filtrar...">
+                <form action="{{ route('buscarMedicamento') }}" method="GET">
+            <input type="text" name="query" placeholder="Buscar medicamento...">
             <button type="submit">Buscar</button>
         </form>
         </div>
@@ -31,16 +31,14 @@
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>SucursalID</th>
-                    <th>Teléfono</th>
+                    <th>Nombre principal</th>
                     <th>Opciones</th>
                 </tr>
                 <tr>
                     <td>123</td>
-                    <td>Acetf</td>
                     <td>Genvem</td>
                     <td>
-                    <div class="buttonCont">
+                        <div class="buttonCont">
                         <button>Editar</button>
                         <button>Eliminar</button>
                      </div>

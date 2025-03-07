@@ -18,8 +18,8 @@
         </div>
         <div>        
         <!-- Hacer una ruta llamada m,,-->
-                <form action="{{ route('filtrar') }}" method="GET">
-            <input type="text" name="query" placeholder="Filtrar...">
+                <form action="{{ route('buscarC') }}" method="GET">
+            <input type="text" name="query" placeholder="Buecar cargo...">
             <button type="submit">Buscar</button>
         </form>
         </div>

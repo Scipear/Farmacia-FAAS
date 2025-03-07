@@ -18,8 +18,8 @@
         </div>
         <div>        
         <!-- Hacer una ruta llamada m,,-->
-                <form action="{{ route('filtrar') }}" method="GET">
-            <input type="text" name="query" placeholder="Filtrar...">
+                <form action="{{ route('buscarL') }}" method="GET">
+            <input type="text" name="query" placeholder="Buscar laboratorio...">
             <button type="submit">Buscar</button>
         </form>
         </div>
@@ -32,6 +32,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
+                    <th>Telefono(s)</th>
                     <th>Ciudad</th>
                     <th>Dirección</th>
                     <th>Correo</th>
@@ -40,6 +41,11 @@
                 <tr>
                     <td>123</td>
                     <td>Acetf</td>
+                    <td>
+                    <div class="buttonCont">
+                        <button>Ver</button>
+                     </div>
+                    </td>
                     <td>Genvem</td>
                     <td>Genvem</td>
                     <td>Genvem</td>
@@ -51,7 +57,4 @@
                     </td>
                 </tr>
             </table>
-            <h1>Otros datos</h1>
-            <b>Teléfonos </b>
-            <a  class="botonIr" href="/admin/telfLab">Ir</a><br><br><br>
 @endsection

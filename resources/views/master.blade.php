@@ -65,6 +65,7 @@
         }
 
         table, th, td{
+            text-align: center;
             width: 90%;
             border-collapse: collapse;
             padding: 10px;

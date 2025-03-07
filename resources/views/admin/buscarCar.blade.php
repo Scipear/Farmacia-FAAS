@@ -14,16 +14,9 @@
 </header>
 @section('contenido')
         <div class="container">
-            <h1>Información de los teléfonos de las sucursales</h1>
+            <h1>Información de los cargos</h1>
+            <p>Mostrando resultados para: <strong>{{$BuscarC}}</strong></p>
         </div>
-        <div>        
-        <!-- Hacer una ruta llamada m,,-->
-                <form action="{{ route('filtrar') }}" method="GET">
-            <input type="text" name="query" placeholder="Filtrar...">
-            <button type="submit">Buscar</button>
-        </form>
-        </div>
-
         <div class="buttonA">
                 <button>Agregar +</button>
         </div>
@@ -31,14 +24,12 @@
             <table>
                 <tr>
                     <th>ID</th>
-                    <th>SucursalID</th>
-                    <th>Teléfono</th>
+                    <th>Cargo</th>
                     <th>Opciones</th>
                 </tr>
                 <tr>
                     <td>123</td>
                     <td>Acetf</td>
-                    <td>Genvem</td>
                     <td>
                     <div class="buttonCont">
                         <button>Editar</button>

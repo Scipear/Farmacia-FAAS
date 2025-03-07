@@ -211,34 +211,52 @@ Route::get('/admin/logout', function () {
 
 
     // RUTAS ADMINISTRADOR
-Route::get('/admin/sucursales', function () {
-        return view('admin.sucursales');
-});
-
 
 Route::get('/admin/dashboar', function () {
     return view('admin.dashboard');
 });
 
+
+Route::get('/admin/sucursales', function () {
+    return view('admin.sucursales');
+});
+
+//Nueva ruta filtrar
+Route::get('/buscarS', function (Request $request) {
+    $BuscarS = $request->query('query');
+    return view('admin.buscarSuc', compact('BuscarS'));
+})->name('buscarS');
+
 Route::get('/admin/telfsucursal', function () {
     return view('admin.telfsucursal');
-});
+});//revisar
 
 Route::get('/admin/laboratoriosA', function () {
     return view('admin.laboratoriosA');
-});
+});//revisar
 
 Route::get('/admin/laborat', function () {
     return view('admin.laborat');
-});
+});//revisar
+
+Route::get('/buscarL', function (Request $request) {
+    $BuscarL = $request->query('query');
+    return view('admin.buscarLab', compact('BuscarL'));
+})->name('buscarL');
+
 
 Route::get('/admin/telfLab', function () {
     return view('admin.telfLab');
-});
+});//revisar
 
 Route::get('/admin/empleados', function () {
     return view('admin.empleados');
 });
+
+Route::get('/buscarE', function (Request $request) {
+    $BuscarE = $request->query('query');
+    return view('admin.buscarEmp', compact('BuscarE'));
+})->name('buscarE');
 
 Route::get('/admin/telfEmpl', function () {
     return view('admin.telfEmpl');
@@ -248,6 +266,59 @@ Route::get('/admin/cargo', function () {
     return view('admin.cargo');
 });
 
+Route::get('/buscarC', function (Request $request) {
+    $BuscarC = $request->query('query');
+    return view('admin.buscarCar', compact('BuscarC'));
+})->name('buscarC');
+
+
+Route::get('/admin/medicina', function () {
+    return view('admin.medicina');
+});
+
+Route::get('/buscarMedicina', function (Request $request) {
+    $BuscarMedicina = $request->query('query');
+    return view('admin.buscarMedicina', compact('BuscarMedicina'));
+})->name('buscarMedicina');
+
+
+
+Route::get('/admin/medicamento', function () {
+    return view('admin.medicamento');
+});
+
+Route::get('/buscarMedicamento', function (Request $request) {
+    $BuscarMedicamento = $request->query('query');
+    return view('admin.buscarMedicamento', compact('BuscarMedicamento'));
+})->name('buscarMedicamento');
+
+
+Route::get('/admin/presentacion', function () {
+    return view('admin.presentacion');
+});
+
+Route::get('/buscarPresentacion', function (Request $request) {
+    $BuscarPre= $request->query('query');
+    return view('admin.buscarPre', compact('BuscarPre'));
+})->name('buscarPresentacion');
+
+Route::get('/admin/acciont', function () {
+    return view('admin.acciont');
+});
+
+Route::get('/buscarAc', function (Request $request) {
+    $BuscarA= $request->query('query');
+    return view('admin.buscarAccionT', compact('BuscarA'));
+})->name('buscarAc');
+
+Route::get('/admin/monodroga', function () {
+    return view('admin.monodroga');
+});
+
+Route::get('/buscarMonodroga', function (Request $request) {
+    $BuscarMonodroga= $request->query('query');
+    return view('admin.buscarMon', compact('BuscarMonodroga'));
+})->name('buscarMonodroga');
 
 //Get:Redirigir hacia pagina
 //Mandar info no visible desde un formulario

@@ -18,12 +18,22 @@
             <h1>Bienvenido al Panel de Administración</h1>
             <p>¡Has iniciado sesión como administrador!</p>
         </div>
-        <b>Gestionar Surcursales</b> 
+        <b>Gestionar surcursales</b> 
         <a  class="botonIr" href="/admin/sucursales">Ir</a><br><br><br>
-        <b>Gestionar Laboratorios</b>
+        <b>Gestionar laboratorios</b>
         <a  class="botonIr" href="/admin/laborat">Ir</a><br><br><br>
-        <b>Gestionar Empleados</b>
+        <b>Gestionar empleados</b>
         <a  class="botonIr" href="/admin/empleados">Ir</a><br><br><br>
-        <b>Gestionar Medicina</b>
-        <button>Ir</button><br><br>
+        <b>Gestionar cargo de empleados</b>
+        <a  class="botonIr" href="/admin/cargo">Ir</a><br><br><br>
+        <b>Gestionar medicina</b>
+        <a  class="botonIr" href="/admin/medicina">Ir</a><br><br><br>
+        <b>Gestionar medicamento</b>
+        <a  class="botonIr" href="/admin/medicamento">Ir</a><br><br><br>
+        <b>Gestionar tipo de presentación</b>
+        <a  class="botonIr" href="/admin/presentacion">Ir</a><br><br><br>
+        <b>Gestionar acción terapéutica</b>
+        <a  class="botonIr" href="/admin/acciont">Ir</a><br><br><br>
+        <b>Gestionar monodroga</b>
+        <a  class="botonIr" href="/admin/monodroga">Ir</a><br><br><br>
 @endsection

@@ -32,7 +32,7 @@
                 <tr>
                     <th>ID</th>
                     <th>EmpleadolID</th>
-                    <th>Número de teléfono</th>
+                    <th>Teléfono</th>
                     <th>Opciones</th>
                 </tr>
                 <tr>

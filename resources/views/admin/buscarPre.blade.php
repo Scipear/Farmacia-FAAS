@@ -5,7 +5,7 @@
     @yield('header', 'Farmacias FAAS')
     <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
             <li class="nav-item">
-                <a class="nav-link active" href="/admin/dashboard">inicioadmin</a>
+            <a class="nav-link active" href="/admin/dashboard">inicioadmin</a>
             </li>
             <li class="nav-item">
                 <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
@@ -14,37 +14,35 @@
 </header>
 @section('contenido')
         <div class="container">
-            <h1>Información de los teléfonos de las sucursales</h1>
+            <h1>Información de Tipo de presentación</h1>
+            <p>Mostrando resultados para: <strong>{{$BuscarPre}}</strong></p>
         </div>
-        <div>        
-        <!-- Hacer una ruta llamada m,,-->
-                <form action="{{ route('filtrar') }}" method="GET">
-            <input type="text" name="query" placeholder="Filtrar...">
-            <button type="submit">Buscar</button>
-        </form>
-        </div>
-
-        <div class="buttonA">
+       <div class="buttonA">
                 <button>Agregar +</button>
         </div>
-
-            <table>
+        <table>
                 <tr>
                     <th>ID</th>
-                    <th>SucursalID</th>
-                    <th>Teléfono</th>
-                    <th>Opciones</th>
+                    <th>Tipo presentación</th>
+                    <th>Cantidad</th>
+                    <th>Medida</th>
+                    <th>Unidades</th>
+                    <th>Opcines</th>
                 </tr>
                 <tr>
                     <td>123</td>
                     <td>Acetf</td>
                     <td>Genvem</td>
+                    <td>20mg</td>
+                    <td>Dolor </td>
                     <td>
-                    <div class="buttonCont">
+                        <div class="buttonCont">
                         <button>Editar</button>
                         <button>Eliminar</button>
                      </div>
                     </td>
+                    
                 </tr>
+
             </table>
 @endsection

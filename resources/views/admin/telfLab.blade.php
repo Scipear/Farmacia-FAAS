@@ -32,7 +32,7 @@
                 <tr>
                     <th>ID</th>
                     <th>LaboratorioID</th>
-                    <th>Número de teléfono</th>
+                    <th>Teléfono</th>
                     <th>Opciones</th>
                 </tr>
                 <tr>
