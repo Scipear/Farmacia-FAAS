@@ -31,7 +31,7 @@ class Empleado extends Model
 
     // Relacion Muchos a muchos
     public function cargos(){
-        return $this->belongsToMany(Cargo::class)->using(Cargo_empleado::class)->withPivot('fechaInicio', 'fechaFin');
+        return $this->belongsToMany(Cargo::class, 'cargo_empleado', 'empleado_id', 'cargo_id')->withPivot('fechaInicio', 'fechaFin');
     }
 
     public function sucursales(){

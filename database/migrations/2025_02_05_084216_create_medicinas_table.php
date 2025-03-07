@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('laboratorio_id')
-                ->constrained()
+                ->constrained('laboratorios')
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();
 
             $table->foreignId('medicamento_id')
-                ->constrained()
+                ->constrained('medicamentos')
                 ->cascadeOnUpdateon()
                 ->cascadeOnDelete();
 

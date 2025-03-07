@@ -19,6 +19,6 @@ class Presentacion extends Model
 
     //Relacion uno a muchos
     public function medicinas(){
-        return $this->hasMany(Medicina::class());
+        return $this->hasMany(Medicina::class(), 'medicina_id');
     }
 }

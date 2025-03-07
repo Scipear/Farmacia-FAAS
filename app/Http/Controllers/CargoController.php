@@ -17,7 +17,7 @@ class CargoController extends Controller
     //mostrar un cargo en específico
     public function mostrarCargo($cargo)
     {
-        $cargo = Cargo::find($cargo);
+        $cargo = Cargo::findOrFail($cargo);
         return $cargo;
     }
 
@@ -43,7 +43,7 @@ class CargoController extends Controller
     //vista para editar un cargo
     public function editarCargo($cargo)
     {
-        $cargo = Cargo::find($cargo);
+        $cargo = Cargo::findOrFail($cargo);
         return view('cargos.edit', compact('cargo'));
     }
 
@@ -54,7 +54,7 @@ class CargoController extends Controller
             'nombre' => 'required|unique:cargos'
         ]);
 
-        $cargo = Cargo::find($cargo);
+        $cargo = Cargo::findOrFail($cargo);
         $cargo->nombre = $request->input('nombre');
         $cargo->save(); // Guarda el registro en la tabla
         return redirect('/cargos');
@@ -63,8 +63,14 @@ class CargoController extends Controller
     //eliminar un cargo
     public function eliminarCargo($cargo)
     {
-        $cargo = Cargo::find($cargo);
+        $cargo = Cargo::findOrFail($cargo);
         $cargo->delete();
         return redirect('/cargos');
+    }
+
+    //devuelve todos los empleados que están asociados a un cargo
+    public function empleadosPorCargo($empleadoId){
+        $cargo = Cargo::findOrFail($empleadoId);
+        return $cargo->empleados;
     }
 }
