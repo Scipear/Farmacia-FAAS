@@ -22,10 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PresentacionSeeder::class);
         $this->call(LaboratorioSeeder::class);
         $this->call(MedicamentoSeeder::class);
-
         Medicina::factory(50)->create();
-        Sucursal::factory(10)->create();
-
+        $this->call(SucursalSeeder::class);
         $this->call(EmpleadoSeeder::class);
 
         // User::factory(10)->create();

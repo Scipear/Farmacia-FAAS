@@ -56,7 +56,7 @@ class EmpleadoSeeder extends Seeder
             $empleado->sucursales()->attach($sucursalId);
             $empleado->telefonos()->create([
                 'empleado_id' => $empleado->id,
-                'tipo' => 'Celular',
+                'tipo' => 'Personal',
                 'numero' => fake()->unique()->numberBetween(500000, 1000000)
             ]);
 

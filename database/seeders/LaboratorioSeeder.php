@@ -64,8 +64,13 @@ class LaboratorioSeeder extends Seeder
             ],
         ];
 
-        foreach($laboratorios as $laboratorio){
-            Laboratorio::create($laboratorio);
+        foreach($laboratorios as $laboratorioData){
+            $laboratorio = Laboratorio::create($laboratorioData);
+            $laboratorio->telefonos()->create([
+                'laboratorio_id' => $laboratorio->id,
+                'tipo' => 'Local',
+                'numero' => fake()->unique()->numberBetween(500000, 1000000)
+            ]);
         }
     }
 }
