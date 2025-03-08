@@ -33,6 +33,22 @@
         <label>Dirección</label>
         <input type="text" id="direccion" name="direccion" required><br><br>
 
+        <label>Teléfono 1 (Principal)</label>
+        <input type="text" name="telefonos[0][numero]" required>
+        <select id="telefonos[0][tipo]" name="telefonos[0][tipo]">
+            <option value="Local">Local</option>
+            <option value="Movil">Movil</option>
+            <option value="Otro">Otro</option>
+        </select><br><br>
+
+        <label>Teléfono 2 (Opcional)</label>
+        <input type="text" name="telefonos[1][numero]">
+        <select id="telefonos[1][tipo]" name="telefonos[1][tipo]">
+            <option value="Local">Local</option>
+            <option value="Movil">Movil</option>
+            <option value="Otro">Otro</option>
+        </select><br><br>
+
         <label>Correo</label>
         <input type="email" id="correo" name="correo" required><br><br>
 

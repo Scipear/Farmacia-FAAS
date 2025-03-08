@@ -31,20 +31,18 @@
             <label>Teléfono {{ $index + 1 }}</label>
             <input type="text" name="telefonos[{{ $index }}][numero]" value="{{ $telefono->numero }}" required>
             <select name="telefonos[{{ $index }}][tipo]" required>
-                <option value="Personal" {{ $telefono->tipo == 'Personal' ? 'selected' : '' }}>Personal</option>
-                <option value="Casa" {{ $telefono->tipo == 'Casa' ? 'selected' : '' }}>Casa</option>
-                <option value="Trabajo" {{ $telefono->tipo == 'Trabajo' ? 'selected' : '' }}>Trabajo</option>
+                <option value="Local" {{ $telefono->tipo == 'Local' ? 'selected' : '' }}>Local</option>
+                <option value="Movil" {{ $telefono->tipo == 'Movil' ? 'selected' : '' }}>Movil</option>
                 <option value="Otro" {{ $telefono->tipo == 'Otro' ? 'selected' : '' }}>Otro</option>
             </select><br><br>
         @endforeach
 
-        @if ($laboratorio->telefonos->count() < 2)
+        @if($laboratorio->telefonos->count() < 2)
             <label>Teléfono {{ $laboratorio->telefonos->count() + 1 }} (Opcional)</label>
             <input type="text" name="telefonos[{{ $laboratorio->telefonos->count() }}][numero]">
             <select name="telefonos[{{ $laboratorio->telefonos->count() }}][tipo]">
-                <option value="Personal">Personal</option>
-                <option value="Casa">Casa</option>
-                <option value="Trabajo">Trabajo</option>
+                <option value="Local">Local</option>
+                <option value="Movil">Movil</option>
                 <option value="Otro">Otro</option>
             </select><br><br>
         @endif

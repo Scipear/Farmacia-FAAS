@@ -43,8 +43,11 @@ class SucursalController extends Controller
             'zona' => 'required',
             'correo' => 'required|unique:sucursales', // Verifica que el correo sea unico
             'direccion' => 'required',
-            //'telefono' => 'required',
             'status' => 'required',
+            'telefonos' => 'required|array',
+            'telefonos.*.tipo' => 'required',
+            'telefonos.*.numero' => 'required',
+
         ]);
 
         $sucursal = new Sucursal();
@@ -55,9 +58,18 @@ class SucursalController extends Controller
         $sucursal->zona = $request->zona;
         $sucursal->correo = $request->correo;
         $sucursal->direccion = $request->direccion;
-        //$sucursal->telefono = $request->telefono;
         $sucursal->status = $request->status;
-        $sucursal->save(); // Guarda el registro en la tabla
+        $sucursal->save();
+
+        if($request->has('telefonos')){
+            foreach($request->telefonos as $telefono){
+                $sucursal->telefonos()->create([
+                    'sucursal_id' => $sucursal->id,
+                    'tipo' => $telefono['tipo'],
+                    'numero' => $telefono['numero']
+                ]);
+            }
+        }
 
         return redirect('/admin/sucursales');
     }
@@ -79,8 +91,11 @@ class SucursalController extends Controller
             'zona' => 'required',
             'correo' => "required|unique:sucursales,correo,{$sucursal->id}",
             'direccion' => 'required',
-            //'telefono' => 'required',
             'status' => 'required',
+            'telefonos' => 'required|array',
+            'telefonos.*.tipo' => 'required',
+            'telefonos.*.numero' => 'required',
+
         ]);
 
         $sucursal->nombre = $request->nombre;
@@ -89,10 +104,22 @@ class SucursalController extends Controller
         $sucursal->zona = $request->zona;
         $sucursal->correo = $request->correo;
         $sucursal->direccion = $request->direccion;
-        //$sucursal->telefono = $request->telefono;
         $sucursal->status = $request->status;
 
         $sucursal->save();
+
+        $sucursal->telefonos()->delete();
+
+        if($request->has('telefonos')){
+            foreach($request->telefonos as $telefono){
+                if($telefono['numero']){ // Añade el teléfono solo si tiene número
+                    $sucursal->telefonos()->create([
+                        'tipo' => $telefono['tipo'],
+                        'numero' => $telefono['numero'],
+                    ]);
+                }
+            }
+        }
 
         return redirect('/admin/sucursales'); // Redirige a la vista de la sucursal actualizada
     }

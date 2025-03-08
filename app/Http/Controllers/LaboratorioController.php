@@ -80,9 +80,9 @@ class LaboratorioController extends Controller
 
         $laboratorio->telefonos()->delete();
 
-        if ($request->has('telefonos')) {
-            foreach ($request->telefonos as $telefono) {
-                if ($telefono['numero']) { // Añade el teléfono solo si tiene número
+        if($request->has('telefonos')){
+            foreach($request->telefonos as $telefono){
+                if($telefono['numero']){ // Añade el teléfono solo si tiene número
                     $laboratorio->telefonos()->create([
                         'tipo' => $telefono['tipo'],
                         'numero' => $telefono['numero'],

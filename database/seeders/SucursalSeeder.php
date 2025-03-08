@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Sucursal;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,42 +13,14 @@ class SucursalSeeder extends Seeder
      */
     public function run(): void
     {
-        $sucursales = [
-            [
-                'nombre' => 'Rosa',
-                'estado' => 'Perales',
-                'ciudad' => 'example@mail.com',
-                'zona' => 'zona',
-                'direccion' => 'Calle 123',
-                'correo' => 1
-            ],
+        $sucursalesFactory = Sucursal::factory(10)->create();
 
-            [
-                'cedula' => '25853499',
-                'nombre' => 'Carlos',
-                'apellido' => 'Rojas',
-                'correo' => 'cr@mail.com',
-                'direccion' => 'Calle 321',
-                'cargo_id' => 2
-            ],
-
-            [
-                'cedula' => '35478892',
-                'nombre' => 'Luis',
-                'apellido' => 'Garcia',
-                'correo' => 'lbbbb@mail.com',
-                'direccion' => 'Calle 789',
-                'cargo_id' => 3
-            ],
-
-            [
-                'cedula' => '7589248',
-                'nombre' => 'Maria',
-                'apellido' => 'Gonzales',
-                'correo' => 'urra@mail.com',
-                'direccion' => 'Calle 5464',
-                'cargo_id' => 4
-            ]
-        ];
+        foreach($sucursalesFactory as $sucursal){
+            $sucursal->telefonos()->create([
+                'sucursal_id' => $sucursal->id,
+                'tipo' => 'Local',
+                'numero' => fake()->unique()->numberBetween(500000, 1000000)
+            ]);
+        }
     }
 }
