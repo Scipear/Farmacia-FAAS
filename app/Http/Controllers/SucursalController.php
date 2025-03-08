@@ -9,6 +9,7 @@ class SucursalController extends Controller
     // Muestra todas las sucursales
     public function index(){
         $sucursales = Sucursal::all();
+        
         return view('sucursales.index', compact('sucursales'));
     }
 
@@ -24,7 +25,7 @@ class SucursalController extends Controller
     }
 
     // Crea un nuevo registro de sucursal a traves de una peticion
-    public function guardarSucursales(Request $request){
+    public function guardarSucursal(Request $request){
         // Validaciones para los campos del registro
         $request->validate([
             'nombre' => 'required',
@@ -33,7 +34,7 @@ class SucursalController extends Controller
             'zona' => 'required',
             'correo' => 'required|unique:sucursales', // Verifica que el correo sea unico
             'direccion' => 'required',
-            'telefono' => 'required',
+            //'telefono' => 'required',
             'status' => 'required',
         ]);
 
@@ -45,7 +46,7 @@ class SucursalController extends Controller
         $sucursal->zona = $request->zona;
         $sucursal->correo = $request->correo;
         $sucursal->direccion = $request->direccion;
-        $sucursal->telefono = $request->telefono;
+        //$sucursal->telefono = $request->telefono;
         $sucursal->status = $request->status;
         $sucursal->save(); // Guarda el registro en la tabla
 
@@ -67,9 +68,9 @@ class SucursalController extends Controller
             'ciudad' => 'required',
             'estado' => 'required',
             'zona' => 'required',
-            'correo' => "required|unique:sucursales,correo,{$sucursal->correo}",
+            'correo' => "required|unique:sucursales,correo,{$sucursal->id}",
             'direccion' => 'required',
-            'telefono' => 'required',
+            //'telefono' => 'required',
             'status' => 'required',
         ]);
 
@@ -79,7 +80,7 @@ class SucursalController extends Controller
         $sucursal->zona = $request->zona;
         $sucursal->correo = $request->correo;
         $sucursal->direccion = $request->direccion;
-        $sucursal->telefono = $request->telefono;
+        //$sucursal->telefono = $request->telefono;
         $sucursal->status = $request->status;
 
         $sucursal->save();

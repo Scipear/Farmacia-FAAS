@@ -29,10 +29,10 @@ class MedicamentoController extends Controller
     public function crearMedicamento(Request $request)
     {
         $request->validate([
-            'nombre' => 'required'
+            'nombre' => 'required|unique:medicamentos'
         ]);
 
-        $medicamento = Medicamento::created($request->all());
+        $medicamento = Medicamento::create($request->all());
 
         return response()->json($medicamento, 200);
     }
@@ -44,7 +44,7 @@ class MedicamentoController extends Controller
         $medicamento = Medicamento::find($id); // Busca x por su ID
 
         $request->validate([
-            'nombre' => 'required'
+            'nombre' => 'required|unique:medicamentos'
         ]);
 
         $medicamento->update($request->all());
@@ -60,5 +60,47 @@ class MedicamentoController extends Controller
         $medicamento->delete();
 
         return response()->json([], 204);
+    }
+
+    //Asignaler acciones terapeuticas a un medicamento 
+
+    public function asignarAccionTerapeutica($accionTerapeutica_Id, $medicamento)
+    {
+        $medicamento->accionTerapeutica()->sync([$accionTerapeutica_Id]);
+    }
+
+
+    //Asignaler monodrogas a un medicamento 
+
+    public function asignarMonodrogas($monodroga_Id, $medicamento)
+    {
+        $medicamento->monodrogas()->sync([$monodroga_Id]);
+    }
+
+    //funcion para obtener las acciones terapeuticas de un medicamento 
+
+    public function AccionTPorMedicamento($medicamentoId)
+    {
+        $medicamento = Medicamento::where('medicamento_id', $medicamentoId)->get();
+
+        return $medicamento->accionTerapeutica;
+    }
+
+    //funcion para obtener todas monodrogas de un medicamento 
+
+    public function MonodrogasPorMedicamento($medicamentoId)
+    {
+        $medicamento = Medicamento::where('medicamento_id', $medicamentoId)->get();
+
+        return $medicamento->monodrgas;
+    }
+
+    //funcion para obtener todas las medicinas de un medicamento 
+
+    public function MedicinasPorMedicamento($medicamentoId)
+    {
+        $medicamento = Medicamento::where('medicamento_id', $medicamentoId)->get();
+
+        return $medicamento->medicina;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pedido;
 use App\Models\Medicina_pedido;
+use App\Models\Compra;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
@@ -45,7 +46,15 @@ class PedidoController extends Controller
 
         $pedido = Pedido::create($request->only(['sucursal_id', 'empleado_id', 'laboratorio_id', 
         'precioTotal', 'tipoPago', 'status', 'observaciones']));
-    
+
+        $compra = new Compra([
+            'precioPagar' => $request->precioTotal,
+            'observaciones' => 'nada',
+            'status' => 'Pendiente', // Quitar luego de refrescar la base de datos
+        ]);
+
+
+        $pedido->compras()->save($compra);
         $this->guardarMedicinas($request->medicinas, $pedido);
 
         return response()->json($pedido, 200); // Respuesta en formato JSON implementada por ahora

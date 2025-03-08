@@ -10,7 +10,8 @@ class Laboratorio extends Model
     use HasFactory;
     protected $table = 'laboratorios';
     protected $fillable = [
-        'nombre', 
+        'nombre',
+        'ciudad',
         'direccion', 
         'correo'
     ];

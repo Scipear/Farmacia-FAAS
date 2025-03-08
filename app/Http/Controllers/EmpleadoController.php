@@ -35,7 +35,6 @@ class EmpleadoController extends Controller
             'apellido' => 'required',
             'correo' => 'required|unique:empleados',
             'direccion' => 'required',
-            'status' => 'required',
             'telefonos' => 'required|array',
             'telefonos.*.tipo' => 'required',
             'telefonos.*.numero' => 'required',
@@ -45,7 +44,7 @@ class EmpleadoController extends Controller
 
 
         $empleado = Empleado::create($request->only(['cedula', 'nombre', 'apellido', 
-        'correo', 'direccion', 'status'])); // Guarda en la tabla de empleados unicamente los datos que van en dicha tabla
+        'correo', 'direccion'])); // Guarda en la tabla de empleados unicamente los datos que van en dicha tabla
 
         if($request->has('cargo')){
             $this->asignarCargo($request->cargo, $empleado);
@@ -86,20 +85,20 @@ class EmpleadoController extends Controller
 
         $cargoActual = $empleado->cargos()->whereNull('cargo_empleado.fechaFin')->first();
         
-        if($cargoActual && ($cargoActual->id !== $request->cargo)){
+        if($cargoActual && ((int)$cargoActual->id !== (int)$request->cargo)){
             $empleado->cargos()->updateExistingPivot($cargoActual->id, ['fechaFin' => now()]);
             
-            $this->asignarCargo($request->cargo, $empleado);
+            $empleado->cargos()->attach([$request->cargo]);
         } /* Un empleado solo puede tener un cargo a la vez (Supongo) por lo que si al actualizar
         un empleado viene con un nuevo cargo se edita ese registro en la tabla cargo_empleado colocando
         una fecha de fin y se le asigna el nuevo cargo al empleado */
         
         $sucursalActual = $empleado->sucursales()->whereNull('empleado_sucursal.fecha_salida')->first();
 
-        if($sucursalActual && ($sucursalActual->id !== $request->sucursal)){
+        if($sucursalActual && ((int)$sucursalActual->id !== (int)$request->sucursal)){
             $empleado->sucursales()->updateExistingPivot($sucursalActual->id, ['fecha_salida' => now()]);
             
-            $this->asignarSucursal($request->sucursal, $empleado);
+            $empleado->sucursales()->attach([$request->sucursal]);
         } /* Un empleado solo puede trabajar en una sucursal a la vez por lo que si al actualizar
         un empleado viene con una nueva sucursal realiza el mismo proceso que con el cargo */
 
@@ -117,6 +116,7 @@ class EmpleadoController extends Controller
             'status' =>'required',
         ]);
 
+        $empleado->update(['status' => $request->status]);
         $cargoActual = $empleado->cargos()->whereNull('cargo_empleado.fechaFin')->first();
         $sucursalActual = $empleado->sucursales()->whereNull('empleado_sucursal.fecha_salida')->first();
 
@@ -124,6 +124,8 @@ class EmpleadoController extends Controller
             $empleado->cargos()->updateExistingPivot($cargoActual->id, ['fechaFin' => now()]);
             $empleado->sucursales()->updateExistingPivot($sucursalActual->id, ['fecha_salida' => now()]);
         }
+
+        return response()->json($empleado, 200);
     }
 
     // Elimina un empleado de la tabla
