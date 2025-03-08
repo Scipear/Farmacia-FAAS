@@ -84,7 +84,7 @@ class SucursalController extends Controller
 
         $sucursal->save();
 
-        return redirect()->route("/sucursales){$sucursal->id}"); // Redirige a la vista de la sucursal actualizada
+        return redirect()->route("/sucursales/{$sucursal->id}"); // Redirige a la vista de la sucursal actualizada
     }
 
     // Elimina una sucursal de la tabla 
@@ -93,6 +93,40 @@ class SucursalController extends Controller
         $sucursal->delete();
 
         return redirect()->route('/sucursales');
+    }
+
+    public function asignarLaboratorio($laboratorio_id, $sucursal){
+        $sucursal->laboratorios()->sync([$laboratorio_id]);
+    }
+
+    //funcion para obtener los pedidos de una sucursal
+    public function pedidosPorSucursal($sucursalId){
+        $sucursal = Sucursal::where('sucursal_id', $sucursalId)->get();
+        return $sucursal->pedidos;
+    }
+
+    //funcion para obtener los empleados de una sucursal
+    public function empleadosPorSucursal($sucursalId){
+        $sucursal = Sucursal::where('sucursal_id', $sucursalId)->get();
+        return $sucursal->empleados;
+    }
+
+    //funcion para obtener los laboratorios de una sucursal
+    public function laboratoriosPorSucursal($sucursalId){
+        $sucursal = Sucursal::where('sucursal_id', $sucursalId)->get();
+        return $sucursal->laboratorios;
+    }
+
+    //funcion para obtener las medicionas de una sucursal
+    public function medicinasPorSucursal($sucursalId){
+        $sucursal = Sucursal::where('sucursal_id', $sucursalId)->get();
+        return $sucursal->medicinas;
+    }
+
+    //funcion para obtener los tlf de una sucursal
+    public function telefonosPorSucursal($sucursalId){
+        $sucursal = Sucursal::where('sucursal_id', $sucursalId)->get();
+        return $sucursal->telefonos;
     }
 }
 

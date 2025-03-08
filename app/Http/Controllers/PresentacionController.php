@@ -82,7 +82,7 @@ class PresentacionController extends Controller
 
     //obtener todas las medicinas asociadas a una presentación
     public function medicinasPorPresentacion($medicinaId){
-        $presentacion = Presentacion::findOrFail($medicinaId);
+        $presentacion = Presentacion::where('medicina_id', $medicinaId)->get();
         return $presentacion->medicinas;
     }
 
