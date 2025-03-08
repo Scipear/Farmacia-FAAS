@@ -61,6 +61,7 @@
                             <a  class="botonEd" href="/editarSucursal/{{$sucursal->id}}">Editar</a>
                                 
                                 <button popovertarget="popup{{$sucursal->id}}">Eliminar</button>
+                                <div>
                                 <div popover id="popup{{$sucursal->id}}">
                                     ¿Estás seguro que quieres eliminar este registro?<br><br>
                                     
@@ -70,9 +71,11 @@
 
                                         <button type="submit">Aceptar</button>
                                     </form>
-                                    
+    
                                     <button popovertarget="popup{{$sucursal->id}}">Cerrar</button>
                                 </div>
+                                </div>
+                                
                             </div>
                         </td>
 

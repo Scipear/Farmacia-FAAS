@@ -79,7 +79,7 @@
 
         table, th, td{
             text-align: center;
-            width: 90%;
+            /* width: 90%; */
             border-collapse: collapse;
             padding: 10px;
             margin: 60px; 
@@ -89,6 +89,7 @@
 
         th
         {
+            width: 15%;
             font-size: px;
             background:rgb(57, 139, 39);
             color: white;
@@ -187,6 +188,10 @@
             margin-right: 10px;
     }
 
+    /* .formElim{
+        
+    }
+ */
 
     .cards{
         display: flex;
@@ -198,6 +203,9 @@
         border: 2px solid white;
         border-radius: 5px;
     }
+
+
+
 
 </style>
 
