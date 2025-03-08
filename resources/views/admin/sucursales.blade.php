@@ -22,7 +22,7 @@
             <button type="submit">Buscar</button>
         </form>
         </div>
-        <a  class="botonAg" href="/admin/formularios/formSuc">Agregar +</a>
+        <a  class="botonAg" href="/admin/formSuc">Agregar +</a>
         <table>
                 <tr>
                     <th>ID</th>
