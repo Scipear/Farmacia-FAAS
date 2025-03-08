@@ -89,7 +89,7 @@
 
         th
         {
-            width: 15%;
+            width: %;
             font-size: px;
             background:rgb(57, 139, 39);
             color: white;

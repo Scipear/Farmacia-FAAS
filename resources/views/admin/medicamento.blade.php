@@ -29,12 +29,10 @@
 
             <table>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre principal</th>
                     <th>Opciones</th>
                 </tr>
                 <tr>
-                    <td>123</td>
                     <td>Genvem</td>
                     <td>
                         <div class="buttonCont">

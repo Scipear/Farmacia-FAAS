@@ -246,6 +246,10 @@ Route::get('/admin/laboratoriosA', function () {
 
 Route::get('/admin/laborat', [LaboratorioController::class, 'mostrarLaboratorios']);//revisar
 
+Route::get('/admin/formLab', function () {
+    return view('admin.formLab');
+});
+
 Route::get('/buscarL', function (Request $request) {
     $BuscarL = $request->query('query');
     return view('admin.buscarLab', compact('BuscarL'));

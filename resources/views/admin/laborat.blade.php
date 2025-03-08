@@ -23,9 +23,7 @@
         </form>
         </div>
 
-        <div class="buttonA">
-                <button>Agregar +</button>
-        </div>
+        <a  class="botonAg" href="/admin/formLab">Agregar +</a>
 
             <table>
                 <tr>
@@ -50,7 +48,7 @@
                     <td>{{$laboratorio->correo}}</td>
                     <td>
                         <div class="buttonCont">
-                            <button>Editar</button>
+                        <a  class="botonEd" href="/editarLaboratorio/{{$laboratorio->id}}">Editar</a>
 
                             <button popovertarget="popup{{$laboratorio->id}}">Eliminar</button>
 
