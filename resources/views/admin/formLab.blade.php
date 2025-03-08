@@ -30,18 +30,18 @@
         <label>Teléfono 1 (Principal)</label>
         <input type="text" name="telefonos[0][numero]" required>
         <select id="telefonos[0][tipo]" name="telefonos[0][tipo]">
-            <option value="Trabajo">Trabajo</option>
+            <option value="Personal">Personal</option>
             <option value="Casa">Casa</option>
-            <option value="Móvil">Móvil</option>
+            <option value="Trabajo">Trabajo</option>
             <option value="Otro">Otro</option>
         </select><br><br>
 
         <label>Teléfono 2 (Opcional)</label>
         <input type="text" name="telefonos[1][numero]">
         <select id="telefonos[1][tipo]" name="telefonos[1][tipo]">
-            <option value="Trabajo">Trabajo</option>
+            <option value="Personal">Personal</option>
             <option value="Casa">Casa</option>
-            <option value="Móvil">Móvil</option>
+            <option value="Trabajo">Trabajo</option>
             <option value="Otro">Otro</option>
         </select><br><br>
 
