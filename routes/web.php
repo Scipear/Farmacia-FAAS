@@ -262,6 +262,10 @@ Route::get('/admin/telfLab', function () {
 
 Route::get('/admin/empleados', [EmpleadoController::class, 'mostrarEmpleados']);
 
+Route::get('/admin/formEmp', function () {
+    return view('admin.formEmp');
+});
+
 Route::get('/buscarE', function (Request $request) {
     $BuscarE = $request->query('query');
     return view('admin.buscarEmp', compact('BuscarE'));
@@ -273,6 +277,11 @@ Route::get('/admin/telfEmpl', function () {
 
 Route::get('/admin/cargo', [CargoController::class, 'index']);
 
+Route::get('/admin/formCarg', function () {
+    return view('admin.formCarg');
+});
+
+
 Route::get('/buscarC', function (Request $request) {
     $BuscarC = $request->query('query');
     return view('admin.buscarCar', compact('BuscarC'));
@@ -281,6 +290,10 @@ Route::get('/buscarC', function (Request $request) {
 
 Route::get('/admin/medicina', function () {
     return view('admin.medicina');
+});
+
+Route::get('/admin/formMedicina', function () {
+    return view('admin.formMedicina');
 });
 
 Route::get('/buscarMedicina', function (Request $request) {
@@ -294,6 +307,10 @@ Route::get('/admin/medicamento', function () {
     return view('admin.medicamento');
 });
 
+Route::get('/admin/formMedicamento', function () {
+    return view('admin.formMedicamento');
+});
+
 Route::get('/buscarMedicamento', function (Request $request) {
     $BuscarMedicamento = $request->query('query');
     return view('admin.buscarMedicamento', compact('BuscarMedicamento'));
@@ -302,6 +319,10 @@ Route::get('/buscarMedicamento', function (Request $request) {
 
 Route::get('/admin/presentacion', function () {
     return view('admin.presentacion');
+});
+
+Route::get('/admin/formPre', function () {
+    return view('admin.formPre');
 });
 
 Route::get('/buscarPresentacion', function (Request $request) {
@@ -313,6 +334,10 @@ Route::get('/admin/acciont', function () {
     return view('admin.acciont');
 });
 
+Route::get('/admin/formAccion', function () {
+    return view('admin.formAccion');
+});
+
 Route::get('/buscarAc', function (Request $request) {
     $BuscarA= $request->query('query');
     return view('admin.buscarAccionT', compact('BuscarA'));
@@ -320,6 +345,10 @@ Route::get('/buscarAc', function (Request $request) {
 
 Route::get('/admin/monodroga', function () {
     return view('admin.monodroga');
+});
+
+Route::get('/admin/formMon', function () {
+    return view('admin.formMon');
 });
 
 Route::get('/buscarMonodroga', function (Request $request) {

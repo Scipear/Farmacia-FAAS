@@ -24,11 +24,10 @@
         </div>
 
         <div class="buttonA">
-                <button>Agregar +</button>
+        <a  class="botonAg" href="/admin/formMedicina">Agregar +</a>
         </div>
         <table>
                 <tr>
-                    <th>ID</th>
                     <th>laboratorioID</th>
                     <th>MedicamentoID</th>
                     <th>PresentaciónID</th>
@@ -38,7 +37,6 @@
                     <th>Opcines</th>
                 </tr>
                 <tr>
-                    <td>123</td>
                     <td>Acetf</td>
                     <td>Genvem</td>
                     <td>20mg</td>

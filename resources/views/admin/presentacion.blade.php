@@ -23,12 +23,10 @@
         </form>
         </div>
 
-        <div class="buttonA">
-                <button>Agregar +</button>
-        </div>
+            <a  class="botonAg" href="/admin/formPre">Agregar +</a>
+
         <table>
                 <tr>
-                    <th>ID</th>
                     <th>Tipo presentación</th>
                     <th>Cantidad</th>
                     <th>Medida</th>
@@ -36,7 +34,6 @@
                     <th>Opcines</th>
                 </tr>
                 <tr>
-                    <td>123</td>
                     <td>Acetf</td>
                     <td>Genvem</td>
                     <td>20mg</td>

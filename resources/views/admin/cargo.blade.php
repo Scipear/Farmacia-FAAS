@@ -23,9 +23,8 @@
         </form>
         </div>
 
-        <div class="buttonA">
-                <button>Agregar +</button>
-        </div>
+
+        <a  class="botonAg" href="/admin/formCarg">Agregar +</a>
 
             <table>
                 <tr>
