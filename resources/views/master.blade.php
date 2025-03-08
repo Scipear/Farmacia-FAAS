@@ -174,6 +174,19 @@
             margin-right: 1450px;
     }
 
+    .botonEd{
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #29a15f;
+            ;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 10px;
+    }
+
 
     .cards{
         display: flex;

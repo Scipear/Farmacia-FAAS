@@ -324,15 +324,6 @@ Route::get('/buscarMonodroga', function (Request $request) {
 
 //Rutas para enviar formularios
 
-Route::post('/admin/formSuc', function (\Illuminate\Http\Request $request) {
-    $estadoSuc = $request->input('nombreSuc');
-    $emailSuc = $request->input('email');
-    $ciudadSuc = $request->input('password');
-    $zonaSuc = $request->input('password');
-    $direccionSuc = $request->input('password');
-    $correoSuc = $request->input('password');
-    return redirect('/admin/sucursales'); // Redirect to admin sucursal
-})->name('admin.formSuc');
 
 //Get:Redirigir hacia pagina
 //Mandar info no visible desde un formulario
