@@ -13,8 +13,9 @@
     </ul>
 </header>
 @section('contenido')
+        <h1>Información de los cargos</h1>
+        @if($BuscarC)
         <div class="container">
-            <h1>Información de los cargos</h1>
             <p>Mostrando resultados para: <strong>{{$BuscarC}}</strong></p>
         </div>
         <div class="buttonA">
@@ -38,4 +39,7 @@
                     </td>
                 </tr>
             </table>
+        @else
+        <p>No ingresaste un término de búsqueda.</p>
+        @endif
 @endsection

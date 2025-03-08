@@ -13,11 +13,10 @@
     </ul>
 </header>
 @section('contenido')
+        <h1>Información de Acción terapéutica</h1>
         <div class="container">
-            <h1>Información de Acción terapéutica</h1>
         </div>
         <div>        
-        <!-- Hacer una ruta llamada buscar sucursal Y ACA CAMBIART-->
                 <form action="{{ route('buscarAc') }}" method="GET">
             <input type="text" name="query" placeholder="Filtrar...">
             <button type="submit">Buscar</button>
@@ -39,7 +38,12 @@
                     <td>
                         <div class="buttonCont">
                         <button>Editar</button>
-                        <button>Eliminar</button>
+                        <button popovertarget="popup">Eliminar</button>
+                        <div popover id="popup">
+                        ¿Estás seguro que quieres eliminar este registro?<br><br>
+                        <button popovertarget="popup">Aceptar</button>
+                        <button popovertarget="popup">Cerrar</button>
+                        </div>
                      </div>
                     </td>
                     

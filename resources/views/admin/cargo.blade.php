@@ -13,12 +13,11 @@
     </ul>
 </header>
 @section('contenido')
+        <h1>Información de los cargos</h1>
         <div class="container">
-            <h1>Información de los cargos</h1>
         </div>
         <div>        
-        <!-- Hacer una ruta llamada m,,-->
-                <form action="{{ route('buscarC') }}" method="GET">
+            <form action="{{ route('buscarC') }}" method="GET">
             <input type="text" name="query" placeholder="Buecar cargo...">
             <button type="submit">Buscar</button>
         </form>

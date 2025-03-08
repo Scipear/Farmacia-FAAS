@@ -210,7 +210,7 @@ Route::get('/admin/logout', function () {
 });
 
 
-    // RUTAS ADMINISTRADOR
+// RUTAS ADMINISTRADOR
 
 Route::get('/admin/dashboar', function () {
     return view('admin.dashboard');
@@ -219,6 +219,10 @@ Route::get('/admin/dashboar', function () {
 
 Route::get('/admin/sucursales', function () {
     return view('admin.sucursales');
+});
+
+Route::get('/admin/formularios/formSuc', function () {
+    return view('admin.formularios.formSuc');
 });
 
 //Nueva ruta filtrar

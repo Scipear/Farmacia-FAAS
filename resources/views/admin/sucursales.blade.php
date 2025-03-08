@@ -13,21 +13,16 @@
     </ul>
 </header>
 @section('contenido')
+        <h1>Información de Surcursales</h1>
         <div class="container">
-            <h1>Información de Surcursales</h1>
         </div>
         <div> 
-            <!-- ver como lo hice en resultados esto         -->
-        <!-- Hacer una ruta llamada buscar sucursal Y ACA CAMBIART-->
-                <form action="{{ route('buscarS') }}" method="GET">
+            <form action="{{ route('buscarS') }}" method="GET">
             <input type="text" name="query" placeholder="Burcar sucursal...">
             <button type="submit">Buscar</button>
         </form>
         </div>
-
-        <div class="buttonA">
-                <button>Agregar +</button>
-        </div>
+        <a  class="botonAg" href="/admin/formularios/formSuc">Agregar +</a>
         <table>
                 <tr>
                     <th>ID</th>
@@ -58,8 +53,13 @@
                     <td>
                     <div class="buttonCont">
                         <button>Editar</button>
-                        <button>Eliminar</button>
-                     </div>
+                        <button popovertarget="popup">Eliminar</button>
+                        <div popover id="popup">
+                        ¿Estás seguro que quieres eliminar este registro?<br><br>
+                        <button popovertarget="popup">Aceptar</button>
+                        <button popovertarget="popup">Cerrar</button>
+                        </div>
+                    </div>
                     </td>
                 </tr>
             </table>

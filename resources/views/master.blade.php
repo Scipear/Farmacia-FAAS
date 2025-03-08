@@ -64,6 +64,19 @@
             background:rgb(228, 255, 222);
         }
 
+        #popup{
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            border-collapse: collapse;
+            /* padding: 10px;
+            margin: 60px;  */
+            border: none;
+            border-radius: 5px;
+            background:rgb(52, 119, 37);
+            color:rgb(255, 255, 255); /* Modified */
+        }
+
         table, th, td{
             text-align: center;
             width: 90%;
@@ -90,13 +103,6 @@
     </style>
 
    <style>
-
-        .buttonA{
-            display: flex;
-            justify-content: left;
-            padding-left: 60px;
-        }
-
         .buttonCont{
             display: flex;
             justify-content: left;
@@ -154,6 +160,20 @@
             cursor: pointer;
             text-decoration: none;
     }
+
+    .botonAg{
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #29a15f;
+            ;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 1450px;
+    }
+
 
     .cards{
         display: flex;

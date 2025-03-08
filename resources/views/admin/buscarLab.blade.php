@@ -13,8 +13,9 @@
     </ul>
 </header>
 @section('contenido')
+        <h1>Información de Laboratorios</h1>
+        @if($BuscarL)
         <div class="container">
-            <h1>Información de Laboratorios</h1>
             <p>Mostrando resultados para: <strong>{{$BuscarL}}</strong></p>
         </div>
         <div class="buttonA">
@@ -45,9 +46,17 @@
                     <td>
                     <div class="buttonCont">
                         <button>Editar</button>
-                        <button>Eliminar</button>
+                        <button popovertarget="popup">Eliminar</button>
+                        <div popover id="popup">
+                        ¿Estás seguro que quieres eliminar este registro?<br><br>
+                        <button popovertarget="popup">Aceptar</button>
+                        <button popovertarget="popup">Cerrar</button>
+                        </div>
                      </div>
                     </td>
                 </tr>
             </table>
+        @else
+        <p>No ingresaste un término de búsqueda.</p>
+        @endif
 @endsection
