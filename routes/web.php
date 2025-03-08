@@ -245,6 +245,7 @@ Route::get('/admin/laboratoriosA', function () {
 });//revisar
 
 Route::get('/admin/laborat', [LaboratorioController::class, 'mostrarLaboratorios']);//revisar
+Route::get('/editarLaboratorio/{id}', [LaboratorioController::class, 'obtenerLaboratorioID']);
 
 Route::get('/admin/formLab', function () {
     return view('admin.formLab');

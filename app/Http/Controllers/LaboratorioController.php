@@ -18,7 +18,7 @@ class LaboratorioController extends Controller
     {
         $laboratorio = Laboratorio::find($id);
 
-        return response()->json($laboratorio, 200);
+        return view('admin.editFormLab', compact('laboratorio'));
     }
 
     public function buscarLaboratorio(Request $request){
@@ -37,32 +37,61 @@ class LaboratorioController extends Controller
             'ciudad' => 'required',
             'direccion' => 'required',
             'correo' => 'required|unique:laboratorios',
+            'telefonos' => 'required|array',
+            'telefonos.*.tipo' => 'required',
+            'telefonos.*.numero' => 'required',
 
         ]); // Validaciones para los campos del registro
 
 
         $laboratorio = Laboratorio::create($request->only(['nombre', 'ciudad', 'direccion', 'correo']));
 
+        if($request->has('telefonos')){
+            foreach($request->telefonos as $telefono){
+                $laboratorio->telefonos()->create([
+                    'laboratorio_id' => $laboratorio->id,
+                    'tipo' => $telefono['tipo'],
+                    'numero' => $telefono['numero']
+                ]);
+            }
+        }
 
-        return response()->json($laboratorio, 200); // Respuesta en formato JSON implementada por ahora
+
+        return redirect('/admin/laborat'); // Respuesta en formato JSON implementada por ahora
     }
 
     // Actualiza los datos de un laboratorio
     public function actualizarLaboratorio(Request $request, $id)
     {
 
-        $laboratorio = Laboratorio::find($id); // Busca a un labpratorio por su ID
+        $laboratorio = Laboratorio::findOrFail($id); // Busca a un labpratorio por su ID
 
         $request->validate([
             'nombre' => 'required',
             'ciudad' => 'required',
             'direccion' => 'required',
             'correo' => "required|unique:laboratorios,correo,{$laboratorio->id}",
+            'telefonos' => 'required|array',
+            'telefonos.*.tipo' => 'required',
+            'telefonos.*.numero' => 'required',
         ]);
 
-        $laboratorio->update($request->all());
+        $laboratorio->update($request->only(['nombre', 'ciudad', 'direccion', 'correo']));
 
-        return response()->json($laboratorio, 200);
+        $laboratorio->telefonos()->delete();
+
+        if ($request->has('telefonos')) {
+            foreach ($request->telefonos as $telefono) {
+                if ($telefono['numero']) { // Añade el teléfono solo si tiene número
+                    $laboratorio->telefonos()->create([
+                        'tipo' => $telefono['tipo'],
+                        'numero' => $telefono['numero'],
+                    ]);
+                }
+            }
+        }
+
+        return redirect('/admin/laborat');
     }
 
     public function eliminarLaboratorio($id){

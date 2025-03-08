@@ -43,7 +43,7 @@
             <option value="En mantenimiento">En mantenimiento</option>
             <option value="Cerrado temporalmente">Cerrado temporalmente</option>
             <option value="Cerrado permanentemente">Cerrado temporalmente</option>
-            </select><br><br>
+        </select><br><br>
 
         <button>Enviar</button>
     </form>
