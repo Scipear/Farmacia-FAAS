@@ -16,17 +16,17 @@
     <h1>Formulario de Surcursales</h1>
     <form>
         <label>Nombre</label>
-        <input type="text" name="nombre"><br><br>
+        <input type="text" name="nombre" required><br><br>
         <label>Estado</label>
-        <input type="text" name="estado"><br><br>
+        <input type="text" name="estado"required><br><br>
         <label>Ciudad</label>
-        <input type="text" name="ciudad"><br><br>
+        <input type="text" name="ciudad"required><br><br>
         <label>Zona</label>
-        <input type="text" name="zona"><br><br>
+        <input type="text" name="zona"required><br><br>
         <label>Dirección</label>
-        <input type="text" name="direccion"><br><br>
+        <input type="text" name="direccion"required><br><br>
         <label>Correo</label>
-        <input type="email" name="email"><br><br>
+        <input type="email" name="email"required><br><br>
         <input type="submit" value="Enviar">
     </form>
 
