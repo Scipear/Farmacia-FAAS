@@ -15,8 +15,9 @@ class SucursalController extends Controller
 
     // Muestra una sucursal en especifico
     public function mostrarSucursal($sucursal){
-        $sucursal = Sucursal::find($sucursal);
-        return $sucursal;
+        $sucursal = Sucursal::findOrFail($sucursal);
+        
+        return view('admin.editFormSuc', compact('sucursal'));
     }
 
     public function buscarSucursal(Request $request){
@@ -93,7 +94,7 @@ class SucursalController extends Controller
 
         $sucursal->save();
 
-        return redirect()->route("/sucursales/{$sucursal->id}"); // Redirige a la vista de la sucursal actualizada
+        return redirect('/admin/sucursales'); // Redirige a la vista de la sucursal actualizada
     }
 
     // Elimina una sucursal de la tabla 

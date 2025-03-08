@@ -58,7 +58,7 @@
                         
                         <td>
                             <div class="buttonCont">
-                            <a  class="botonEd" href="/admin/formSuc">Editar</a>
+                            <a  class="botonEd" href="/editarSucursal/{{$sucursal->id}}">Editar</a>
                                 
                                 <button popovertarget="popup{{$sucursal->id}}">Eliminar</button>
                                 <div popover id="popup{{$sucursal->id}}">

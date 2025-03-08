@@ -224,6 +224,7 @@ Route::get('/admin/dashboar', function () {
 
 
 Route::get('/admin/sucursales', [SucursalController::class, 'index']); //Obtiene todas las sucursales y se la muestra al administrador
+Route::get('/editarSucursal/{id}', [SucursalController::class, 'mostrarSucursal']);
 
 Route::get('/admin/formSuc', function () {
     return view('admin.formSuc');
