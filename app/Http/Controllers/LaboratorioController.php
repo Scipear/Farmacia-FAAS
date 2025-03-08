@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use app\Models\Laboratorio;
+use App\Models\Laboratorio;
 use Illuminate\Http\Request;
 
 class LaboratorioController extends Controller
@@ -26,13 +26,14 @@ class LaboratorioController extends Controller
     {
         $request->validate([
             'nombre' => 'required',
+            'ciudad' => 'required',
             'direccion' => 'required',
             'correo' => 'required|unique:laboratorios',
 
         ]); // Validaciones para los campos del registro
 
 
-        $laboratorio = Laboratorio::created($request->only(['nombre', 'direccion', 'correo']));
+        $laboratorio = Laboratorio::create($request->only(['nombre', 'ciudad', 'direccion', 'correo']));
 
 
         return response()->json($laboratorio, 200); // Respuesta en formato JSON implementada por ahora
@@ -46,8 +47,9 @@ class LaboratorioController extends Controller
 
         $request->validate([
             'nombre' => 'required',
+            'ciudad' => 'required',
             'direccion' => 'required',
-            'correo' => "required|unique:laboratorios,correo,{$laboratorio->correo}",
+            'correo' => "required|unique:laboratorios,correo,{$laboratorio->id}",
         ]);
 
         $laboratorio->update($request->all());

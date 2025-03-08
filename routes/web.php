@@ -6,8 +6,8 @@
 
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\EmpleadoController;
-use app\Http\Controllers\MedicinaController;
-use app\Http\Controllers\PedidoController;
+use App\Http\Controllers\MedicinaController;
+use App\Http\Controllers\PedidoController;
 
 use App\Http\Controllers\LaboratorioController;
 use App\Http\Controllers\AccionTerapeuticaController;
@@ -29,7 +29,7 @@ use Illuminate\Http\Request;
 // RUTAS PARA EMPLEADOS
 Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados']); // Ruta para obtener todos los empleados
 Route::get('/empleado/{id}', [EmpleadoController::class, 'obtenerEmpleadoID']); //Ruta para obtener un empleado por ID
-Route::get('/empleado/{id}/telefonos', [EmpleadoController::class, 'obtenerTelefonosdeEmpelado']); // Ruta para obtener los telefonos de un empleado
+Route::get('/empleado/{id}/telefonos', [EmpleadoController::class, 'obtenerTelefonosdeEmpleado']); // Ruta para obtener los telefonos de un empleado
 Route::post('/empleado', [EmpleadoController::class, 'crearEmpleado']); // Ruta para crear empleados
 Route::put('/empleado/{id}', [EmpleadoController::class, 'actualizarEmpleado']); // Ruta para actualizar un empleado
 Route::put('/desasignarEmpleado/{id}', [EmpleadoController::class, 'desasignarEmpleado']); // Ruta para actualizar el estado de un empleado en caso de que renuncie o sea despedido
@@ -38,23 +38,25 @@ Route::delete('/empleado/{id}', [EmpleadoController::class, 'eliminarEmpleado'])
 // RUTAS PARA TELEFONO DE EMPLEADOS
 Route::get('/telefonosEmpleados', [TelefonoEmpleadoController::class, 'mostrarTelefonosEmpleados']);
 Route::get('/telefonoEmpleado/{id}', [TelefonoEmpleadoController::class, 'obtenerTelefonoEmpleadoID']);
-Route::post('/telefonoEmpelado', [TelefonoEmpleadoController::class, 'crearTelefonoEmpelado']);
-Route::put('/telefonoEmpleado/{id}', [TelefonoEmpleadoController::class, 'actualizarTelefonoEmpelado']);
-route::delete('telefonoEmpleado/{id}', [TelefonoEmpleadoController::class, 'eliminarTelefonoEmpelado']);
+Route::post('/telefonoEmpleado', [TelefonoEmpleadoController::class, 'crearTelefonoEmpleado']);
+Route::put('/telefonoEmpleado/{id}', [TelefonoEmpleadoController::class, 'actualizarTelefonoEmpleado']);
+route::delete('telefonoEmpleado/{id}', [TelefonoEmpleadoController::class, 'eliminarTelefonoEmpleado']);
 
 // RUTAS PARA MEDICINAS
 Route::get('/medicinas', [MedicinaController::class, 'mostrarMedicinas']); // Ruta para obtener todas las medicinas
 Route::get('/medicina/{id}', [MedicinaController::class, 'obtenerMedicinaID']); //Ruta para obtener una medicina por ID
 Route::get('/medicina/{id}/sucursales', [MedicinaController::class, 'obtenerSucursales']); //Ruta para obtener todas las sucursales en las que se encuentra una medicina
 Route::post('/medicina', [MedicinaController::class, 'crearMedicina']); // Ruta para crear medicinas
+Route::post('/medicina/{id}/sucursal', [MedicinaController::class, 'agregarSucursal']);
 Route::put('/medicina/{id}', [MedicinaController::class, 'actualizarMedicina']); // Ruta para actualizar una medicina
 Route::delete('/medicina/{id}', [MedicinaController::class, 'eliminarMedicina']); // Ruta para eliminar una medicina
 
 // RUTAS PARA PEDIDOS
 Route::get('/pedidos', [PedidoController::class, 'mostrarPedidos']); // Ruta para obtener todos los pedidos
-Route::get('/pedido/{id}', [MedicinaController::class, 'obtenerPedidoID']); //Ruta para obtener un pedido por ID
-Route::post('/pedido', [MedicinaController::class, 'crearPedido']); // Ruta para crear pedidos
-Route::put('/pedido/{id}', [MedicinaController::class, 'actualizarPedido']); // Ruta para actualizar un pedido
+Route::get('/pedido/{id}', [PedidoController::class, 'obtenerPedidoID']); //Ruta para obtener un pedido por ID
+Route::get("/pedido/{id}/medicinas", [PedidoController::class, 'obtenerMedicinas']);
+Route::post('/pedido', [PedidoController::class, 'crearPedido']); // Ruta para crear pedidos
+Route::put('/pedido/{id}', [PedidoController::class, 'actualizarPedido']); // Ruta para actualizar un pedido
 
 // RUTAS PARA COMPRAS
 Route::get('/compras', [CompraController::class, 'mostrarCompras']); // Ruta para obtener todos los pedidos

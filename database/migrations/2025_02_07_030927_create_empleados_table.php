@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('apellido');
             $table->string('correo')->unique();
             $table->text('direccion');
-            $table->string('status');
+            $table->string('status')->default("Activo");
         });
     }
 

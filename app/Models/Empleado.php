@@ -15,7 +15,8 @@ class Empleado extends Model
         'nombre',
         'apellido',
         'correo',
-        'direccion'
+        'direccion',
+        'status',
     ];
     public $timestamps = false;
 
@@ -35,6 +36,6 @@ class Empleado extends Model
     }
 
     public function sucursales(){
-        return $this->belongsToMany(Sucursal::class)->using(Empleado_sucursal::class)->withPivot('fecha_inicio', 'fecha_salida');
+        return $this->belongsToMany(Sucursal::class, 'empleado_sucursal', 'empleado_id', 'sucursal_id')->withPivot('fecha_inicio', 'fecha_salida');
     }
 }

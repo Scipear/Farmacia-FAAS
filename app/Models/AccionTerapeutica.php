@@ -11,7 +11,7 @@ class AccionTerapeutica extends Model
 
     protected $table = 'accionTerapeutica';
     protected $fillable = ['nombre'];
-    // public $timestamps = false;
+    public $timestamps = false;
 
 
     //Relacion Muchos a muchos

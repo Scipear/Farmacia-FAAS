@@ -32,7 +32,7 @@ class AccionTerapeuticaController extends Controller
             'nombre' => 'required'
         ]);
 
-        $accionT = AccionTerapeutica::created($request->all());
+        $accionT = AccionTerapeutica::create($request->all());
 
         return response()->json($accionT, 200);
     }
@@ -44,7 +44,7 @@ class AccionTerapeuticaController extends Controller
         $accionT = AccionTerapeutica::find($id); // Busca x por su ID
 
         $request->validate([
-            'numero' => 'required|numeric'
+            'nombre' => 'required'
         ]);
 
         $accionT->update($request->all());

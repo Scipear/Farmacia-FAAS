@@ -29,10 +29,10 @@ class MedicamentoController extends Controller
     public function crearMedicamento(Request $request)
     {
         $request->validate([
-            'nombre' => 'required'
+            'nombre' => 'required|unique:medicamentos'
         ]);
 
-        $medicamento = Medicamento::created($request->all());
+        $medicamento = Medicamento::create($request->all());
 
         return response()->json($medicamento, 200);
     }
@@ -44,7 +44,7 @@ class MedicamentoController extends Controller
         $medicamento = Medicamento::find($id); // Busca x por su ID
 
         $request->validate([
-            'nombre' => 'required'
+            'nombre' => 'required|unique:medicamentos'
         ]);
 
         $medicamento->update($request->all());

@@ -36,14 +36,14 @@ class Medicina extends Model
 
     //Relacion Muchos a muchos
     public function compras(){
-        return $this->belongsToMany(Compra::class)->using(Medicina_compra::class)->withPivot('cantidad', 'precio');
+        return $this->belongsToMany(Compra::class, 'medicina_compra', 'medicina_id', 'compra_id')->withPivot('cantidad', 'precio');
     }
 
     public function pedidos(){
-        return $this->belongsToMany(Pedido::class)->using(Medicina_pedido::class)->withPivot('cantidad', 'precio');
+        return $this->belongsToMany(Pedido::class, 'medicina_pedido', 'medicina_id', 'pedido_id')->withPivot('cantidad', 'precio');
     }
 
     public function sucursales(){
-        return $this->belongsToMany(Sucursal::class)->using(Medicina_sucursal::class)->withPivot('cantidad', 'observacion');
+        return $this->belongsToMany(Sucursal::class, 'medicina_sucursal', 'medicina_id', 'sucursal_id')->withPivot('cantidad', 'observacion');
     }
 }
