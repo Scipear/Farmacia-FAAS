@@ -17,7 +17,7 @@
         <div class="container">
         </div>
         <div>        
-            <form action="{{ route('buscarL') }}" method="GET">
+            <form action="/buscarLaboratorio" method="GET">
             <input type="text" name="query" placeholder="Buscar laboratorio...">
             <button type="submit">Buscar</button>
         </form>
@@ -29,7 +29,6 @@
 
             <table>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Telefono(s)</th>
                     <th>Ciudad</th>
@@ -37,28 +36,37 @@
                     <th>Correo</th>
                     <th>Opción</th>
                 </tr>
+
+                @foreach($laboratorios as $laboratorio)
                 <tr>
-                    <td>123</td>
-                    <td>Acetf</td>
+                    <td>{{$laboratorio->nombre}}</td>
                     <td>
-                    <div class="buttonCont">
-                        <button>Ver</button>
-                     </div>
-                    </td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>
-                    <div class="buttonCont">
-                        <button>Editar</button>
-                        <button popovertarget="popup">Eliminar</button>
-                        <div popover id="popup">
-                        ¿Estás seguro que quieres eliminar este registro?<br><br>
-                        <button popovertarget="popup">Aceptar</button>
-                        <button popovertarget="popup">Cerrar</button>
+                        <div class="buttonCont">
+                            <button>Ver</button>
                         </div>
-                     </div>
+                    </td>
+                    <td>{{$laboratorio->ciudad}}</td>
+                    <td>{{$laboratorio->direccion}}</td>
+                    <td>{{$laboratorio->correo}}</td>
+                    <td>
+                        <div class="buttonCont">
+                            <button>Editar</button>
+
+                            <button popovertarget="popup{{$laboratorio->id}}">Eliminar</button>
+
+                            <div popover id="popup{{$laboratorio->id}}">
+                                ¿Estás seguro que quieres eliminar este registro?<br><br>
+                                <form method="POST" action="/laboratorio/{{$laboratorio->id}}">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button popovertarget="popup{{$laboratorio->id}}">Aceptar</button>
+                                </form>
+                                <button popovertarget="popup{{$laboratorio->id}}">Cerrar</button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
+                @endforeach
             </table>
 @endsection

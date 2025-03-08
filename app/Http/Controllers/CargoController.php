@@ -11,7 +11,7 @@ class CargoController extends Controller
     public function index()
     {
         $cargos = Cargo::all();
-        return view('cargos.index', compact('cargos'));
+        return view('admin.cargo', compact('cargos'));
     }
 
     //mostrar un cargo en específico
@@ -19,6 +19,14 @@ class CargoController extends Controller
     {
         $cargo = Cargo::findOrFail($cargo);
         return $cargo;
+    }
+
+    public function buscarCargo(Request $request){
+        $query = $request->input('query');
+
+        $cargos = Cargo::where('nombre', 'LIKE', '%' . $query . '%')->get();
+
+        return view('admin.cargo', compact('cargos'));
     }
 
     //vista para crear un nuevo cargo

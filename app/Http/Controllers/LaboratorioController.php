@@ -10,8 +10,8 @@ class LaboratorioController extends Controller
 {
     public function mostrarLaboratorios()
     {
-        $laboratios = Laboratorio::all();
-        return response()->json($laboratios, 200);
+        $laboratorios = Laboratorio::all();
+        return view('admin.laborat', compact('laboratorios'));
     }
 
     public function obtenerLaboratorioID($id)
@@ -19,6 +19,14 @@ class LaboratorioController extends Controller
         $laboratorio = Laboratorio::find($id);
 
         return response()->json($laboratorio, 200);
+    }
+
+    public function buscarLaboratorio(Request $request){
+        $query = $request->input('query');
+
+        $laboratorios = Laboratorio::where('nombre', 'LIKE', '%' . $query . '%')->get();
+
+        return view('admin.laborat', compact('laboratorios'));
     }
 
     // Crea un nuevo registro de laboratorio a traves de una peticion
@@ -55,6 +63,13 @@ class LaboratorioController extends Controller
         $laboratorio->update($request->all());
 
         return response()->json($laboratorio, 200);
+    }
+
+    public function eliminarLaboratorio($id){
+        $laboratorio = Laboratorio::find($id);
+        $laboratorio->delete();
+
+        return redirect('/admin/laborat');
     }
 
     //Funcion para obtener todas las sucursales que despachan un laboratorio
