@@ -17,8 +17,8 @@
         <div class="container">
         </div>
         <div>        
-            <form action="{{ route('buscarC') }}" method="GET">
-            <input type="text" name="query" placeholder="Buecar cargo...">
+            <form action="/buscarCargo" method="GET">
+            <input type="text" name="query" placeholder="Buscar cargo...">
             <button type="submit">Buscar</button>
         </form>
         </div>
@@ -29,19 +29,19 @@
 
             <table>
                 <tr>
-                    <th>ID</th>
                     <th>Cargo</th>
                     <th>Opciones</th>
                 </tr>
-                <tr>
-                    <td>123</td>
-                    <td>Acetf</td>
-                    <td>
-                    <div class="buttonCont">
-                        <button>Editar</button>
-                        <button>Eliminar</button>
-                     </div>
-                    </td>
-                </tr>
+                @foreach($cargos as $cargo)
+                    <tr>
+                        <td>{{$cargo->nombre}}</td>
+                        <td>
+                            <div class="buttonCont">
+                                <button>Editar</button>
+                                <button>Eliminar</button>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
             </table>
 @endsection

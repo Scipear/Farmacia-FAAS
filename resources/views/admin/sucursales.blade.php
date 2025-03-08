@@ -19,7 +19,7 @@
 
         <div> 
             <form action="/buscarSucursal" method="GET">
-                <input type="text" name="query" placeholder="Burcar sucursal...">
+                <input type="text" name="query" placeholder="Buscar sucursal...">
                 <button type="submit">Buscar</button>
             </form>
         </div>
@@ -39,7 +39,7 @@
                     <th>Opciones</th>
                 </tr>
 
-                @foreach ($sucursales as $sucursal)
+                @foreach($sucursales as $sucursal)
                     <tr>
                         <td>{{$sucursal->nombre}}</td>
                         
@@ -66,7 +66,8 @@
                                     
                                     <form action="/sucursales/{{$sucursal->id}}" method="POST">
                                         @csrf
-                                        @method('DELETE') {{-- Usa el método DELETE para eliminar --}}
+                                        @method('DELETE')
+
                                         <button type="submit">Aceptar</button>
                                     </form>
                                     

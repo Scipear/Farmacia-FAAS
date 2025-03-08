@@ -12,13 +12,37 @@ class EmpleadoController extends Controller
     public function mostrarEmpleados(){
         $empleados = Empleado::all();
 
-        return response()->json($empleados, 200);
+        foreach($empleados as $empleado){
+            $cargoActual = $empleado->cargos()->whereNull('cargo_empleado.fechaFin')->first();
+            $sucursalActual = $empleado->sucursales()->whereNull('empleado_sucursal.fecha_salida')->first();
+
+            $empleado->cargoActual = $cargoActual ? $cargoActual->nombre : "No";
+            $empleado->sucursalActual = $sucursalActual ? $sucursalActual->nombre : "No";
+        }
+
+        return view('admin.empleados', compact('empleados'));
     }
 
     public function obtenerEmpleadoID($id){
         $empleado = Empleado::findOrFail($id);
         
         return response()->json($empleado, 200);
+    }
+
+    public function buscarEmpleado(Request $request){
+        $query = $request->input('query');
+
+        $empleados = Empleado::where('nombre', 'LIKE', '%' . $query . '%')->get();
+
+        foreach($empleados as $empleado){
+            $cargoActual = $empleado->cargos()->whereNull('cargo_empleado.fechaFin')->first();
+            $sucursalActual = $empleado->sucursales()->whereNull('empleado_sucursal.fecha_salida')->first();
+
+            $empleado->cargoActual = $cargoActual ? $cargoActual->nombre : "No";
+            $empleado->sucursalActual = $sucursalActual ? $sucursalActual->nombre : "No";
+        }
+
+        return view('admin.empleados', compact('empleados'));
     }
 
     public function obtenerTelefonosdeEmpleado($id){
@@ -133,7 +157,7 @@ class EmpleadoController extends Controller
         $empleado = Empleado::findOrFail($id);
         $empleado->delete();
         
-        return response()->json([], 204);
+        return redirect('/admin/empleados');
     }
 
     // Crear funcion para mostrar la ficha de un trabajador

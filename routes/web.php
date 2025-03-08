@@ -30,6 +30,7 @@ use Illuminate\Http\Request;
 Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados']); // Ruta para obtener todos los empleados
 Route::get('/empleado/{id}', [EmpleadoController::class, 'obtenerEmpleadoID']); //Ruta para obtener un empleado por ID
 Route::get('/empleado/{id}/telefonos', [EmpleadoController::class, 'obtenerTelefonosdeEmpleado']); // Ruta para obtener los telefonos de un empleado
+Route::get('/buscarEmpleado', [EmpleadoController::class, 'buscarEmpleado']); //Busca empleados por el nombre
 Route::post('/empleado', [EmpleadoController::class, 'crearEmpleado']); // Ruta para crear empleados
 Route::put('/empleado/{id}', [EmpleadoController::class, 'actualizarEmpleado']); // Ruta para actualizar un empleado
 Route::put('/desasignarEmpleado/{id}', [EmpleadoController::class, 'desasignarEmpleado']); // Ruta para actualizar el estado de un empleado en caso de que renuncie o sea despedido
@@ -69,6 +70,7 @@ Route::put('/compra/{id}', [CompraController::class, 'actualizarCompra']); // Ru
 //RUTAS PARA LABORATORIOS//
 Route::get('/laboratorios', [LaboratorioController::class, 'mostrarLaboratorios']); //Ruta para obtener laboratorios
 Route::get('/laboratorio/{id}', [LaboratorioController::class, 'obtenerLaboratorioID']); // Ruta para obtener Laboratorios  x ID
+Route::get('/buscarLaboratorio', [LaboratorioController::class, 'buscarLaboratorio']); //Busca laboratorios por el nombre
 Route::post('/laboratorio', [LaboratorioController::class, 'crearLaboratorio']); // Ruta para crear medicinas
 Route::put('/laboratorio/{id}', [LaboratorioController::class, 'actualizarLaboratorio']); // Ruta para actualizar 
 Route::delete('/laboratorio/{id}', [LaboratorioController::class, 'eliminarLaboratorio']); // Ruta para eliminar 
@@ -131,6 +133,7 @@ Route::delete('/presentaciones/{id}', [PresentacionController::class, 'eliminarP
 // RUTAS DE CARGOS
 Route::get('/cargos', [CargoController::class, 'index']); // Ruta para obtener todos los cargos
 Route::get('/cargos/{id}', [CargoController::class, 'mostrarCargo']); // Ruta para obtener un cargo por id
+Route::get('/buscarCargo', [CargoController::class, 'buscarCargo']); //Busca sucursales por el nombre
 Route::post('/cargos', [CargoController::class, 'guardarCargo']); // Ruta para guardar cargos
 Route::put('/cargos/{id}', [CargoController::class, 'actualizarCargo']); // Ruta para actualizar un cargo
 Route::delete('/cargos/{id}', [CargoController::class, 'eliminarCargo']); // Ruta para eliminar un cargo
@@ -240,9 +243,7 @@ Route::get('/admin/laboratoriosA', function () {
     return view('admin.laboratoriosA');
 });//revisar
 
-Route::get('/admin/laborat', function () {
-    return view('admin.laborat');
-});//revisar
+Route::get('/admin/laborat', [LaboratorioController::class, 'mostrarLaboratorios']);//revisar
 
 Route::get('/buscarL', function (Request $request) {
     $BuscarL = $request->query('query');
@@ -254,9 +255,7 @@ Route::get('/admin/telfLab', function () {
     return view('admin.telfLab');
 });//revisar
 
-Route::get('/admin/empleados', function () {
-    return view('admin.empleados');
-});
+Route::get('/admin/empleados', [EmpleadoController::class, 'mostrarEmpleados']);
 
 Route::get('/buscarE', function (Request $request) {
     $BuscarE = $request->query('query');
@@ -267,9 +266,7 @@ Route::get('/admin/telfEmpl', function () {
     return view('admin.telfEmpl');
 });
 
-Route::get('/admin/cargo', function () {
-    return view('admin.cargo');
-});
+Route::get('/admin/cargo', [CargoController::class, 'index']);
 
 Route::get('/buscarC', function (Request $request) {
     $BuscarC = $request->query('query');
