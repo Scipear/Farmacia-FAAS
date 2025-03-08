@@ -61,6 +61,7 @@
                             <a  class="botonEd" href="/admin/formSuc">Editar</a>
                                 
                                 <button popovertarget="popup{{$sucursal->id}}">Eliminar</button>
+                                <div>
                                 <div popover id="popup{{$sucursal->id}}">
                                     ¿Estás seguro que quieres eliminar este registro?<br><br>
                                     
@@ -69,9 +70,11 @@
                                         @method('DELETE') {{-- Usa el método DELETE para eliminar --}}
                                         <button type="submit">Aceptar</button>
                                     </form>
-                                    
+    
                                     <button popovertarget="popup{{$sucursal->id}}">Cerrar</button>
                                 </div>
+                                </div>
+                                
                             </div>
                         </td>
 
