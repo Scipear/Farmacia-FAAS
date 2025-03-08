@@ -109,6 +109,7 @@ Route::delete('/medicamento/{id}', [MedicamentoController::class, 'eliminarMedic
 // RUTAS DE SUCURSALES
 Route::get('/sucursales', [SucursalController::class, 'index']); // Ruta para obtener todas las sucursales
 Route::get('/sucursales/{id}', [SucursalController::class, 'mostrarSucursal']); // Ruta para obtener una sucursal por id
+Route::get('/buscarSucursal', [SucursalController::class, 'buscarSucursal']); //Busca sucursales por el nombre
 Route::post('/sucursales', [SucursalController::class, 'guardarSucursal']); // Ruta para guardar sucursales
 Route::put('/sucursales/{id}', [SucursalController::class, 'actualizarSucursal']); // Ruta para actualizar una sucursal
 Route::delete('/sucursales/{id}', [SucursalController::class, 'eliminarSucursal']); // Ruta para eliminar una sucursal
@@ -219,9 +220,7 @@ Route::get('/admin/dashboar', function () {
 });
 
 
-Route::get('/admin/sucursales', function () {
-    return view('admin.sucursales');
-});
+Route::get('/admin/sucursales', [SucursalController::class, 'index']); //Obtiene todas las sucursales y se la muestra al administrador
 
 Route::get('/admin/formSuc', function () {
     return view('admin.formSuc');

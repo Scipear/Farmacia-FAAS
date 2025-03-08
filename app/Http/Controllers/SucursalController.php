@@ -10,13 +10,21 @@ class SucursalController extends Controller
     public function index(){
         $sucursales = Sucursal::all();
         
-        return view('sucursales.index', compact('sucursales'));
+        return view('admin.sucursales', compact('sucursales'));
     }
 
     // Muestra una sucursal en especifico
     public function mostrarSucursal($sucursal){
         $sucursal = Sucursal::find($sucursal);
         return $sucursal;
+    }
+
+    public function buscarSucursal(Request $request){
+        $query = $request->input('query');
+
+        $sucursales = Sucursal::where('nombre', 'LIKE', '%' . $query . '%')->get();
+
+        return view('admin.sucursales', compact('sucursales'));
     }
 
     //vista para crear una nueva sucursal
@@ -50,7 +58,7 @@ class SucursalController extends Controller
         $sucursal->status = $request->status;
         $sucursal->save(); // Guarda el registro en la tabla
 
-        return redirect()->route('/sucursales');
+        return redirect('/admin/sucursales');
     }
 
     public function editarSucursal($sucursal){
@@ -93,7 +101,7 @@ class SucursalController extends Controller
         $sucursal = Sucursal::find($sucursal);
         $sucursal->delete();
 
-        return redirect()->route('/sucursales');
+        return redirect('/admin/sucursales');
     }
 
     public function asignarLaboratorio($laboratorio_id, $sucursal){

@@ -16,16 +16,18 @@
         <h1>Información de Surcursales</h1>
         <div class="container">
         </div>
+
         <div> 
-            <form action="{{ route('buscarS') }}" method="GET">
-            <input type="text" name="query" placeholder="Burcar sucursal...">
-            <button type="submit">Buscar</button>
-        </form>
+            <form action="/buscarSucursal" method="GET">
+                <input type="text" name="query" placeholder="Burcar sucursal...">
+                <button type="submit">Buscar</button>
+            </form>
         </div>
+
         <a  class="botonAg" href="/admin/formSuc">Agregar +</a>
+        
         <table>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Teléfono(s)</th>
                     <th>Estado</th>
@@ -36,31 +38,45 @@
                     <th>Status</th>
                     <th>Opciones</th>
                 </tr>
-                <tr>
-                    <td>123</td>
-                    <td>Acetf</td>
-                    <td>
-                    <div class="buttonCont">
-                        <button>Ver</button>
-                     </div>
-                    </td>
-                    <td>Genvem</td>
-                    <td>20mg</td>
-                    <td>Dolor </td>
-                    <td>10</td>
-                    <td>20</td>
-                    <td>20</td>
-                    <td>
-                    <div class="buttonCont">
-                        <button>Editar</button>
-                        <button popovertarget="popup">Eliminar</button>
-                        <div popover id="popup">
-                        ¿Estás seguro que quieres eliminar este registro?<br><br>
-                        <button popovertarget="popup">Aceptar</button>
-                        <button popovertarget="popup">Cerrar</button>
-                        </div>
-                    </div>
-                    </td>
-                </tr>
+
+                @foreach ($sucursales as $sucursal)
+                    <tr>
+                        <td>{{$sucursal->nombre}}</td>
+                        
+                        <td>
+                            <div class="buttonCont">
+                                <button>Ver</button>
+                            </div>
+                        </td>
+
+                        <td>{{$sucursal->estado}}</td>
+                        <td>{{$sucursal->ciudad}}</td>
+                        <td>{{$sucursal->zona}}</td>
+                        <td>{{$sucursal->direccion}}</td>
+                        <td>{{$sucursal->correo}}</td>
+                        <td>{{$sucursal->status}}</td>
+                        
+                        <td>
+                            <div class="buttonCont">
+                                <button>Editar</button>
+                                
+                                <button popovertarget="popup{{$sucursal->id}}">Eliminar</button>
+                                <div popover id="popup{{$sucursal->id}}">
+                                    ¿Estás seguro que quieres eliminar este registro?<br><br>
+                                    
+                                    <form action="/sucursales/{{$sucursal->id}}" method="POST">
+                                        @csrf
+                                        @method('DELETE') {{-- Usa el método DELETE para eliminar --}}
+                                        <button type="submit">Aceptar</button>
+                                    </form>
+                                    
+                                    <button popovertarget="popup{{$sucursal->id}}">Cerrar</button>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                @endforeach
+
             </table>
 @endsection
