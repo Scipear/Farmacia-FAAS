@@ -22,11 +22,11 @@ class Medicamento extends Model
 
     // Relaciones muchos a muchos
     public function monodrogas(){
-        return $this->belongsToMany(Monodroga::class);
+        return $this->belongsToMany(Monodroga::class, 'medicamento_monodroga', 'medicamento_id', 'monodroga_id');
     }
     
     public function accionTerapeutica(){
-        return $this->belongsToMany(AccionTerapeutica::class);
+        return $this->belongsToMany(AccionTerapeutica::class, 'accion_medicamento', 'medicamento_id', 'accion_id');
     }
 
 }

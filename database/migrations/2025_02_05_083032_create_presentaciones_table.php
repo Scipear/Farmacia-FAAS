@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('presentaciones', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo')->unique();
+            $table->string('tipo');
             $table->unsignedInteger('cantidad');
             $table->string('medida', 3);
             $table->unsignedInteger('unidades');

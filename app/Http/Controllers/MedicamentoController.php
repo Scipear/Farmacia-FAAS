@@ -29,10 +29,27 @@ class MedicamentoController extends Controller
     public function crearMedicamento(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|unique:medicamentos'
+            'nombre' => 'required|unique:medicamentos',
+            'monodrogas' => 'required|array',
+            'monodrogas.*.monodroga_id' => 'required|exists:monodrogas,id',
+            'acciones' => 'required|array',
+            'acciones.*.accion__id' => 'required|exists:acciones_terapeuticas,id',
         ]);
 
-        $medicamento = Medicamento::create($request->all());
+        
+        $medicamento = Medicamento::create($request->only(['nombre']));
+        
+        if($request->has('monodrogas')){
+            foreach($request->monodrogas as $monodroga){
+                $this->asignarMonodrogas($monodroga, $medicamento);
+            }
+        }
+
+        if($request->has('acciones')){
+            foreach($request->acciones as $accion){
+                $this->asignarAccionTerapeutica($accion, $medicamento);
+            }
+        }
 
         return response()->json($medicamento, 200);
     }
