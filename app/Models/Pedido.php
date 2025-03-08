@@ -33,7 +33,7 @@ class Pedido extends Model
     //Relacion muchos a muchos
     public function medicinas()
     {
-        return $this->belongsToMany(Medicina::class)->using(Medicina_compra::class)->withPivot('cantidad', 'precio');
+        return $this->belongsToMany(Medicina::class, 'medicina_pedido', 'pedido_id', 'medicina_id')->withPivot('cantidad', 'precio');
     }
     
     //relacion uno a uno

@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\Medicina;
 use App\Models\Medicina_sucursal;
 use Illuminate\Http\Request;
 
 class MedicinaController extends Controller
 {
-    // Obtiene todos los monodrgas de la tabla
-    public function mostrarMedicinas()
-    {
+    public function mostrarMedicinas(){
         $medicinas = Medicina::all();
 
         return response()->json($medicinas, 200);
@@ -24,7 +23,7 @@ class MedicinaController extends Controller
 
     public function obtenerSucursales($id){
         $sucursales = Medicina_sucursal::where([
-            ['sucursal_id', $id],
+            ['medicina_id', $id],
             ['cantidad', '>', 0],
         ])->get();
 
@@ -32,8 +31,7 @@ class MedicinaController extends Controller
     }
 
     // Crea un nuevo registro de medicina a traves de una peticion
-    public function crearMedicina(Request $request)
-    {
+    public function crearMedicina(Request $request){
         $request->validate([
             'laboratorio_id' => 'required|exists:laboratorios,id',
             'medicamento_id' => 'required|exists:medicamentos,id',
@@ -49,8 +47,7 @@ class MedicinaController extends Controller
     }
 
     // Actualiza los datos de una medicina
-    public function actualizarMedicina(Request $request, $id)
-    {
+    public function actualizarMedicina(Request $request, $id){
 
         $medicina = Medicina::findOrFail($id); // Busca una medicina por su ID
 
@@ -61,28 +58,36 @@ class MedicinaController extends Controller
             'descripcion' => 'required',
             'precio_compra' => 'required|numeric',
             'precio_venta' => 'required|numeric',
-            'sucursal_id' => 'required|exists:sucursales,id',
-            'cantidad' => 'required|numeric',
-            'observacion' => 'nullable',
+            //'sucursal_id' => 'required|exists:sucursales,id',
+            //'cantidad' => 'required|numeric',
+            //'observacion' => 'nullable',
         ]);
 
         $medicina->update($request->only(['laboratorio_id', 'medicamento_id', 'presentacion_id', 'descripcion', 'precio_compra', 'precio_venta']));
 
-        if($request->has('sucursal_id')){
-            $mSucursal = $request->only(['sucursal_id', 'cantidad', 'observacion']);
+        //if($request->has('sucursal_id')){
+        //    $mSucursal = $request->only(['sucursal_id', 'cantidad', 'observacion']);
 
-            $this->asignarSucursal($mSucursal, $medicina);
-        }
+        //    $this->asignarSucursal($mSucursal, $medicina);
+        //}
 
         return response()->json($medicina, 200);
     }
 
-    public function asignarSucursal($mSucursal, $medicina){
+    public function agregarSucursal(Request $request, $id){
+        $medicina = Medicina::findOrFail($id);
+
+        $request->validate([
+            'sucursal_id' =>'required|exists:sucursales,id',
+            'cantidad' =>'required|numeric',
+            'observacion' => 'nullable',
+        ]);
+
         $synced = [
-            $mSucursal['sucursal_id'] => [
-                'cantidad' => $mSucursal['cantidad'],
-                'observacion' => $mSucursal['observacion'],
-            ]
+            $request->sucursal_id => [
+                'cantidad' => $request->cantidad,
+                'observacion' => $request->observacion,
+            ],
         ];
 
         $medicina->sucursales()->sync($synced);

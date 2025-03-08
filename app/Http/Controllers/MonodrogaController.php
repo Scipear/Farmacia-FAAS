@@ -32,7 +32,7 @@ class MonodrogaController extends Controller
             'nombre' => 'required'
         ]);
 
-        $monodroga = Monodroga::created($request->all());
+        $monodroga = Monodroga::create($request->all());
 
         return response()->json($monodroga, 200);
     }
