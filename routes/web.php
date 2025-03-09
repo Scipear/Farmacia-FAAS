@@ -182,7 +182,7 @@ Route::get('/login', function () {
     return view('login');
 })->name('login.form');
 
-Route::post('/admin/login', function (\Illuminate\Http\Request $request) {
+/*Route::post('/admin/login', function (\Illuminate\Http\Request $request) {
     $email = $request->input('email');
     $password = $request->input('password');
 
@@ -193,7 +193,7 @@ Route::post('/admin/login', function (\Illuminate\Http\Request $request) {
     } else {
         return back()->with('error', 'Credenciales incorrectas.');
     }
-})->name('admin.login');
+})->name('admin.login');*/
 
 Route::get('/admin/dashboard', function () {
     if (session('admin')) {
