@@ -29,7 +29,7 @@ class LoginController extends Controller
                 case 3:
                     return redirect('/farmaceutico/inicioFarmaceutico');
                 case 4:
-                    return redirect('/analista/pedidos');
+                    return redirect('/analista/inicioAnalista');
                 default:
                     return redirect('/home'); // Redirige a /home si no se encuentra un rol específico
             }

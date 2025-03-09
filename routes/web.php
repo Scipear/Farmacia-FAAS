@@ -295,7 +295,7 @@ Route::middleware([VerificarRol::class . ':Administrador general'])->group(funct
 });
 
 // RUTAS PARA FARMACEUTICO
-Route::middleware([VerificarRol::class . ':Farmaceutico'])->group(function () {
+Route::middleware([VerificarRol::class . ':Farmaceutico'])->group(function (){
     Route::get('/farmaceutico/inicioFarmaceutico', function () {
         return view('farmaceutico.inicioFarmaceutico');
     });
@@ -371,6 +371,12 @@ Route::middleware([VerificarRol::class . ':Farmaceutico'])->group(function () {
    Route::get('/farmaceutico/formMon', function () {
        return view('farmaceutico.formMon');
    });
+});
+
+Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function (){
+    Route::get('/analista/inicioAnalista', function () {
+        return view('analis.inicioanalista');
+    });
 });
 
 Route::get('/admin/medicina', function () {
