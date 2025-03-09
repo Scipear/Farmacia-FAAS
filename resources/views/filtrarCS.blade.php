@@ -9,7 +9,7 @@
             <a class="nav-link active" href="/">Inicio</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.login.form') }}">Login</a>
+            <a class="nav-link" href="{{ route('login.form') }}">Login</a>
         </li> 
 </ul>
 </header>

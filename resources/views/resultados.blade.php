@@ -22,57 +22,68 @@
 
         <div class="content">
           
-            <form action="{{ route('filtrar') }}" method="GET">
-                <input type="text" name="query" placeholder="Filtrar...">
+            <form action="/buscar" method="GET">
+                <input type="text" name="query" placeholder="Buscar...">
                 <button type="submit">Buscar</button>
               
             </form>
-            <form action="{{ route('filtrar') }}" method="GET">
-                <select name="filtro" id="filtro">
-                    <option value="presentacion">Filtrar por presentación</option>
-                    <option value="precio">Filtrar por precio</option>
-                    <option value="sucursal">Filtrar por sucursal</option>
+            <form action="/filtrar/{{$busqueda}}" method="GET">
+                <select name="sucursal_id" id="filtro">
+                    <option value="">Filtrar por Sucursal</opcion>
+                    @foreach ($sucursales as $sucursal)
+                        <option value="{{$sucursal->id}}">Sucursal: {{$sucursal->nombre}} Ciudad: {{$sucursal->ciudad}}</option>
+                    @endforeach
                 </select>
+                
+                <select name="presentacion_id" id="filtro">
+                    <option value="">Filtrar por Presentación</option>
+                    @foreach ($presentaciones as $presentacion)
+                    <option value="{{$presentacion->id}}">{{$presentacion->unidades}} {{$presentacion->tipo}} {{$presentacion->cantidad}} {{$presentacion->medida}}</option>
+                    @endforeach
+                </select>
+                
                 <button type="submit">Filtrar</button>
             </form>
         </div>
-
-        <!-- Segmento de medicamento-->
-        <div style="border: 1px solid #ccc; margin-bottom: 20px; padding: 10px; width: 80%; margin-left: auto; margin-right: auto;">
-            <!-- Sección de imagen del medicamento -->
-            <div style="text-align: center; margin-bottom: 10px;">
-                <img src="{{ asset('medicinaBD.jpg') }}" alt="Imagen del medicamento" style="max-width: 100px; height: auto;">
-            </div>
-
-            <!-- Sección de detalles del medicamento (horizontal) -->
-            <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
-                <div style="width: 20%; margin-bottom: 10px; text-align: center;">
-                    <strong style="display: block; margin-bottom: 5px;">Nombre:</strong>
-                    <span>Acetaminofen</span>
+        @foreach($medicinas as $medicina)
+            
+            <!-- Segmento de medicamento-->
+            <div style="border: 1px solid #ccc; margin-bottom: 20px; padding: 10px; width: 80%; margin-left: auto; margin-right: auto;">
+                <!-- Sección de imagen del medicamento -->
+                <div style="text-align: center; margin-bottom: 10px;">
+                    <img src="{{ asset('medicinaBD.jpg') }}" alt="Imagen del medicamento" style="max-width: 100px; height: auto;">
                 </div>
 
-                <div style="width: 20%; margin-bottom: 10px; text-align: center;">
-                    <strong style="display: block; margin-bottom: 5px;">Laboratorio:</strong>
-                    <span>Genvem</span>
-                </div>
+                <!-- Sección de detalles del medicamento (horizontal) -->
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                    <div style="width: 20%; margin-bottom: 10px; text-align: center;">
+                        <strong style="display: block; margin-bottom: 5px;">Nombre:</strong>
+                        <span>{{$medicina->medicamento->nombre}}</span>
+                    </div>
 
-                <div style="width: 20%; margin-bottom: 10px; text-align: center;">
-                    <strong style="display: block; margin-bottom: 5px;">Presentación:</strong>
-                    <span>20mg</span>
-                </div>
+                    <div style="width: 20%; margin-bottom: 10px; text-align: center;">
+                        <strong style="display: block; margin-bottom: 5px;">Laboratorio:</strong>
+                        <span>{{$medicina->laboratorio->nombre}}</span>
+                    </div>
 
-                <div style="width: 20%; margin-bottom: 10px; text-align: center;">
-                    <strong style="display: block; margin-bottom: 5px;">Descripción:</strong>
-                    <span>Dolor</span>
-                </div>
+                    <div style="width: 20%; margin-bottom: 10px; text-align: center;">
+                        <strong style="display: block; margin-bottom: 5px;">Presentación:</strong>
+                        <span>{{$medicina->presentacion->unidades}} {{$medicina->presentacion->tipo}} {{$medicina->presentacion->cantidad}} {{$medicina->presentacion->medida}}</span>
+                    </div>
 
-                <div style="width: 20%; margin-bottom: 10px; text-align: center;">
-                    <strong style="display: block; margin-bottom: 5px;">Precio:</strong>
-                    <span>20</span>
+                    <div style="width: 20%; margin-bottom: 10px; text-align: center;">
+                        <strong style="display: block; margin-bottom: 5px;">Descripción:</strong>
+                        <span>{{$medicina->descripcion}}</span>
+                    </div>
+
+                    <div style="width: 20%; margin-bottom: 10px; text-align: center;">
+                        <strong style="display: block; margin-bottom: 5px;">Precio:</strong>
+                        <span>$ {{$medicina->precio_venta}}</span>
+                    </div>
+                    <!-- Agrega más detalles aquí si es necesario -->
                 </div>
-                <!-- Agrega más detalles aquí si es necesario -->
-            </div>
         </div>
+        @endforeach
         <!-- Fin del segmento de medicamento -->
     @else
         <p>No ingresaste un término de búsqueda.</p>

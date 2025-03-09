@@ -10,6 +10,7 @@ use App\Models\Medicina_sucursal;
 use App\Models\Presentacion;
 use App\Models\Sucursal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MedicinaController extends Controller
 {
@@ -54,13 +55,51 @@ class MedicinaController extends Controller
     }
 
     public function buscarMedicina(Request $request){
-        $query = $request->input('query');
+        $busqueda = $request->input('query');
 
-        $medicinas = Medicina::whereHas('medicamento', function ($q) use ($query) {
-            $q->where('nombre', 'LIKE', '%' . $query . '%');
+        $medicinas = Medicina::whereHas('medicamento', function ($q) use ($busqueda) {
+            $q->where('nombre', 'LIKE', '%' . $busqueda . '%');
         })->get();
 
-        return view('farmaceutico.medicina', compact('medicinas'));
+        if(Auth::check()){
+            $user = Auth::user();
+
+            if($user->rol && $user->rol->nombre === 'Farmacéutico'){
+                return view('farmaceutico.medicina', compact('medicinas'));
+            }
+        }
+
+        $sucursales = Sucursal::all();
+        $presentaciones = Presentacion::all();
+        return view('resultados', compact('medicinas', 'sucursales', 'presentaciones', 'busqueda'));
+    }
+
+    public function filtrarBusqueda(Request $request, $busqueda){
+        $sucursal_id = $request->input('sucursal_id');
+        $presentacion_id = $request->input('presentacion_id');
+
+        $medicinas = Medicina::query();
+
+        if($sucursal_id && $presentacion_id){
+            $medicinas->whereHas('sucursales', function ($query) use ($sucursal_id) {
+                    $query->where('sucursal_id', $sucursal_id);
+                    })->where('presentacion_id', $presentacion_id);
+        }else if($sucursal_id){
+            // Solo filtro de sucursal
+            $medicinas->whereHas('sucursales', function ($query) use ($sucursal_id) {
+                    $query->where('sucursal_id', $sucursal_id);
+            });
+        }else if($presentacion_id){
+            // Solo filtro de presentación
+            $medicinas->where('presentacion_id', $presentacion_id);
+        }
+
+        $medicinas = $medicinas->get();
+
+        $sucursales = Sucursal::all();
+        $presentaciones = Presentacion::all();
+
+        return view('resultados', compact('medicinas', 'sucursales', 'presentaciones', 'busqueda'));
     }
 
     public function obtenerSucursales($id){

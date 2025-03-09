@@ -156,16 +156,9 @@ Route::get('/greet', function () {
     return view('master');
 });
 
-Route::get('/buscar', function (Request $request) {
-    $busqueda = $request->query('query');
-    return view('resultados', compact('busqueda'));
-})->name('buscar');
-
+Route::get('/buscar', [MedicinaController::class, 'buscarMedicina']);
 //Nueva ruta filtrar
-Route::get('/filtrar', function (Request $request) {
-    $filtrarM = $request->query('query');
-    return view('filtrarCS', compact('filtrarM'));
-})->name('filtrar');
+Route::get('/filtrar/{busqueda}', [MedicinaController::class, 'filtrarBusqueda']);
 
 ///////////////////////////////////////////////////////////////LOGIN///////////////////////////////////////
 Route::get('/login', function () {
