@@ -1,12 +1,12 @@
 @extends('master')
 
-@section('titulo', 'Analista de Compras inicio')
+@section('titulo', 'Analista de Compras')
 
 <header>
     @yield('header', 'Farmacias FAAS')
     <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
             <li class="nav-item">
-                <a class="nav-link active" href="/analis/inicioanalista">Inicio</a>
+                <a class="nav-link active" href="/analista/inicioAnalista">Inicio</a>
             </li>
             <li class="nav-item">
                 <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
@@ -22,10 +22,11 @@
         </div>
 
         <b>Gestionar pedidos</b>
-        <a  class="botonIr" href="">Ir</a><br><br><br>
+        <a  class="botonIr" href="pedidos">Ir</a><br><br><br>
         <b>Gestionar compras</b>
-        <a  class="botonIr" href="">Ir</a><br><br><br>
+        <a  class="botonIr" href="compras">Ir</a><br><br><br>
         <b>Ver cuentas por pagar</b>
-        <a  class="botonIr" href="">Ir</a><br><br><br>
+        <a  class="botonIr" href="cuentasxpagar">Ir</a><br><br><br>
+        
         
 @endsection
