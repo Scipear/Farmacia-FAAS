@@ -26,14 +26,4 @@
         <a  class="botonIr" href="/admin/empleados">Ir</a><br><br><br>
         <b>Gestionar cargo de empleados</b>
         <a  class="botonIr" href="/admin/cargo">Ir</a><br><br><br>
-        <b>Gestionar medicina</b>
-        <a  class="botonIr" href="/admin/medicina">Ir</a><br><br><br>
-        <b>Gestionar medicamento</b>
-        <a  class="botonIr" href="/admin/medicamento">Ir</a><br><br><br>
-        <b>Gestionar tipo de presentación</b>
-        <a  class="botonIr" href="/admin/presentacion">Ir</a><br><br><br>
-        <b>Gestionar acción terapéutica</b>
-        <a  class="botonIr" href="/admin/acciont">Ir</a><br><br><br>
-        <b>Gestionar monodroga</b>
-        <a  class="botonIr" href="/admin/monodroga">Ir</a><br><br><br>
 @endsection

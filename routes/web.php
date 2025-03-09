@@ -342,11 +342,62 @@ Route::middleware([VerificarRol::class . ':Farmaceutico'])->group(function (){
     });
 });
 
+
+//Rutas de ANALISTA
 Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function (){
+    
     Route::get('/analista/inicioAnalista', function () {
-        return view('analis.inicioanalista');
+        return view('analista.inicioanalista');
     });
+
+
+    //Rutas para Gestionar pedidos
+    Route::get('/analista/pedidos', function () {
+        return view('analista.pedidos');
+    });
+
+    Route::get('/buscarP', function (Request $request) {
+        $BuscarP= $request->query('query');
+        return view('analista.buscarPedidos', compact('BuscarP'));
+    })->name('buscarP');
+
+    //Rutas para Gestionar compras
+    Route::get('analista/compras', function () {
+         return view('analista.compras');
+     });
+
+     Route::get('analista/compraMedicina', function () {
+        return view('analista.compraMedicina');
+    });
+
+    Route::get('analista/formMedicina', function () {
+        return view('analista.formMedicina');
+    });
+
+    Route::get('/buscarCompraM', function (Request $request) {
+        $BuscarCM= $request->query('query');
+        return view('analista.buscarCompraM', compact('BuscarCM'));
+    })->name('buscarCompraM');
+
+    Route::get('/buscarC', function (Request $request) {
+        $BuscarC= $request->query('query');
+        return view('analista.buscarCompra', compact('BuscarC'));
+    })->name('buscarC');
+
+    //Rutas para Ver cuentas por pagar
+    Route::get('analista/cuentasxpagar', function () {
+        return view('analista.cuentasxpagar');
+    });
+
+    Route::get('/buscarCP', function (Request $request) {
+        $BuscarCP= $request->query('query');
+        return view('analista.buscarCuentasxPagar', compact('BuscarCP'));
+    })->name('buscarCP');
 });
+
+
+
+
 
 Route::get('/admin/medicina', function () {
     return view('admin.medicina');

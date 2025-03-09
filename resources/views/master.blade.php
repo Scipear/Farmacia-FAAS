@@ -151,7 +151,7 @@
     } */
 
     .botonIr{
-        padding: 10px 20px;
+            padding: 10px 20px;
             font-size: 16px;
             background: #29a15f;
             ;
@@ -174,6 +174,33 @@
             text-decoration: none;
             margin-right: 1450px;
     }
+
+    .botonVer{
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #29a15f;
+            ;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 10px;
+    }
+
+    .botonPDF{
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #29a15f;
+            ;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 1400px;
+    }
+    
 
     .botonEd{
             padding: 10px 20px;
