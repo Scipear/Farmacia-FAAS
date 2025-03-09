@@ -254,7 +254,7 @@ Route::middleware([VerificarRol::class . ':Administrador general'])->group(funct
 Route::middleware([VerificarRol::class . ':Farmaceutico'])->group(function (){
     Route::get('/farmaceutico/inicioFarmaceutico', function () {
         return view('farmaceutico.inicioFarmaceutico');
-    });
+});
 
    //RUTAS PARA FARMACEUTICO MEDICINA
     Route::get('/farmaceutico/medicina', [MedicinaController::class, 'mostrarMedicinas']);

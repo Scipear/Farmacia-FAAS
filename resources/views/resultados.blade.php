@@ -9,7 +9,6 @@
             <a class="nav-link active" href="/">Inicio</a>
         </li>
         <li class="nav-item">
-            <!--ACOMODAR EL LOGIN PARA QUE VAYA AL LOGIN  -->
             <a class="nav-link" href="/login">Login</a>
         </li>  
 </ul>
