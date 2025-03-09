@@ -9,13 +9,13 @@
                 <a class="nav-link active" href="/analista/inicioAnalista">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 
 @section('contenido')
-<h1>Información de Cuentas por pagar</h1>
+<h1>Información de las Cuentas por Pagar</h1>
         <div class="container">
         </div>
         <div>        
@@ -26,12 +26,12 @@
         </div>
 
             <!-- <a  class="botonAg" href="/admin/formMedicamento">Agregar +</a> -->
-
+        <center>
             <table>
                 <tr>
-                    <th>PedidoID</th>
-                    <th>Fecha llegada</th>
-                    <th>Precio pagar</th>
+                    <th>Identificador</th>
+                    <th>Fecha de Llegada</th>
+                    <th>Precio a Pagar</th>
                     <th>Observación</th>
                     <th>Status</th>
                 </tr>
@@ -43,4 +43,5 @@
                     <td>Genvem</td>
                 </tr>
             </table>
+        </center>
 @endsection

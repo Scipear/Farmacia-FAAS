@@ -8,12 +8,12 @@
             <a class="nav-link active" href="/admin/dashboard">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 @section('contenido')
-    <h1>Formulario de Surcursales</h1>
+    <h1>Actualizando Surcursal {{$sucursal->nombre}}</h1>
     <form method="POST" action="/sucursales/{{$sucursal->id}}">
 
         @csrf

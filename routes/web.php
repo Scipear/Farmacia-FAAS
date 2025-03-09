@@ -152,19 +152,6 @@ Route::get('/', function () {
      return view('inicio');
 });
 
-
-Route::get('/inicio', function () {
-    return view('inicio');
-});
-
-//Route::get('/inicio', function () {
-//    return view('inicio');
-//});
-
-// Route::get('/', function () {
-//     return view('admin.telfsucursal');
-// });
-
 Route::get('/greet', function () {
     return view('master');
 });
@@ -184,44 +171,18 @@ Route::get('/filtrar', function (Request $request) {
 Route::get('/login', function () {
     return view('login');
 })->name('login.form');
+
 Route::post('/login', [LoginController::class, 'login']);
 
-/*Route::post('/admin/login', function (\Illuminate\Http\Request $request) {
-    $email = $request->input('email');
-    $password = $request->input('password');
-
-    // Just for a test xd**
-    if ($email == 'admin@example.com' && $password == 'password') {
-        session(['admin' => true]); // Set a session variable
-        return redirect('/admin/dashboard'); // Redirect to admin dashboard
-    } else {
-        return back()->with('error', 'Credenciales incorrectas.');
-    }
-})->name('admin.login');*/
-
-Route::get('/admin/dashboard', function () {
-    if (session('admin')) {
-        return view('admin.dashboard'); // Create a basic admin dashboard view
-    } else {
-        return redirect('/admin/login'); // Redirect to login if not authenticated
-    }
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect('/');
 });
 
-Route::get('/admin/logout', function () {
-    session()->forget('admin'); // Remove the admin session variable
-    return redirect('/admin/login');
-});
 ////////////////////////////////////////////////////////REGISTER///////////////////////////////////
 
 Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register.form');
 Route::post('/admin/register', [AdminAuthController::class, 'register'])->name('admin.register');
-
-
-Route::get('/admin/logout', function () {
-    session()->forget('admin'); // Remove the admin session variable
-    return redirect('/admin/login');
-});
-
 
 // RUTAS DE ADMINISTRADOR GENERAL
 
@@ -229,14 +190,6 @@ Route::middleware([VerificarRol::class . ':Administrador general'])->group(funct
     
     Route::get('/admin/dashboard', function () {    
         return view('admin.dashboard'); 
-    });
-
-    Route::get('/admin/dashboar', function () {
-        return view('admin.dashboard');
-    });
-
-    Route::get('/admin/logout', function () {
-        return redirect('/admin/login');
     });
     
     Route::get('/admin/sucursales', [SucursalController::class, 'index']); //Obtiene todas las sucursales y se la muestra al administrador
@@ -394,51 +347,6 @@ Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function
         return view('analista.buscarCuentasxPagar', compact('BuscarCP'));
     })->name('buscarCP');
 });
-
-
-
-
-
-Route::get('/admin/medicina', function () {
-    return view('admin.medicina');
-});
-
-Route::get('/admin/formMedicina', function () {
-    return view('admin.formMedicina');
-});
-
-Route::get('/admin/medicamento', function () {
-    return view('admin.medicamento');
-});
-
-Route::get('/admin/formMedicamento', function () {
-    return view('admin.formMedicamento');
-});
-
-Route::get('/admin/presentacion', function () {
-    return view('admin.presentacion');
-});
-
-Route::get('/admin/formPre', function () {
-    return view('admin.formPre');
-});
-
-Route::get('/admin/acciont', function () {
-    return view('admin.acciont');
-});
-
-Route::get('/admin/formAccion', function () {
-    return view('admin.formAccion');
-});
-
-Route::get('/admin/monodroga', function () {
-    return view('admin.monodroga');
-});
-
-Route::get('/admin/formMon', function () {
-    return view('admin.formMon');
-});
-
 
 //Get:Redirigir hacia pagina
 //Mandar info no visible desde un formulario

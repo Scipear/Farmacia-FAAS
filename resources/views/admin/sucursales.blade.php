@@ -8,12 +8,12 @@
             <a class="nav-link active" href="/admin/dashboard">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 @section('contenido')
-        <h1>Información de Surcursales</h1>
+        <h1>Información de las Surcursales</h1>
         <div class="container">
         </div>
 
@@ -25,8 +25,8 @@
         </div>
 
         <a  class="botonAg" href="/admin/formSuc">Agregar +</a>
-        
-        <table>
+        <center>
+            <table>
                 <tr>
                     <th>Nombre</th>
                     <th>Teléfono(s)</th>
@@ -44,9 +44,9 @@
                         <td>{{$sucursal->nombre}}</td>
                         
                         <td>
-                            <div class="buttonCont">
-                                <button>Ver</button>
-                            </div>
+                            @foreach($sucursal->telefonos as $telefono)
+                                {{$telefono->numero}}<br>
+                            @endforeach
                         </td>
 
                         <td>{{$sucursal->estado}}</td>
@@ -83,4 +83,5 @@
                 @endforeach
 
             </table>
+        </center>
 @endsection

@@ -9,13 +9,13 @@
                 <a class="nav-link active" href="/analista/inicioAnalista">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 
 @section('contenido')
-<h1>Información de Pedidos</h1>
+<h1>Información de los Pedidos</h1>
         @if($BuscarP)
         <div class="container">
             <p>Mostrando resultados para: <strong>{{$BuscarP}}</strong></p>
@@ -23,10 +23,10 @@
             <table>
                 <!-- CAMBIAR VALORES DE LA TABLA  -->
                 <tr>
-                    <th>PedidoID</th>
+                    <th>Identificador</th>
                     <th>Medicinas</th>
-                    <th>Fecha llegada</th>
-                    <th>Precio pagar</th>
+                    <th>Fecha de Llegada</th>
+                    <th>Precio a Pagar</th>
                     <th>Observación</th>
                     <th>Status</th>
                     <th>Opciones</th>

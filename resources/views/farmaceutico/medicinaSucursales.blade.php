@@ -13,7 +13,7 @@
             </li>
 
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>

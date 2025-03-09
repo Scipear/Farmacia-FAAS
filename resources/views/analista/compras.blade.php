@@ -9,13 +9,13 @@
                 <a class="nav-link active" href="/analista/inicioAnalista">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 
 @section('contenido')
-<h1>Información de Compras</h1>
+<h1>Información de las Compras</h1>
         <div class="container">
         </div>
         <div>        
@@ -25,12 +25,14 @@
         </form>
         </div>
         <a  class="botonPDF">Descargar PDF</a>
+
+        <center>
             <table>
                 <tr>
-                    <th>PedidoID</th>
+                    <th>Identificador</th>
                     <th>Medicinas</th>
-                    <th>Fecha llegada</th>
-                    <th>Precio pagar</th>
+                    <th>Fecha de Llegada</th>
+                    <th>Precio A Pagar</th>
                     <th>Observación</th>
                     <th>Status</th>
                     <th>Opciones</th>
@@ -49,4 +51,5 @@
                     </td>
                 </tr>
             </table>
+        </center>
 @endsection

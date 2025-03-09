@@ -8,11 +8,12 @@
             <a class="nav-link active" href="/admin/dashboard">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 @section('contenido')
+    <h1>Actualizando Laboratorio {{$laboratorio->nombre}}</h1>
     <form method="POST" action="/laboratorio/{{$laboratorio->id}}">
 
         @csrf

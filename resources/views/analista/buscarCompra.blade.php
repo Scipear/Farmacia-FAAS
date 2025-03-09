@@ -9,23 +9,23 @@
                 <a class="nav-link active" href="/analista/inicioAnalista">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 
 @section('contenido')
-<h1>Información de Compras Medicinas</h1>
+<h1>Información de las Compras</h1>
         @if($BuscarC)
         <div class="container">
             <p>Mostrando resultados para: <strong>{{$BuscarC}}</strong></p>
         </div>
             <table>
                 <tr>
-                    <th>PedidoID</th>
+                    <th>Identificador</th>
                     <th>Medicinas</th>
-                    <th>Fecha llegada</th>
-                    <th>Precio pagar</th>
+                    <th>Fecha de Llegada</th>
+                    <th>Precio a Pagar</th>
                     <th>Observación</th>
                     <th>Status</th>
                     <th>Opciones</th>
