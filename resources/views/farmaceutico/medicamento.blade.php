@@ -8,7 +8,7 @@
                 <a class="nav-link active" href="/farmaceutico/inicioFarmaceutico">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
@@ -17,32 +17,45 @@
         <div class="container">
         </div>
         <div>        
-            <form action="{{ route('buscarMedicamento') }}" method="GET">
-            <input type="text" name="query" placeholder="Buscar medicamento...">
-            <button type="submit">Buscar</button>
-        </form>
+            <form action="/buscarMedicamento" method="GET">
+                <input type="text" name="query" placeholder="Buscar medicamento...">
+                <button type="submit">Buscar</button>
+            </form>
         </div>
 
-            <a  class="botonAg" href="/farmaceutico/formMedicamento">Agregar +</a>
-
+            <a class="botonAg" href="/farmaceutico/formMedicamento">Agregar +</a>
+        <center>
             <table>
                 <tr>
                     <th>Nombre principal</th>
+                    <th>Monodrogas</th>
+                    <th>Acciones Terapeuticas</th>
                     <th>Opciones</th>
                 </tr>
-                <tr>
-                    <td>Genvem</td>
-                    <td>
-                        <div class="buttonCont">
-                        <button>Editar</button>
-                        <button popovertarget="popup">Eliminar</button>
-                        <div popover id="popup">
-                        ¿Estás seguro que quieres eliminar este registro?<br><br>
-                        <button popovertarget="popup">Aceptar</button>
-                        <button popovertarget="popup">Cerrar</button>
-                        </div>
-                     </div>
-                    </td>
-                </tr>
+
+                @foreach($medicamentos as $medicamento)  
+                    <tr>
+                        <td>{{$medicamento->nombre}}</td>
+
+                        <td>
+                            @foreach($medicamento->monodrogas as $monodroga)
+                                {{$monodroga->nombre}}<br>
+                            @endforeach
+                        </td>
+
+                        <td>
+                            @foreach($medicamento->accionTerapeutica as $accion)
+                                {{$accion->nombre}}<br>
+                            @endforeach
+                        </td>
+
+                        <td>
+                            <div class="buttonCont">
+                                <a class="botonEd" href="/medicamento/{{$medicamento->id}}">Editar</a>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
             </table>
+        </center>
 @endsection

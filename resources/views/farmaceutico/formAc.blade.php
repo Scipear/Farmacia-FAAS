@@ -8,20 +8,19 @@
             <a class="nav-link active" href="/farmaceutico/inicioFarmaceutico">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 @section('contenido')
-    <h1>Formulario de Acción terapéutica</h1>
-    <form>
+    <h1>Formulario para crear una Acción Terapeutica</h1>
+        <form method="POST" action="/accion/terapeutica">
 
-        @csrf
+            @csrf
 
-        <label>Nombre</label>
-        <input type="text" id ="nombre" name="nombre" required><br><br>
-
-        <button>Enviar</button>
-    </form>
+            <label>Nombre</label>
+            <input type="text" id ="nombre" name="nombre" required><br><br>
+            <button>Enviar</button>
+        </form>
 
 @endsection

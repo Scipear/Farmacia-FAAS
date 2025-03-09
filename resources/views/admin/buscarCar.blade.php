@@ -8,7 +8,7 @@
                 <a class="nav-link active" href="/admin/dashboard">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
@@ -20,7 +20,7 @@
         </div>
 
         <a  class="botonAg" href="/admin/formCarg">Agregar +</a>
-
+        <center>
             <table>
                 <tr>
                     <th>ID</th>
@@ -38,6 +38,7 @@
                     </td>
                 </tr>
             </table>
+        </center>
         @else
         <p>No ingresaste un término de búsqueda.</p>
         @endif

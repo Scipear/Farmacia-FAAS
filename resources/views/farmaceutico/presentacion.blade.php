@@ -8,49 +8,44 @@
             <a class="nav-link active" href="/farmaceutico/inicioFarmaceutico">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 @section('contenido')
-        <h1>Información de Tipo de presentación</h1>
+        <h1>Información de los Tipos de Presentaciones</h1>
         <div class="container">
         </div>
         <div>        
-            <form action="{{ route('buscarPre') }}" method="GET">
+            <form action="/buscarPre" method="GET">
             <input type="text" name="query" placeholder="Buscar tipo presentación...">
             <button type="submit">Buscar</button>
         </form>
         </div>
 
-            <a  class="botonAg" href="/farmaceutico/formPre">Agregar +</a>
-
-        <table>
+            <a class="botonAg" href="/farmaceutico/formPre">Agregar +</a>
+        <center>
+            <table>
                 <tr>
-                    <th>Tipo presentación</th>
+                    <th>Tipo de Presentación</th>
                     <th>Cantidad</th>
-                    <th>Medida</th>
                     <th>Unidades</th>
-                    <th>Opcines</th>
+                    <th>Opciones</th>
                 </tr>
-                <tr>
-                    <td>Acetf</td>
-                    <td>Genvem</td>
-                    <td>20mg</td>
-                    <td>Dolor </td>
-                    <td>
-                        <div class="buttonCont">
-                        <button>Editar</button>
-                        <button popovertarget="popup">Eliminar</button>
-                        <div popover id="popup">
-                        ¿Estás seguro que quieres eliminar este registro?<br><br>
-                        <button popovertarget="popup">Aceptar</button>
-                        <button popovertarget="popup">Cerrar</button>
-                        </div>
-                     </div>
-                    </td>
-                    
-                </tr>
+                @foreach($presentaciones as $presentacion)
+                    <tr>
+                        <td>{{$presentacion->tipo}}</td>
+                        <td>{{$presentacion->cantidad}} {{$presentacion->medida}}</td>
+                        <td>{{$presentacion->unidades}}</td>
+                        <td>
+                            <div class="buttonCont">
+                                <a class="botonEd" href="/editarPresentacion/{{$presentacion->id}}">Editar</a>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                @endforeach
 
             </table>
+        </center>
 @endsection

@@ -8,53 +8,51 @@
             <a class="nav-link active" href="/farmaceutico/inicioFarmaceutico">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 @section('contenido')
-        <h1>Información de Medicina</h1>
+        <h1>Información de las Medicinas</h1>
         <div class="container">
         </div>
         <div>        
-            <form action="{{ route('buscarMedicina') }}" method="GET">
+            <form action="/buscarMedicina" method="GET">
             <input type="text" name="query" placeholder="Buscar medicina...">
             <button type="submit">Buscar</button>
         </form>
         </div>
 
         <a  class="botonAg" href="/farmaceutico/formMedicina">Agregar +</a>
-        
-        <table>
+        <center>
+            <table>
                 <tr>
-                    <th>laboratorioID</th>
-                    <th>MedicamentoID</th>
-                    <th>PresentaciónID</th>
+                    <th>Medicamento</th>
+                    <th>Laboratorio</th>
+                    <th>Presentación</th>
                     <th>Descripción</th>
-                    <th>Precio compra</th>
-                    <th>Precio venta</th>
-                    <th>Opcines</th>
+                    <th>Precio Compra</th>
+                    <th>Precio Venta</th>
+                    <th>Opciones</th>
                 </tr>
-                <tr>
-                    <td>Acetf</td>
-                    <td>Genvem</td>
-                    <td>20mg</td>
-                    <td>Dolor </td>
-                    <td>10</td>
-                    <td>15</td>
-                    <td>
-                        <div class="buttonCont">
-                        <button>Editar</button>
-                        <button popovertarget="popup">Eliminar</button>
-                        <div popover id="popup">
-                        ¿Estás seguro que quieres eliminar este registro?<br><br>
-                        <button popovertarget="popup">Aceptar</button>
-                        <button popovertarget="popup">Cerrar</button>
-                        </div>
-                     </div>
-                    </td>
-                    
-                </tr>
+                @foreach($medicinas as $medicina)
+                    <tr>
+                        <td>{{$medicina->medicamento->nombre}}</td>
+                        <td>{{$medicina->laboratorio->nombre}}</td>
+                        <td>{{$medicina->presentacion->unidades}} {{$medicina->presentacion->tipo}} {{$medicina->presentacion->cantidad}} {{$medicina->presentacion->medida}}</td>
+                        <td>{{$medicina->descripcion}}</td>
+                        <td>${{$medicina->precio_compra}}</td>
+                        <td>${{$medicina->precio_venta}}</td>
+                        <td>
+                            <div class="buttonCont">
+                                <a class="botonEd" href="/medicina/{{$medicina->id}}">Editar</a>
+                                <a class ="botonEd" href="/farmaceutico/medicina/{{$medicina->id}}/sucursales">Existencia en sucursales</a>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                @endforeach
 
             </table>
+        </center>
 @endsection

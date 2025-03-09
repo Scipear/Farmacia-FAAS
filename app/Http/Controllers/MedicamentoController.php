@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\AccionTerapeutica;
 use App\Models\Medicamento;
+use App\Models\Monodroga;
 use Illuminate\Http\Request;
 
 class MedicamentoController extends Controller
@@ -12,20 +14,36 @@ class MedicamentoController extends Controller
 
     public function mostrarMedicamento()
     {
-        $medicamento = Medicamento::all();
+        $medicamentos = Medicamento::all();
 
-        return response()->json($medicamento, 200);
+        return view('farmaceutico.medicamento', compact('medicamentos'));
     }
 
     public function obtenerMedicamento($id)
     {
         $medicamento = Medicamento::find($id);
+        $monodrogas = Monodroga::all();
+        $acciones = AccionTerapeutica::all();
 
-        return response()->json($medicamento, 200);
+        return view('farmaceutico.editFormMedicamento', compact('medicamento', 'monodrogas', 'acciones'));
+    }
+
+    public function buscarMedicamento(Request $request){
+        $query = $request->input('query');
+
+        $medicamentos = Medicamento::where('nombre', 'LIKE', '%' . $query . '%')->get();
+
+        return view('farmaceutico.medicamento', compact('medicamentos'));
+    }
+
+    public function formMedicamento(){
+        $monodrogas = Monodroga::all();
+        $acciones = AccionTerapeutica::all();
+
+        return view('farmaceutico.formMedicamento', compact('monodrogas', 'acciones'));
     }
 
     // Crear un nuevo Registro
-
     public function crearMedicamento(Request $request)
     {
         $request->validate([
@@ -33,7 +51,7 @@ class MedicamentoController extends Controller
             'monodrogas' => 'required|array',
             'monodrogas.*.monodroga_id' => 'required|exists:monodrogas,id',
             'acciones' => 'required|array',
-            'acciones.*.accion__id' => 'required|exists:acciones_terapeuticas,id',
+            'acciones.*.accion_id' => 'required|exists:accionTerapeutica,id',
         ]);
 
         
@@ -51,7 +69,7 @@ class MedicamentoController extends Controller
             }
         }
 
-        return response()->json($medicamento, 200);
+        return redirect('/farmaceutico/medicamento');
     }
 
     // Actualiza los datos 
@@ -61,12 +79,31 @@ class MedicamentoController extends Controller
         $medicamento = Medicamento::find($id); // Busca x por su ID
 
         $request->validate([
-            'nombre' => 'required|unique:medicamentos'
+            'nombre' => "required|unique:medicamentos,nombre,{$id}",
+            'monodrogas' => 'required|array',
+            'monodrogas.*.monodroga_id' => 'required|exists:monodrogas,id',
+            'acciones' => 'required|array',
+            'acciones.*.accion_id' => 'required|exists:accionTerapeutica,id',
         ]);
 
-        $medicamento->update($request->all());
+        $medicamento->update($request->only(['nombre']));
 
-        return response()->json($medicamento, 200);
+        if($request->has('monodrogas')){
+            $medicamento->monodrogas()->detach();
+            
+            foreach($request->monodrogas as $monodroga){
+                $this->asignarMonodrogas($monodroga, $medicamento);
+            }
+        }
+
+        if($request->has('acciones')){
+            $medicamento->accionTerapeutica()->detach();
+            foreach($request->acciones as $accion){
+                $this->asignarAccionTerapeutica($accion, $medicamento);
+            }
+        }
+
+        return redirect('/farmaceutico/medicamento');
     }
 
     // Eliminar un registro
@@ -76,14 +113,14 @@ class MedicamentoController extends Controller
         $medicamento = Medicamento::find($id);
         $medicamento->delete();
 
-        return response()->json([], 204);
+        return redirect('/farmaceutico/medicamento');
     }
 
     //Asignaler acciones terapeuticas a un medicamento 
 
     public function asignarAccionTerapeutica($accionTerapeutica_Id, $medicamento)
     {
-        $medicamento->accionTerapeutica()->sync([$accionTerapeutica_Id]);
+        $medicamento->accionTerapeutica()->attach([$accionTerapeutica_Id]);
     }
 
 
@@ -91,7 +128,7 @@ class MedicamentoController extends Controller
 
     public function asignarMonodrogas($monodroga_Id, $medicamento)
     {
-        $medicamento->monodrogas()->sync([$monodroga_Id]);
+        $medicamento->monodrogas()->attach([$monodroga_Id]);
     }
 
     //funcion para obtener las acciones terapeuticas de un medicamento 

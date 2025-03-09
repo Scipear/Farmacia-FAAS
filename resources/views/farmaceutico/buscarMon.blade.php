@@ -8,12 +8,12 @@
             <a class="nav-link active" href="/farmaceutico/inicioFarmaceutico">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 @section('contenido')
-        <h1>Información de Monodroga</h1>
+        <h1>Información de las Monodrogas</h1>
         @if($BuscarMon)
         <div class="container">
             <p>Mostrando resultados para: <strong>{{$BuscarMon}}</strong></p>

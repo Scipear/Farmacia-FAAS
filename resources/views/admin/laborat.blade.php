@@ -8,12 +8,12 @@
                 <a class="nav-link active" href="/admin/dashboard">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 @section('contenido')
-        <h1>Información de Laboratorios</h1>
+        <h1>Información de los Laboratorios</h1>
         <div class="container">
         </div>
         <div>        
@@ -24,7 +24,7 @@
         </div>
 
         <a  class="botonAg" href="/admin/formLab">Agregar +</a>
-
+        <center>
             <table>
                 <tr>
                     <th>Nombre</th>
@@ -38,11 +38,13 @@
                 @foreach($laboratorios as $laboratorio)
                 <tr>
                     <td>{{$laboratorio->nombre}}</td>
+
                     <td>
-                        <div class="buttonCont">
-                            <button>Ver</button>
-                        </div>
+                        @foreach($laboratorio->telefonos as $telefono)
+                            {{$telefono->numero}}<br>
+                        @endforeach
                     </td>
+
                     <td>{{$laboratorio->ciudad}}</td>
                     <td>{{$laboratorio->direccion}}</td>
                     <td>{{$laboratorio->correo}}</td>
@@ -67,4 +69,5 @@
                 </tr>
                 @endforeach
             </table>
+        </center>
 @endsection

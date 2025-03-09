@@ -8,7 +8,7 @@
                 <a class="nav-link active" href="/admin/dashboard">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
@@ -25,7 +25,7 @@
 
 
         <a  class="botonAg" href="/admin/formCarg">Agregar +</a>
-
+        <center>
             <table>
                 <tr>
                     <th>Cargo</th>
@@ -43,4 +43,5 @@
                     </tr>
                 @endforeach
             </table>
+        </center>
 @endsection

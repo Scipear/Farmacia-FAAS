@@ -9,7 +9,7 @@
                 <a class="nav-link active" href="/analista/inicioAnalista">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
@@ -21,12 +21,9 @@
             <p>¡Has iniciado sesión como Analita de compras!</p>
         </div>
 
-        <b>Gestionar pedidos</b>
-        <a  class="botonIr" href="pedidos">Ir</a><br><br><br>
-        <b>Gestionar compras</b>
-        <a  class="botonIr" href="compras">Ir</a><br><br><br>
-        <b>Ver cuentas por pagar</b>
-        <a  class="botonIr" href="cuentasxpagar">Ir</a><br><br><br>
+        <a  class="botonIr" href="pedidos">Gestionar Pedidos</a><br><br><br>
+        <a  class="botonIr" href="compras">Gestionar Compras</a><br><br><br>
+        <a  class="botonIr" href="cuentasxpagar">Ver Cuentas por Pagar</a><br><br><br>
         
         
 @endsection

@@ -12,16 +12,24 @@ class MonodrogaController extends Controller
 
     public function mostrarMonodroga()
     {
-        $monodroga = Monodroga::all();
+        $monodrogas = Monodroga::all();
 
-        return response()->json($monodroga, 200);
+        return view('farmaceutico.monodroga', compact('monodrogas'));
     }
 
     public function obtenerMonodroga($id)
     {
-        $monodroga = Monodroga::find($id);
+        $monodroga = Monodroga::findOrFail($id);
 
-        return response()->json($monodroga, 200);
+        return view('farmaceutico.editFormMon', compact('monodroga'));
+    }
+
+    public function buscarMonodroga(Request $request){
+        $query = $request->input('query');
+
+        $monodrogas = Monodroga::where('nombre', 'LIKE', '%' . $query . '%')->get();
+
+        return view('farmaceutico.monodroga', compact('monodrogas'));
     }
 
     // Crear un nuevo Registro
@@ -34,13 +42,12 @@ class MonodrogaController extends Controller
 
         $monodroga = Monodroga::create($request->all());
 
-        return response()->json($monodroga, 200);
+        return redirect('/farmaceutico/monodroga');
     }
 
     // Actualiza los datos 
     public function actualizarMonodroga(Request $request, $id)
     {
-
         $monodroga = Monodroga::find($id); // Busca x por su ID
 
         $request->validate([
@@ -49,7 +56,7 @@ class MonodrogaController extends Controller
 
         $monodroga->update($request->all());
 
-        return response()->json($monodroga, 200);
+        return redirect('/farmaceutico/monodroga');
     }
 
     // Eliminar un registro
@@ -59,6 +66,6 @@ class MonodrogaController extends Controller
         $modroga = Monodroga::find($id);
         $modroga->delete();
 
-        return response()->json([], 204);
+        return redirect('/farmaceutico/monodroga');
     }
 }

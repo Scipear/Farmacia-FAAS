@@ -20,11 +20,11 @@ class Medicina_sucursal extends Model
 
     // Relaciones
 
-    public function medicinas(){
+    public function medicina(){
         return $this->belongsTo(Medicina::class);
     }
 
-    public function sucursales(){
+    public function sucursal(){
         return $this->belongsTo(Sucursal::class);
     }
 }

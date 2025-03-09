@@ -8,12 +8,12 @@
             <a class="nav-link active" href="/admin/dashboard">Inicio</a>
             </li>
             <li class="nav-item">
-                <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
+                <a  class="nav-link active" href="/logout">Cerrar Sesión</a>
             </li>
     </ul>
 </header>
 @section('contenido')
-    <h1>Formulario de Surcursales</h1>
+    <h1>Actualizando Surcursal {{$sucursal->nombre}}</h1>
     <form method="POST" action="/sucursales/{{$sucursal->id}}">
 
         @csrf
@@ -35,19 +35,19 @@
         <input type="text" id="direccion" name="direccion" value={{$sucursal->direccion}} required><br><br>
 
         @foreach($sucursal->telefonos as $index => $telefono)
-            <label>Teléfono {{ $index + 1 }}</label>
-            <input type="text" name="telefonos[{{ $index }}][numero]" value="{{ $telefono->numero }}" required>
-            <select name="telefonos[{{ $index }}][tipo]" required>
-                <option value="Local" {{ $telefono->tipo == 'Local' ? 'selected' : '' }}>Local</option>
-                <option value="Movil" {{ $telefono->tipo == 'Movil' ? 'selected' : '' }}>Movil</option>
-                <option value="Otro" {{ $telefono->tipo == 'Otro' ? 'selected' : '' }}>Otro</option>
+            <label>Teléfono {{$index + 1}}</label>
+            <input type="text" name="telefonos[{{$index}}][numero]" value="{{$telefono->numero}}" required>
+            <select name="telefonos[{{$index}}][tipo]" required>
+                <option value="Local" {{$telefono->tipo == 'Local' ? 'selected' : ''}}>Local</option>
+                <option value="Movil" {{$telefono->tipo == 'Movil' ? 'selected' : ''}}>Movil</option>
+                <option value="Otro" {{$telefono->tipo == 'Otro' ? 'selected' : ''}}>Otro</option>
             </select><br><br>
         @endforeach
 
         @if($sucursal->telefonos->count() < 2)
             <label>Teléfono {{ $sucursal->telefonos->count() + 1 }} (Opcional)</label>
-            <input type="text" name="telefonos[{{ $sucursal->telefonos->count() }}][numero]">
-            <select name="telefonos[{{ $sucursal->telefonos->count() }}][tipo]">
+            <input type="text" name="telefonos[{{$sucursal->telefonos->count()}}][numero]">
+            <select name="telefonos[{{$sucursal->telefonos->count()}}][tipo]">
                 <option value="Local">Local</option>
                 <option value="Movil">Movil</option>
                 <option value="Otro">Otro</option>
