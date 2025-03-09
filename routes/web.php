@@ -183,18 +183,6 @@ Route::get('/login', function () {
 })->name('login.form');
 
 Route::post('/login', [LoginController::class, 'login']);
-/*Route::post('/login', function (\Illuminate\Http\Request $request) {
-    $email = $request->input('email');
-    $password = $request->input('password');
-
-    // Just for a test xd**
-    if ($email == 'admin@example.com' && $password == 'password') {
-        session(['admin' => true]); // Set a session variable
-        return redirect('/admin/dashboard'); // Redirect to admin dashboard
-    } else {
-        return back()->with('error', 'Credenciales incorrectas.');
-    }
-})->name('admin.login');*/
 ////////////////////////////////////////////////////////REGISTER///////////////////////////////////
 
 Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register.form');
