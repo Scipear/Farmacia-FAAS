@@ -1,11 +1,11 @@
 @extends('master')
 
-@section('titulo', 'Panel de Administrador')
+@section('titulo', 'Panel de Farmaceutico')
 <header>
     @yield('header', 'Farmacias FAAS')
     <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
             <li class="nav-item">
-            <a class="nav-link active" href="/admin/dashboard">Inicio</a>
+            <a class="nav-link active" href="/farmaceutico/inicioFarmaceutico">Inicio</a>
             </li>
             <li class="nav-item">
                 <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
@@ -19,7 +19,7 @@
             <p>Mostrando resultados para: <strong>{{$BuscarMedicina}}</strong></p>
         </div>
 
-        <a  class="botonAg" href="/admin/formMedicina">Agregar +</a>
+        <a  class="botonAg" href="/farmaceutico/formMedicina">Agregar +</a>
 
         <table>
                 <tr>

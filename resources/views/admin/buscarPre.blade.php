@@ -5,7 +5,7 @@
     @yield('header', 'Farmacias FAAS')
     <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
             <li class="nav-item">
-            <a class="nav-link active" href="/admin/dashboard">inicioadmin</a>
+            <a class="nav-link active" href="/admin/dashboard">Inicio</a>
             </li>
             <li class="nav-item">
                 <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
@@ -18,9 +18,9 @@
         <div class="container">
             <p>Mostrando resultados para: <strong>{{$BuscarPre}}</strong></p>
         </div>
-       <div class="buttonA">
-                <button>Agregar +</button>
-        </div>
+
+        <a  class="botonAg" href="/admin/formPre">Agregar +</a>
+
         <table>
                 <tr>
                     <th>ID</th>
