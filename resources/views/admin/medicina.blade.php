@@ -5,7 +5,7 @@
     @yield('header', 'Farmacias FAAS')
     <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
             <li class="nav-item">
-            <a class="nav-link active" href="/admin/dashboard">inicioadmin</a>
+            <a class="nav-link active" href="/admin/dashboard">Inicio</a>
             </li>
             <li class="nav-item">
                 <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>
@@ -23,9 +23,8 @@
         </form>
         </div>
 
-        <div class="buttonA">
         <a  class="botonAg" href="/admin/formMedicina">Agregar +</a>
-        </div>
+        
         <table>
                 <tr>
                     <th>laboratorioID</th>

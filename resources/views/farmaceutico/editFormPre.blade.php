@@ -1,11 +1,11 @@
 @extends('master')
 
-@section('titulo', 'Panel de Administrador')
+@section('titulo', 'Panel de Farmaceutico')
 <header>
     @yield('header', 'Farmacias FAAS')
     <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
             <li class="nav-item">
-            <a class="nav-link active" href="/admin/dashboard">Inicio</a>
+            <a class="nav-link active" href="/farmaceutico/inicioFarmaceutico">Inicio</a>
             </li>
             <li class="nav-item">
                 <a  class="nav-link active" href="/admin/logout">Cerrar Sesión</a>

@@ -182,7 +182,31 @@ Route::get('/login', function () {
     return view('login');
 })->name('login.form');
 
-Route::post('/login', [LoginController::class, 'login']);
+Route::post('/admin/login', function (\Illuminate\Http\Request $request) {
+    $email = $request->input('email');
+    $password = $request->input('password');
+
+    // Just for a test xd**
+    if ($email == 'admin@example.com' && $password == 'password') {
+        session(['admin' => true]); // Set a session variable
+        return redirect('/admin/dashboard'); // Redirect to admin dashboard
+    } else {
+        return back()->with('error', 'Credenciales incorrectas.');
+    }
+})->name('admin.login');
+
+Route::get('/admin/dashboard', function () {
+    if (session('admin')) {
+        return view('admin.dashboard'); // Create a basic admin dashboard view
+    } else {
+        return redirect('/admin/login'); // Redirect to login if not authenticated
+    }
+});
+
+Route::get('/admin/logout', function () {
+    session()->forget('admin'); // Remove the admin session variable
+    return redirect('/admin/login');
+});
 ////////////////////////////////////////////////////////REGISTER///////////////////////////////////
 
 Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register.form');
@@ -337,8 +361,82 @@ Route::get('/buscarMonodroga', function (Request $request) {
     return view('admin.buscarMon', compact('BuscarMonodroga'));
 })->name('buscarMonodroga');
 
-//Rutas para enviar formularios
+//Ruta para inicio farmaceutico
+ Route::get('/farmaceutico/inicioFarmaceutico', function () {
+     return view('farmaceutico.inicioFarmaceutico');
+ });
 
+//RUTAS PARA FARMACEUTICO 
+//RUTAS PARA FARMACEUTICO MEDICINA
+ Route::get('/farmaceutico/medicina', function () {
+    return view('farmaceutico.medicina');
+});
+
+Route::get('/buscarMedicina', function (Request $request) {
+    $BuscarMedicina= $request->query('query');
+    return view('farmaceutico.buscarMedicina', compact('BuscarMedicina'));
+})->name('buscarMedicina');
+
+
+Route::get('/farmaceutico/formMedicina', function () {
+    return view('farmaceutico.formMedicina');
+});
+
+//RUTAS PARA FARMACEUTICO MEDICAMENTO
+Route::get('/farmaceutico/medicamento', function () {
+    return view('farmaceutico.medicamento');
+});
+
+Route::get('/buscarMedicamento', function (Request $request) {
+    $BuscarMedicamento= $request->query('query');
+    return view('farmaceutico.buscarMedicamento', compact('BuscarMedicamento'));
+})->name('buscarMedicamento');
+
+Route::get('/farmaceutico/formMedicamento', function () {
+    return view('farmaceutico.formMedicamento');
+});
+
+//RUTAS PARA FARMACEUTICO PRESENTACION
+Route::get('/farmaceutico/presentacion', function () {
+    return view('farmaceutico.presentacion');
+});
+
+Route::get('/buscarPre', function (Request $request) {
+    $BuscarPre= $request->query('query');
+    return view('farmaceutico.buscarPre', compact('BuscarPre'));
+})->name('buscarPre');
+
+Route::get('/farmaceutico/formPre', function () {
+    return view('farmaceutico.formPre');
+});
+
+//RUTAS PARA FARMACEUTICO ACCION TERAPEUTICA
+Route::get('/farmaceutico/accion', function () {
+    return view('farmaceutico.accion');
+});
+
+Route::get('/buscarAc', function (Request $request) {
+    $BuscarAc= $request->query('query');
+    return view('farmaceutico.buscarAc', compact('BuscarAc'));
+})->name('buscarAc');
+
+Route::get('/farmaceutico/formAc', function () {
+    return view('farmaceutico.formAc');
+});
+
+//RUTAS PARA FARMACEUTICO MONODROGA
+Route::get('/farmaceutico/monodroga', function () {
+    return view('farmaceutico.monodroga');
+});
+
+Route::get('/buscarMon', function (Request $request) {
+    $BuscarMon= $request->query('query');
+    return view('farmaceutico.buscarMon', compact('BuscarMon'));
+})->name('buscarMon');
+
+Route::get('/farmaceutico/formMon', function () {
+    return view('farmaceutico.formMon');
+});
 
 //Get:Redirigir hacia pagina
 //Mandar info no visible desde un formulario
