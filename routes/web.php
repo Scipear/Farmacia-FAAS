@@ -281,10 +281,12 @@ Route::middleware([VerificarRol::class . ':Administrador general'])->group(funct
 
 });
 
-
-
 Route::get('/admin/medicina', function () {
     return view('admin.medicina');
+});
+
+Route::get('/admin/formMedicina', function () {
+    return view('admin.formMedicina');
 });
 
 Route::get('/buscarMedicina', function (Request $request) {
@@ -298,6 +300,10 @@ Route::get('/admin/medicamento', function () {
     return view('admin.medicamento');
 });
 
+Route::get('/admin/formMedicamento', function () {
+    return view('admin.formMedicamento');
+});
+
 Route::get('/buscarMedicamento', function (Request $request) {
     $BuscarMedicamento = $request->query('query');
     return view('admin.buscarMedicamento', compact('BuscarMedicamento'));
@@ -306,6 +312,10 @@ Route::get('/buscarMedicamento', function (Request $request) {
 
 Route::get('/admin/presentacion', function () {
     return view('admin.presentacion');
+});
+
+Route::get('/admin/formPre', function () {
+    return view('admin.formPre');
 });
 
 Route::get('/buscarPresentacion', function (Request $request) {
@@ -317,6 +327,10 @@ Route::get('/admin/acciont', function () {
     return view('admin.acciont');
 });
 
+Route::get('/admin/formAccion', function () {
+    return view('admin.formAccion');
+});
+
 Route::get('/buscarAc', function (Request $request) {
     $BuscarA= $request->query('query');
     return view('admin.buscarAccionT', compact('BuscarA'));
@@ -324,6 +338,10 @@ Route::get('/buscarAc', function (Request $request) {
 
 Route::get('/admin/monodroga', function () {
     return view('admin.monodroga');
+});
+
+Route::get('/admin/formMon', function () {
+    return view('admin.formMon');
 });
 
 Route::get('/buscarMonodroga', function (Request $request) {

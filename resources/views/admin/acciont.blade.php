@@ -23,17 +23,14 @@
         </form>
         </div>
 
-        <div class="buttonA">
-                <button>Agregar +</button>
-        </div>
+        <a  class="botonAg" href="/admin/formAccion">Agregar +</a>
+
         <table>
                 <tr>
-                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Opcines</th>
                 </tr>
                 <tr>
-                    <td>123</td>
                     <td>Acetf</td>
                     <td>
                         <div class="buttonCont">
