@@ -14,14 +14,22 @@ class AccionTerapeuticaController extends Controller
     {
         $accionT = AccionTerapeutica::all();
 
-        return response()->json($accionT, 200);
+        return view('farmaceutico.accion', compact('accionT'));
     }
 
     public function obtenerAT($id)
     {
-        $accionT = AccionTerapeutica::find($id);
+        $accionT = AccionTerapeutica::findOrFail($id);
 
-        return response()->json($accionT, 200);
+        return view('farmaceutico.editFormAc', compact('accionT'));
+    }
+
+    public function buscarAccion(Request $request){
+        $query = $request->input('query');
+
+        $accionT = AccionTerapeutica::where('nombre', 'LIKE', '%' . $query . '%')->get();
+
+        return view('farmaceutico.accion', compact('accionT'));
     }
 
     // Crear un nuevo Registro
@@ -34,7 +42,7 @@ class AccionTerapeuticaController extends Controller
 
         $accionT = AccionTerapeutica::create($request->all());
 
-        return response()->json($accionT, 200);
+        return redirect('/farmaceutico/accion');
     }
 
     // Actualiza los datos 
@@ -49,7 +57,7 @@ class AccionTerapeuticaController extends Controller
 
         $accionT->update($request->all());
 
-        return response()->json($accionT, 200);
+        return redirect('/farmaceutico/accion');
     }
 
     // Eliminar un registro
@@ -59,6 +67,6 @@ class AccionTerapeuticaController extends Controller
         $accionT = AccionTerapeutica::find($id);
         $accionT->delete();
 
-        return response()->json([], 204);
+        return redirect('/farmaceutico/accion');
     }
 }

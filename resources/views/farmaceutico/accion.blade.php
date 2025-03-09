@@ -13,38 +13,34 @@
     </ul>
 </header>
 @section('contenido')
-        <h1>Información de Acción terapéutica</h1>
+        <h1>Información de las Acciones Terapéuticas</h1>
         <div class="container">
         </div>
         <div>        
-                <form action="{{ route('buscarAc') }}" method="GET">
-            <input type="text" name="query" placeholder="Filtrar...">
-            <button type="submit">Buscar</button>
-        </form>
+            <form action="/buscarAc" method="GET">
+                <input type="text" name="query" placeholder="Buscar Accion Terapeutica...">
+                <button type="submit">Buscar</button>
+            </form>
         </div>
 
         <a  class="botonAg" href="/farmaceutico/formAc">Agregar +</a>
-
-        <table>
+        <center>
+            <table>
                 <tr>
                     <th>Nombre</th>
-                    <th>Opcines</th>
+                    <th>Opciones</th>
                 </tr>
-                <tr>
-                    <td>Acetf</td>
-                    <td>
-                        <div class="buttonCont">
-                        <button>Editar</button>
-                        <button popovertarget="popup">Eliminar</button>
-                        <div popover id="popup">
-                        ¿Estás seguro que quieres eliminar este registro?<br><br>
-                        <button popovertarget="popup">Aceptar</button>
-                        <button popovertarget="popup">Cerrar</button>
-                        </div>
-                     </div>
-                    </td>
-                    
-                </tr>
-
+                @foreach($accionT as $accion)
+                    <tr>
+                        <td>{{$accion->nombre}}</td>
+                        <td>
+                            <div class="buttonCont">
+                                <a class="botonEd" href="/editarAccion/{{$accion->id}}">Editar</a>
+                            </div>
+                        </td>
+                        
+                    </tr>
+                @endforeach
             </table>
+        </center>
 @endsection

@@ -13,7 +13,7 @@
     </ul>
 </header>
 @section('contenido')
-        <h1>Información de Tipo de presentación</h1>
+        <h1>Información de los Tipos de Presentaciones</h1>
         @if($BuscarPre)
         <div class="container">
             <p>Mostrando resultados para: <strong>{{$BuscarPre}}</strong></p>

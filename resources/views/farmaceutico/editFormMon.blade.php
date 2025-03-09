@@ -13,13 +13,14 @@
     </ul>
 </header>
 @section('contenido')
-    <h1>Formulario de Monodroga</h1>
-    <form>
+    <h1>Actualizando Monodroga {{$monodroga->nombre}}</h1>
+        <form method='POST' action="/monodroga/{{$monodroga->id}}">
 
         @csrf
+        @method('PUT')
 
-        <label>Nombre</label>
-        <input type="text" id ="nombre" name="nombre" required><br><br>
-        <button>Enviar</button>
-    </form>
+            <label>Nombre</label>
+            <input type="text" id ="nombre" name="nombre" value={{$monodroga->nombre}} required><br><br>
+            <button>Enviar</button>
+        </form>
 @endsection

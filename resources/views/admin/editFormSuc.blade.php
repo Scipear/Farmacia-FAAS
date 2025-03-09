@@ -35,19 +35,19 @@
         <input type="text" id="direccion" name="direccion" value={{$sucursal->direccion}} required><br><br>
 
         @foreach($sucursal->telefonos as $index => $telefono)
-            <label>Teléfono {{ $index + 1 }}</label>
-            <input type="text" name="telefonos[{{ $index }}][numero]" value="{{ $telefono->numero }}" required>
-            <select name="telefonos[{{ $index }}][tipo]" required>
-                <option value="Local" {{ $telefono->tipo == 'Local' ? 'selected' : '' }}>Local</option>
-                <option value="Movil" {{ $telefono->tipo == 'Movil' ? 'selected' : '' }}>Movil</option>
-                <option value="Otro" {{ $telefono->tipo == 'Otro' ? 'selected' : '' }}>Otro</option>
+            <label>Teléfono {{$index + 1}}</label>
+            <input type="text" name="telefonos[{{$index}}][numero]" value="{{$telefono->numero}}" required>
+            <select name="telefonos[{{$index}}][tipo]" required>
+                <option value="Local" {{$telefono->tipo == 'Local' ? 'selected' : ''}}>Local</option>
+                <option value="Movil" {{$telefono->tipo == 'Movil' ? 'selected' : ''}}>Movil</option>
+                <option value="Otro" {{$telefono->tipo == 'Otro' ? 'selected' : ''}}>Otro</option>
             </select><br><br>
         @endforeach
 
         @if($sucursal->telefonos->count() < 2)
             <label>Teléfono {{ $sucursal->telefonos->count() + 1 }} (Opcional)</label>
-            <input type="text" name="telefonos[{{ $sucursal->telefonos->count() }}][numero]">
-            <select name="telefonos[{{ $sucursal->telefonos->count() }}][tipo]">
+            <input type="text" name="telefonos[{{$sucursal->telefonos->count()}}][numero]">
+            <select name="telefonos[{{$sucursal->telefonos->count()}}][tipo]">
                 <option value="Local">Local</option>
                 <option value="Movil">Movil</option>
                 <option value="Otro">Otro</option>

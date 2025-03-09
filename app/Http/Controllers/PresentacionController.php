@@ -10,18 +10,23 @@ class PresentacionController extends Controller
     // Muestra todas las presentaciones
     public function index(){
         $presentaciones = Presentacion::all();
-        return view('presentaciones.index', compact('presentaciones'));
+
+        return view('farmaceutico.presentacion', compact('presentaciones'));
     }
 
     // Muestra una presentacion en especifico
     public function mostrarPresentacion($presentacion){
         $presentacion = Presentacion::find($presentacion);
-        return $presentacion;
+        
+        return view('farmaceutico.editFormPre', compact('presentacion'));
     }
 
-    //vista para crear una nueva presentacion
-    public function crearPresentacion(){
-        return view('presentaciones.create');
+    public function buscarPresentacion(Request $request){
+        $query = $request->input('query');
+
+        $presentaciones = Presentacion::where('tipo', 'LIKE', '%' . $query . '%')->get();
+
+        return view('farmaceutico.presentacion', compact('presentaciones'));
     }
 
     // Crea un nuevo registro de presentacion a traves de una peticion
@@ -42,13 +47,7 @@ class PresentacionController extends Controller
         $presentacion->unidades = $request->unidades;
         $presentacion->save(); // Guarda el registro en la tabla
 
-        return redirect()->route('/presentaciones');
-    }
-    // Editar presentacion
-    public function editarPresentacion($presentacion){
-        $presentacion = Presentacion::find($presentacion);
-
-        return view('presentaciones.edit', compact('presentacion'));
+        return redirect('/farmaceutico/presentacion');
     }
 
     // Actualizar presentacion
@@ -69,7 +68,7 @@ class PresentacionController extends Controller
         $presentacion->unidades = $request->unidades;
         $presentacion->save(); // Guarda el registro en la tabla
 
-        return redirect()->route('/presentaciones');
+        return redirect('/farmaceutico/presentacion');
     }
 
     // Eliminar presentacion
@@ -77,7 +76,7 @@ class PresentacionController extends Controller
         $presentacion = Presentacion::find($presentacion);
         $presentacion->delete(); // Elimina el registro de la tabla
 
-        return redirect()->route('/presentaciones');
+        return redirect('/farmaceutico/presentacion');
     }
 
     //obtener todas las medicinas asociadas a una presentación

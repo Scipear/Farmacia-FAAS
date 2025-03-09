@@ -13,15 +13,15 @@
     </ul>
 </header>
 @section('contenido')
-    <h1>Formulario de Acción terapéutica</h1>
-    <form>
+    <h1>Actualizanco Acción Terapeutica {{$accionT->nombre}}</h1>
+        <form method="POST" action="/accion/terapeutica/{{$accionT->id}}">
 
         @csrf
+        @method('PUT')
 
-        <label>Nombre</label>
-        <input type="text" id ="nombre" name="nombre" required><br><br>
-
-        <button>Enviar</button>
-    </form>
+            <label>Nombre</label>
+            <input type="text" id ="nombre" name="nombre" value={{$accionT->nombre}} required><br><br>
+            <button>Enviar</button>
+        </form>
 
 @endsection

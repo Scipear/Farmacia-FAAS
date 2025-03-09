@@ -23,6 +23,7 @@ use App\Http\Controllers\PresentacionController;
 use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\TelefonoEmpleadoController;
 use App\Http\Middleware\VerificarRol;
+use App\Models\AccionTerapeutica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,6 +54,7 @@ Route::get('/medicina/{id}/sucursales', [MedicinaController::class, 'obtenerSucu
 Route::post('/medicina', [MedicinaController::class, 'crearMedicina']); // Ruta para crear medicinas
 Route::post('/medicina/{id}/sucursal', [MedicinaController::class, 'agregarSucursal']);
 Route::put('/medicina/{id}', [MedicinaController::class, 'actualizarMedicina']); // Ruta para actualizar una medicina
+Route::put('/medicina/{medicinaId}/sucursal/{sucursalId}', [MedicinaController::class, 'actualizarEnSucursal']);
 Route::delete('/medicina/{id}', [MedicinaController::class, 'eliminarMedicina']); // Ruta para eliminar una medicina
 
 // RUTAS PARA PEDIDOS
@@ -99,6 +101,7 @@ Route::delete('/accion/terapeutica/{id}', [AccionTerapeuticaController::class, '
 //RUTAS PARA MONODROGA//
 Route::get('/monodrogas', [MonodrogaController::class, 'mostrarMonodroga']); //Ruta para obtener monodrogas
 Route::get('/monodroga/{id}', [MonodrogaController::class, 'obtenerMonodroga']); // Ruta para obtener x ID
+Route::get('/buscarMonodroga', [MonodrogaController::class, 'buscarMonodroga']);
 Route::post('/monodroga', [MonodrogaController::class, 'crearMonodroga']); // Ruta para crear 
 Route::put('/monodroga/{id}', [MonodrogaController::class, 'actualizarMonodroga']); // Ruta para actualizar 
 Route::delete('/monodroga/{id}', [MonodrogaController::class, 'eliminarMonodroga']); // Ruta para eliminar 
@@ -299,78 +302,44 @@ Route::middleware([VerificarRol::class . ':Farmaceutico'])->group(function (){
     Route::get('/farmaceutico/inicioFarmaceutico', function () {
         return view('farmaceutico.inicioFarmaceutico');
     });
-   
-   //RUTAS PARA FARMACEUTICO 
+
    //RUTAS PARA FARMACEUTICO MEDICINA
-    Route::get('/farmaceutico/medicina', function () {
-       return view('farmaceutico.medicina');
-   });
-   
-   Route::get('/buscarMedicina', function (Request $request) {
-       $BuscarMedicina= $request->query('query');
-       return view('farmaceutico.buscarMedicina', compact('BuscarMedicina'));
-   })->name('buscarMedicina');
-   
-   
-   Route::get('/farmaceutico/formMedicina', function () {
-       return view('farmaceutico.formMedicina');
-   });
-   
-   //RUTAS PARA FARMACEUTICO MEDICAMENTO
-   Route::get('/farmaceutico/medicamento', function () {
-       return view('farmaceutico.medicamento');
-   });
-   
-   Route::get('/buscarMedicamento', function (Request $request) {
-       $BuscarMedicamento= $request->query('query');
-       return view('farmaceutico.buscarMedicamento', compact('BuscarMedicamento'));
-   })->name('buscarMedicamento');
-   
-   Route::get('/farmaceutico/formMedicamento', function () {
-       return view('farmaceutico.formMedicamento');
-   });
-   
-   //RUTAS PARA FARMACEUTICO PRESENTACION
-   Route::get('/farmaceutico/presentacion', function () {
-       return view('farmaceutico.presentacion');
-   });
-   
-   Route::get('/buscarPre', function (Request $request) {
-       $BuscarPre= $request->query('query');
-       return view('farmaceutico.buscarPre', compact('BuscarPre'));
-   })->name('buscarPre');
-   
-   Route::get('/farmaceutico/formPre', function () {
-       return view('farmaceutico.formPre');
-   });
-   
-   //RUTAS PARA FARMACEUTICO ACCION TERAPEUTICA
-   Route::get('/farmaceutico/accion', function () {
-       return view('farmaceutico.accion');
-   });
-   
-   Route::get('/buscarAc', function (Request $request) {
-       $BuscarAc= $request->query('query');
-       return view('farmaceutico.buscarAc', compact('BuscarAc'));
-   })->name('buscarAc');
-   
-   Route::get('/farmaceutico/formAc', function () {
-       return view('farmaceutico.formAc');
-   });
-   
-   //RUTAS PARA FARMACEUTICO MONODROGA
-   Route::get('/farmaceutico/monodroga', function () {
-       return view('farmaceutico.monodroga');
-   });
-   
-   Route::get('/buscarMon', function (Request $request) {
-       $BuscarMon= $request->query('query');
-       return view('farmaceutico.buscarMon', compact('BuscarMon'));
-   })->name('buscarMon');
-   
-   Route::get('/farmaceutico/formMon', function () {
-       return view('farmaceutico.formMon');
-   });
+    Route::get('/farmaceutico/medicina', [MedicinaController::class, 'mostrarMedicinas']);
+    Route::get('/buscarMedicina', [MedicinaController::class, 'buscarMedicina']);
+    Route::get('/farmaceutico/formMedicina', [MedicinaController::class, 'formMedicina']);
+    Route::get('/farmaceutico/medicina/{id}/sucursales', [MedicinaController::class, 'obtenerSucursales']);
+    Route::get('/farmaceutico/{id}/formMedicinaSucursal', [MedicinaController::class, 'formMedicinaSucursal']);
+    Route::get('/farmaceutico/medicina/{medicinaId}/sucursal/{sucursalId}', [MedicinaController::class, 'obtenerMedicinaSucursal']);
+    
+    //RUTAS PARA FARMACEUTICO MEDICAMENTO
+    Route::get('/farmaceutico/medicamento', [MedicamentoController::class, 'mostrarMedicamento']);
+    Route::get('/buscarMedicamento', [MedicamentoController::class, 'buscarMedicamento']);
+    Route::get('/editarMedicamento/{id}', [MedicamentoController::class, 'obtenerMedicamento']);
+    Route::get('/farmaceutico/formMedicamento', [MedicamentoController::class, 'formMedicamento']);
+    
+    //RUTAS PARA FARMACEUTICO PRESENTACION
+    Route::get('/farmaceutico/presentacion', [PresentacionController::class, 'index']);
+    Route::get('/buscarPre', [PresentacionController::class, 'buscarPresentacion']);
+    Route::get('/editarPresentacion/{id}', [PresentacionController::class, 'mostrarPresentacion']);
+    Route::get('/farmaceutico/formPre', function () {
+        return view('farmaceutico.formPre');
+    });
+    
+    //RUTAS PARA FARMACEUTICO ACCION TERAPEUTICA
+    Route::get('/farmaceutico/accion', [AccionTerapeuticaController::class, 'mostrarAT']);
+    Route::get('/buscarAc', [AccionTerapeuticaController::class, 'buscarAccion']);
+    Route::get('/editarAccion/{id}', [AccionTerapeuticaController::class, 'obtenerAT']);
+    Route::get('/farmaceutico/formAc', function () {
+        return view('farmaceutico.formAc');
+    });
+    
+    //RUTAS PARA FARMACEUTICO MONODROGA
+    Route::get('/farmaceutico/monodroga', [MonodrogaController::class, 'mostrarMonodroga']); //Enseña todas las monodrogas
+    Route::get('/buscarMon', [MonodrogaController::class, 'buscarMonodroga']); //Busca una monodroga
+    Route::get('/editarMonodroga/{id}', [MonodrogaController::class, 'obtenerMonodroga']);
+    Route::get('/farmaceutico/formMon', function () {
+        return view('farmaceutico.formMon');
+    });
 });
 
 Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function (){
@@ -387,13 +356,6 @@ Route::get('/admin/formMedicina', function () {
     return view('admin.formMedicina');
 });
 
-Route::get('/buscarMedicina', function (Request $request) {
-    $BuscarMedicina = $request->query('query');
-    return view('admin.buscarMedicina', compact('BuscarMedicina'));
-})->name('buscarMedicina');
-
-
-
 Route::get('/admin/medicamento', function () {
     return view('admin.medicamento');
 });
@@ -401,12 +363,6 @@ Route::get('/admin/medicamento', function () {
 Route::get('/admin/formMedicamento', function () {
     return view('admin.formMedicamento');
 });
-
-Route::get('/buscarMedicamento', function (Request $request) {
-    $BuscarMedicamento = $request->query('query');
-    return view('admin.buscarMedicamento', compact('BuscarMedicamento'));
-})->name('buscarMedicamento');
-
 
 Route::get('/admin/presentacion', function () {
     return view('admin.presentacion');
@@ -416,11 +372,6 @@ Route::get('/admin/formPre', function () {
     return view('admin.formPre');
 });
 
-Route::get('/buscarPresentacion', function (Request $request) {
-    $BuscarPre= $request->query('query');
-    return view('admin.buscarPre', compact('BuscarPre'));
-})->name('buscarPresentacion');
-
 Route::get('/admin/acciont', function () {
     return view('admin.acciont');
 });
@@ -429,11 +380,6 @@ Route::get('/admin/formAccion', function () {
     return view('admin.formAccion');
 });
 
-Route::get('/buscarAc', function (Request $request) {
-    $BuscarA= $request->query('query');
-    return view('admin.buscarAccionT', compact('BuscarA'));
-})->name('buscarAc');
-
 Route::get('/admin/monodroga', function () {
     return view('admin.monodroga');
 });
@@ -441,11 +387,6 @@ Route::get('/admin/monodroga', function () {
 Route::get('/admin/formMon', function () {
     return view('admin.formMon');
 });
-
-Route::get('/buscarMonodroga', function (Request $request) {
-    $BuscarMonodroga= $request->query('query');
-    return view('admin.buscarMon', compact('BuscarMonodroga'));
-})->name('buscarMonodroga');
 
 
 //Get:Redirigir hacia pagina

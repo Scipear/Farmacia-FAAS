@@ -13,7 +13,7 @@
     </ul>
 </header>
 @section('contenido')
-        <h1>Información de Monodroga</h1>
+        <h1>Información de las Monodrogas</h1>
         @if($BuscarMon)
         <div class="container">
             <p>Mostrando resultados para: <strong>{{$BuscarMon}}</strong></p>
