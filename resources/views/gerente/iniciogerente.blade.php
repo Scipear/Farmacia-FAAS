@@ -16,8 +16,10 @@
 
 @section('contenido')
 
-    <h1>Bienvenido Gerente</h1>
-    <p>Selecciona una opcion para gestionar</p><br>
+        <div class="container">
+            <h1>Bienvenido al Panel de Gerente </h1>
+            <p>¡Has iniciado sesión como gerente!</p><br>
+        </div>
 
     <!-- RUTAS PARA COLOCAR EN GERENTE
     
@@ -31,11 +33,6 @@
         return view('gerente.empleados');
     }); 
 
-    //STOCK
-        Route::get('/gerente/stock', function () {
-        return view('gerente.stock');
-    }); 
-
     //PEDIDOS
     Route::get('/gerente/pedidos', function () {
         return view('gerente.pedidos');
@@ -44,6 +41,11 @@
     //COMPRAS
     Route::get('/gerente/compras', function () {
         return view('gerente.compras');
+    }); 
+
+    //STOCK
+        Route::get('/gerente/laboratorios, function () {
+        return view('gerente.laboratorios');
     }); 
 
     //CUENTAS POR PAGAR
@@ -56,11 +58,11 @@
     
     <a class="botonIr" href="/gerente/empleados">Gestionar empleados</a><br><br>
 
-    <a class="botonIr" href="/gerente/stock">Gestionar stock (Medicinas)</a><br><br>
-
     <a class="botonIr" href="/gerente/pedidos">Gestionar pedidos</a><br><br>
 
     <a class="botonIr" href="/gerente/compras">Gestionar compras</a><br><br>
+
+    <a class="botonIr" href="/gerente/laboratorios">Gestionar laboratorios</a><br><br>
 
     <a class="botonIr" href="/gerente/cuentasxpagar">Ver cuentas por pagar</a><br><br>
 
