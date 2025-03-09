@@ -325,6 +325,37 @@ Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function
     })->name('buscarCP');
 });
 
+Route::middleware([VerificarRol::class . ':Gerente'])->group(function (){
+    Route::get('/gerente/inicioGerente', function () {
+        return view('gerente.inicioGerente');
+    }); 
+    
+    //EMPLEADOS
+    Route::get('/gerente/empleados', function () {
+        return view('gerente.empleados');
+    }); 
+
+    //PEDIDOS
+    Route::get('/gerente/pedidos', function () {
+        return view('gerente.pedidos');
+    }); 
+
+    //COMPRAS
+    Route::get('/gerente/compras', function () {
+        return view('gerente.compras');
+    }); 
+
+    //STOCK
+        Route::get('/gerente/laboratorios', function () {
+        return view('gerente.laboratorios');
+    }); 
+
+    //CUENTAS POR PAGAR
+    Route::get('/gerente/cuentasxpagar', function () {
+        return view('gerente.cuentasxpagar');
+    }); 
+});
+
 //Get:Redirigir hacia pagina
 //Mandar info no visible desde un formulario
 //Put

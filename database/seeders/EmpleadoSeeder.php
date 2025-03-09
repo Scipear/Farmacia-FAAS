@@ -21,7 +21,7 @@ class EmpleadoSeeder extends Seeder
                 'cedula' => '12248585',
                 'nombre' => 'Rosa',
                 'apellido' => 'Perales',
-                'correo' => 'example@mail.com',
+                'correo' => 'administrador@mail.com',
                 'direccion' => 'Calle 123',
             ],
 
@@ -29,7 +29,7 @@ class EmpleadoSeeder extends Seeder
                 'cedula' => '25853499',
                 'nombre' => 'Carlos',
                 'apellido' => 'Rojas',
-                'correo' => 'cr@mail.com',
+                'correo' => 'gerente@mail.com',
                 'direccion' => 'Calle 321',
             ],
 
@@ -37,7 +37,7 @@ class EmpleadoSeeder extends Seeder
                 'cedula' => '35478892',
                 'nombre' => 'Luis',
                 'apellido' => 'Garcia',
-                'correo' => 'lbbbb@mail.com',
+                'correo' => 'farmaceutico@mail.com',
                 'direccion' => 'Calle 789',
             ],
 
@@ -45,7 +45,7 @@ class EmpleadoSeeder extends Seeder
                 'cedula' => '7589248',
                 'nombre' => 'Maria',
                 'apellido' => 'Gonzales',
-                'correo' => 'urra@mail.com',
+                'correo' => 'analista@mail.com',
                 'direccion' => 'Calle 5464',
             ]
         ];
