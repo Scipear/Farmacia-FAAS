@@ -89,7 +89,7 @@
         <div class="login-form">
             <h2>{{ __('Iniciar Sesión') }}</h2>
 
-            <form method="POST" action="{{ route('admin.login') }}">
+            <form method="POST" action="/login">
                 @csrf
 
                 <div class="form-group">

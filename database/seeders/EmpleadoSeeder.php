@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cargo;
 use App\Models\Empleado;
+use App\Models\Rol;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -58,6 +61,16 @@ class EmpleadoSeeder extends Seeder
                 'empleado_id' => $empleado->id,
                 'tipo' => 'Personal',
                 'numero' => fake()->unique()->numberBetween(500000, 1000000)
+            ]);
+
+            $cargo = Cargo::findOrFail($i);
+            $rol = Rol::where('nombre', $cargo->nombre)->first();
+
+            User::create([
+                'empleado_id' => $empleado->id,
+                'rol_id' => $rol->id,
+                'email' => $empleado->correo,
+                'password' => 'password',
             ]);
 
             $i = $i + 1;

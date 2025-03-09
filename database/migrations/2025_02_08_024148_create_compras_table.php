@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pedido_id')
-            ->constrained('pedidos')
-            ->cascadeOnUpdateon()
-            ->cascadeOnDelete();
+                ->constrained('pedidos')
+                ->cascadeOnUpdateon()
+                ->cascadeOnDelete();
             $table->float('precioPagar');
             $table->text('observaciones')->nullable();
             $table->string('status')->default("Pendiente");

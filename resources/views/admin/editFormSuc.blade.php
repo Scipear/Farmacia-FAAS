@@ -45,9 +45,9 @@
         @endforeach
 
         @if($sucursal->telefonos->count() < 2)
-            <label>Teléfono {{ $laboratorio->telefonos->count() + 1 }} (Opcional)</label>
-            <input type="text" name="telefonos[{{ $laboratorio->telefonos->count() }}][numero]">
-            <select name="telefonos[{{ $laboratorio->telefonos->count() }}][tipo]">
+            <label>Teléfono {{ $sucursal->telefonos->count() + 1 }} (Opcional)</label>
+            <input type="text" name="telefonos[{{ $sucursal->telefonos->count() }}][numero]">
+            <select name="telefonos[{{ $sucursal->telefonos->count() }}][tipo]">
                 <option value="Local">Local</option>
                 <option value="Movil">Movil</option>
                 <option value="Otro">Otro</option>

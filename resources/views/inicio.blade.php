@@ -6,7 +6,7 @@
 @yield('header', 'Farmacias FAAS')
 <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.login.form') }}">Login</a>
+            <a class="nav-link" href="/login">Login</a>
         </li>  
 </ul>
 

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(LaboratorioSeeder::class);
         $this->call(MedicamentoSeeder::class);
         Medicina::factory(50)->create();
+        $this->call(RolSeeder::class);
         $this->call(SucursalSeeder::class);
         $this->call(EmpleadoSeeder::class);
 

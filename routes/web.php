@@ -18,10 +18,13 @@ use App\Http\Controllers\MedicamentoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\CargoController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PresentacionController;
 use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\TelefonoEmpleadoController;
+use App\Http\Middleware\VerificarRol;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 ###########################################################
 
@@ -175,11 +178,12 @@ Route::get('/filtrar', function (Request $request) {
 })->name('filtrar');
 
 ///////////////////////////////////////////////////////////////LOGIN///////////////////////////////////////
-Route::get('/admin/login', function () {
-    return view('admin.login');
-})->name('admin.login.form');
+Route::get('/login', function () {
+    return view('login');
+})->name('login.form');
 
-Route::post('/admin/login', function (\Illuminate\Http\Request $request) {
+Route::post('/login', [LoginController::class, 'login']);
+/*Route::post('/login', function (\Illuminate\Http\Request $request) {
     $email = $request->input('email');
     $password = $request->input('password');
 
@@ -190,20 +194,7 @@ Route::post('/admin/login', function (\Illuminate\Http\Request $request) {
     } else {
         return back()->with('error', 'Credenciales incorrectas.');
     }
-})->name('admin.login');
-
-Route::get('/admin/dashboard', function () {
-    if (session('admin')) {
-        return view('admin.dashboard'); // Create a basic admin dashboard view
-    } else {
-        return redirect('/admin/login'); // Redirect to login if not authenticated
-    }
-});
-
-Route::get('/admin/logout', function () {
-    session()->forget('admin'); // Remove the admin session variable
-    return redirect('/admin/login');
-});
+})->name('admin.login');*/
 ////////////////////////////////////////////////////////REGISTER///////////////////////////////////
 
 Route::get('/admin/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin.register.form');
@@ -218,66 +209,78 @@ Route::get('/admin/logout', function () {
 
 // RUTAS ADMINISTRADOR
 
-Route::get('/admin/dashboar', function () {
-    return view('admin.dashboard');
+Route::middleware([VerificarRol::class . ':Administrador general'])->group(function (){
+    
+    Route::get('/admin/dashboard', function () {    
+        return view('admin.dashboard'); 
+    });
+
+    Route::get('/admin/dashboar', function () {
+        return view('admin.dashboard');
+    });
+
+    Route::get('/admin/logout', function () {
+        return redirect('/admin/login');
+    });
+    
+    Route::get('/admin/sucursales', [SucursalController::class, 'index']); //Obtiene todas las sucursales y se la muestra al administrador
+    Route::get('/editarSucursal/{id}', [SucursalController::class, 'mostrarSucursal']);
+    
+    Route::get('/admin/formSuc', function () {
+        return view('admin.formSuc');
+    });
+    
+    //Nueva ruta filtrar
+    Route::get('/buscarS', function (Request $request) {
+        $BuscarS = $request->query('query');
+        return view('admin.buscarSuc', compact('BuscarS'));
+    })->name('buscarS');
+    
+    Route::get('/admin/telfsucursal', function () {
+        return view('admin.telfsucursal');
+    });//revisar
+    
+    Route::get('/admin/laboratoriosA', function () {
+        return view('admin.laboratoriosA');
+    });//revisar
+    
+    Route::get('/admin/laborat', [LaboratorioController::class, 'mostrarLaboratorios']);//revisar
+    Route::get('/editarLaboratorio/{id}', [LaboratorioController::class, 'obtenerLaboratorioID']);
+    
+    Route::get('/admin/formLab', function () {
+        return view('admin.formLab');
+    });
+    
+    Route::get('/buscarL', function (Request $request) {
+        $BuscarL = $request->query('query');
+        return view('admin.buscarLab', compact('BuscarL'));
+    })->name('buscarL');
+    
+    
+    Route::get('/admin/telfLab', function () {
+        return view('admin.telfLab');
+    });//revisar
+    
+    Route::get('/admin/empleados', [EmpleadoController::class, 'mostrarEmpleados']);
+    
+    Route::get('/buscarE', function (Request $request) {
+        $BuscarE = $request->query('query');
+        return view('admin.buscarEmp', compact('BuscarE'));
+    })->name('buscarE');
+    
+    Route::get('/admin/telfEmpl', function () {
+        return view('admin.telfEmpl');
+    });
+    
+    Route::get('/admin/cargo', [CargoController::class, 'index']);
+    
+    Route::get('/buscarC', function (Request $request) {
+        $BuscarC = $request->query('query');
+        return view('admin.buscarCar', compact('BuscarC'));
+    })->name('buscarC');
+
 });
 
-
-Route::get('/admin/sucursales', [SucursalController::class, 'index']); //Obtiene todas las sucursales y se la muestra al administrador
-Route::get('/editarSucursal/{id}', [SucursalController::class, 'mostrarSucursal']);
-
-Route::get('/admin/formSuc', function () {
-    return view('admin.formSuc');
-});
-
-//Nueva ruta filtrar
-Route::get('/buscarS', function (Request $request) {
-    $BuscarS = $request->query('query');
-    return view('admin.buscarSuc', compact('BuscarS'));
-})->name('buscarS');
-
-Route::get('/admin/telfsucursal', function () {
-    return view('admin.telfsucursal');
-});//revisar
-
-Route::get('/admin/laboratoriosA', function () {
-    return view('admin.laboratoriosA');
-});//revisar
-
-Route::get('/admin/laborat', [LaboratorioController::class, 'mostrarLaboratorios']);//revisar
-Route::get('/editarLaboratorio/{id}', [LaboratorioController::class, 'obtenerLaboratorioID']);
-
-Route::get('/admin/formLab', function () {
-    return view('admin.formLab');
-});
-
-Route::get('/buscarL', function (Request $request) {
-    $BuscarL = $request->query('query');
-    return view('admin.buscarLab', compact('BuscarL'));
-})->name('buscarL');
-
-
-Route::get('/admin/telfLab', function () {
-    return view('admin.telfLab');
-});//revisar
-
-Route::get('/admin/empleados', [EmpleadoController::class, 'mostrarEmpleados']);
-
-Route::get('/buscarE', function (Request $request) {
-    $BuscarE = $request->query('query');
-    return view('admin.buscarEmp', compact('BuscarE'));
-})->name('buscarE');
-
-Route::get('/admin/telfEmpl', function () {
-    return view('admin.telfEmpl');
-});
-
-Route::get('/admin/cargo', [CargoController::class, 'index']);
-
-Route::get('/buscarC', function (Request $request) {
-    $BuscarC = $request->query('query');
-    return view('admin.buscarCar', compact('BuscarC'));
-})->name('buscarC');
 
 
 Route::get('/admin/medicina', function () {
@@ -336,3 +339,7 @@ Route::get('/buscarMonodroga', function (Request $request) {
 //Put
 //Patch
 //Delete
+
+//Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
