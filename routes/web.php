@@ -181,6 +181,7 @@ Route::get('/filtrar', function (Request $request) {
 Route::get('/login', function () {
     return view('login');
 })->name('login.form');
+Route::post('/login', [LoginController::class, 'login']);
 
 /*Route::post('/admin/login', function (\Illuminate\Http\Request $request) {
     $email = $request->input('email');
