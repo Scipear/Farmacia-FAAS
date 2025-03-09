@@ -64,7 +64,7 @@ class MedicinaController extends Controller
         if(Auth::check()){
             $user = Auth::user();
 
-            if($user->rol && $user->rol->nombre === 'Farmacéutico'){
+            if($user->rol && $user->rol->nombre === 'Farmaceutico'){
                 return view('farmaceutico.medicina', compact('medicinas'));
             }
         }
