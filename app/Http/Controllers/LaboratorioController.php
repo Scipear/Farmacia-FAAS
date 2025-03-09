@@ -38,8 +38,8 @@ class LaboratorioController extends Controller
             'direccion' => 'required',
             'correo' => 'required|unique:laboratorios',
             'telefonos' => 'required|array',
-            'telefonos.*.tipo' => 'required',
-            'telefonos.*.numero' => 'required',
+            'telefonos.0.tipo' => 'required',
+            'telefonos.0.numero' => 'required',
 
         ]); // Validaciones para los campos del registro
 
@@ -48,11 +48,13 @@ class LaboratorioController extends Controller
 
         if($request->has('telefonos')){
             foreach($request->telefonos as $telefono){
-                $laboratorio->telefonos()->create([
-                    'laboratorio_id' => $laboratorio->id,
-                    'tipo' => $telefono['tipo'],
-                    'numero' => $telefono['numero']
-                ]);
+                if($telefono['tipo'] && $telefono['numero']){
+                    $laboratorio->telefonos()->create([
+                        'laboratorio_id' => $laboratorio->id,
+                        'tipo' => $telefono['tipo'],
+                        'numero' => $telefono['numero']
+                    ]);
+                }
             }
         }
 
@@ -82,10 +84,11 @@ class LaboratorioController extends Controller
 
         if($request->has('telefonos')){
             foreach($request->telefonos as $telefono){
-                if($telefono['numero']){ // Añade el teléfono solo si tiene número
+                if($telefono['tipo'] && $telefono['numero']){
                     $laboratorio->telefonos()->create([
+                        'laboratorio_id' => $laboratorio->id,
                         'tipo' => $telefono['tipo'],
-                        'numero' => $telefono['numero'],
+                        'numero' => $telefono['numero']
                     ]);
                 }
             }

@@ -13,15 +13,16 @@
     </ul>
 </header>
 @section('contenido')
-    <h1>Actualizando Cargo</h1>
-    <form>
-        @csrf
+<h1>Formulario para crear un Cargo </h1>
+<form method="POST" action="/cargos/{{$cargo->id}}">
+    @csrf
+    @method('PUT')
 
-        <label>Cargo</label>
-        <input type="text" id ="nombre" name="nombre" required><br><br>
+    <label>Nombre</label>
+    <input type="text" id ="nombre" name="nombre" value="{{$cargo->nombre}}"required><br><br>
 
-        <button>Enviar</button>
-    </form>
+    <button>Enviar</button>
+</form>
 
 
 

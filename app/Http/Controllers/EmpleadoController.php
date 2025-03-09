@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cargo;
 use App\Models\Empleado;
+use App\Models\Sucursal;
 use App\Models\TelefonoEmpleado;
 use Illuminate\Http\Request;
 
@@ -25,8 +27,15 @@ class EmpleadoController extends Controller
 
     public function obtenerEmpleadoID($id){
         $empleado = Empleado::findOrFail($id);
+        $cargoActual = $empleado->cargos()->whereNull('cargo_empleado.fechaFin')->first();
+        $sucursalActual = $empleado->sucursales()->whereNull('empleado_sucursal.fecha_salida')->first();
+
+        $empleado->cargoActual = $cargoActual;
+        $empleado->sucursalActual = $sucursalActual;
+        $cargos = Cargo::all();
+        $sucursales = Sucursal::all();
         
-        return response()->json($empleado, 200);
+        return view('admin.editFormEmp', compact('empleado', 'cargos', 'sucursales'));
     }
 
     public function buscarEmpleado(Request $request){
@@ -45,6 +54,13 @@ class EmpleadoController extends Controller
         return view('admin.empleados', compact('empleados'));
     }
 
+    public function formEmpleado(){
+        $cargos = Cargo::all();
+        $sucursales = Sucursal::all();
+
+        return view('admin.formEmp', compact('cargos','sucursales'));
+    }
+
     public function obtenerTelefonosdeEmpleado($id){
         $telefonos = TelefonoEmpleado::where('empleado_id', $id)->get();
         
@@ -60,12 +76,11 @@ class EmpleadoController extends Controller
             'correo' => 'required|unique:empleados',
             'direccion' => 'required',
             'telefonos' => 'required|array',
-            'telefonos.*.tipo' => 'required',
-            'telefonos.*.numero' => 'required',
+            'telefonos.0.tipo' => 'required',
+            'telefonos.0.numero' => 'required',
             'cargo' => 'required|exists:cargos,id', // id del cargo que va a ejercer el empleado
             'sucursal' => 'required|exists:sucursales,id', // id de la sucursal en la que va a trabajar el empleado
         ]); // Validaciones para los campos del registro
-
 
         $empleado = Empleado::create($request->only(['cedula', 'nombre', 'apellido', 
         'correo', 'direccion'])); // Guarda en la tabla de empleados unicamente los datos que van en dicha tabla
@@ -80,15 +95,17 @@ class EmpleadoController extends Controller
 
         if($request->has('telefonos')){
             foreach($request->telefonos as $telefono){
-                $empleado->telefonos()->create([
-                    'empleado_id' => $empleado->id,
-                    'tipo' => $telefono['tipo'],
-                    'numero' => $telefono['numero']
-                ]);
-            }
+                if($telefono['numero'] && $telefono['tipo']){
+                    $empleado->telefonos()->create([
+                        'empleado_id' => $empleado->id,
+                        'tipo' => $telefono['tipo'],
+                        'numero' => $telefono['numero']
+                    ]);
+                }
+                }
         }
     
-        return response()->json($empleado, 200); // Respuesta en formato JSON implementada por ahora
+        return redirect('/admin/empleados'); // Respuesta en formato JSON implementada por ahora
     }
 
     // Actualiza los datos de un empleado
@@ -106,6 +123,11 @@ class EmpleadoController extends Controller
             'cargo' => 'required|exists:cargos,id',
             'sucursal' => 'required|exists:sucursales,id',
         ]);
+        if($request->status == 'Retirado' || $request->status == 'Jubilado' || $request->status == 'Despedido'){
+            $this->desasignarEmpleado($request, $id);
+
+            return redirect('/admin/empleados');
+        }
 
         $cargoActual = $empleado->cargos()->whereNull('cargo_empleado.fechaFin')->first();
         
@@ -126,11 +148,12 @@ class EmpleadoController extends Controller
         } /* Un empleado solo puede trabajar en una sucursal a la vez por lo que si al actualizar
         un empleado viene con una nueva sucursal realiza el mismo proceso que con el cargo */
 
+
         
         $empleado->update($request->only(['cedula', 'nombre', 'apellido', 
         'correo', 'direccion', 'status']));
 
-        return response()->json($empleado, 200);
+        return redirect('/admin/empleados');
     }
 
     public function desasignarEmpleado(Request $request, $id){
@@ -148,8 +171,6 @@ class EmpleadoController extends Controller
             $empleado->cargos()->updateExistingPivot($cargoActual->id, ['fechaFin' => now()]);
             $empleado->sucursales()->updateExistingPivot($sucursalActual->id, ['fecha_salida' => now()]);
         }
-
-        return response()->json($empleado, 200);
     }
 
     // Elimina un empleado de la tabla
@@ -163,10 +184,10 @@ class EmpleadoController extends Controller
     // Crear funcion para mostrar la ficha de un trabajador
 
     public function asignarCargo($cargo_id, $empleado){
-        $empleado->cargos()->sync([$cargo_id]);
+        $empleado->cargos()->attach([$cargo_id]);
     }
 
     public function asignarSucursal($sucursal_id, $empleado){
-        $empleado->sucursales()->sync([$sucursal_id]);
+        $empleado->sucursales()->attach([$sucursal_id]);
     }
 }

@@ -23,7 +23,7 @@
         </form>
         </div>
 
-        <a  class="botonAg" href="formEmp">Agregar +</a>
+        <a  class="botonAg" href="/admin/formEmp">Agregar +</a>
 
         <center>
             <table>
@@ -57,7 +57,7 @@
                         <td>{{$empleado->sucursalActual}}</td>
                         <td>
                         <div class="buttonCont">
-                            <button>Editar</button>
+                            <a  class="botonEd" href="/editarEmpleado/{{$empleado->id}}">Editar</a>
                             <button popovertarget="popup{{$empleado->id}}">Eliminar</button>
                             <div popover id="popup{{$empleado->id}}">
                                 ¿Estás seguro que quieres eliminar este registro?<br><br>

@@ -16,7 +16,6 @@ class Empleado extends Model
         'apellido',
         'correo',
         'direccion',
-        'status',
     ];
     public $timestamps = false;
 

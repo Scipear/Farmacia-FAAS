@@ -24,7 +24,7 @@
         </div>
 
 
-        <a  class="botonAg" href="/admin/formCarg">Agregar +</a>
+        <a  class="botonAg" href="/admin/formCargo">Agregar +</a>
         <center>
             <table>
                 <tr>
@@ -36,8 +36,18 @@
                         <td>{{$cargo->nombre}}</td>
                         <td>
                             <div class="buttonCont">
-                                <button>Editar</button>
-                                <button>Eliminar</button>
+                                <a  class="botonEd" href="/editarCargo/{{$cargo->id}}">Editar</a>
+                                <button popovertarget="popup{{$cargo->id}}">Eliminar</button>
+                                <div popover id="popup{{$cargo->id}}">
+                                    ¿Estás seguro que quieres eliminar este registro?<br><br>
+                                    <form method='POST' action='/cargos/{{$cargo->id}}'>
+                                        @csrf
+                                        @method('DELETE')
+    
+                                        <button popovertarget="popup{{$cargo->id}}">Aceptar</button>
+                                    </form>
+                                    <button popovertarget="popup{{$cargo->id}}">Cerrar</button>
+                                </div>
                             </div>
                         </td>
                     </tr>

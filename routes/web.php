@@ -156,16 +156,9 @@ Route::get('/greet', function () {
     return view('master');
 });
 
-Route::get('/buscar', function (Request $request) {
-    $busqueda = $request->query('query');
-    return view('resultados', compact('busqueda'));
-})->name('buscar');
-
+Route::get('/buscar', [MedicinaController::class, 'buscarMedicina']);
 //Nueva ruta filtrar
-Route::get('/filtrar', function (Request $request) {
-    $filtrarM = $request->query('query');
-    return view('filtrarCS', compact('filtrarM'));
-})->name('filtrar');
+Route::get('/filtrar/{busqueda}', [MedicinaController::class, 'filtrarBusqueda']);
 
 ///////////////////////////////////////////////////////////////LOGIN///////////////////////////////////////
 Route::get('/login', function () {
@@ -192,58 +185,38 @@ Route::middleware([VerificarRol::class . ':Administrador general'])->group(funct
         return view('admin.dashboard'); 
     });
     
+    //RUTAS SUCURSALES
     Route::get('/admin/sucursales', [SucursalController::class, 'index']); //Obtiene todas las sucursales y se la muestra al administrador
-    Route::get('/editarSucursal/{id}', [SucursalController::class, 'mostrarSucursal']);
-    
+    Route::get('/editarSucursal/{id}', [SucursalController::class, 'mostrarSucursal']);    
     Route::get('/admin/formSuc', function () {
         return view('admin.formSuc');
     });
-    
-    //Nueva ruta filtrar
-    Route::get('/buscarS', function (Request $request) {
-        $BuscarS = $request->query('query');
-        return view('admin.buscarSuc', compact('BuscarS'));
-    })->name('buscarS');
-    
     Route::get('/admin/telfsucursal', function () {
         return view('admin.telfsucursal');
     });//revisar
     
-    Route::get('/admin/laboratoriosA', function () {
-        return view('admin.laboratoriosA');
-    });//revisar
-    
+    // RUTAS LABORATORIOS    
     Route::get('/admin/laborat', [LaboratorioController::class, 'mostrarLaboratorios']);//revisar
     Route::get('/editarLaboratorio/{id}', [LaboratorioController::class, 'obtenerLaboratorioID']);
-    
     Route::get('/admin/formLab', function () {
         return view('admin.formLab');
     });
-    
-    Route::get('/buscarL', function (Request $request) {
-        $BuscarL = $request->query('query');
-        return view('admin.buscarLab', compact('BuscarL'));
-    })->name('buscarL');
-    
-    
     Route::get('/admin/telfLab', function () {
         return view('admin.telfLab');
     });//revisar
     
+    //RUTAS EMPLEADOS
     Route::get('/admin/empleados', [EmpleadoController::class, 'mostrarEmpleados']);
-    
-    Route::get('/buscarE', function (Request $request) {
-        $BuscarE = $request->query('query');
-        return view('admin.buscarEmp', compact('BuscarE'));
-    })->name('buscarE');
-    
+    Route::get('/admin/formEmp', [EmpleadoController::class, 'formEmpleado']);
+    Route::get('/editarEmpleado/{id}', [EmpleadoController::class, 'obtenerEmpleadoID']);
     Route::get('/admin/telfEmpl', function () {
         return view('admin.telfEmpl');
     });
     
     Route::get('/admin/cargo', [CargoController::class, 'index']);
-    
-    Route::get('/buscarC', function (Request $request) {
+    Route::get('/admin/formCargo', [CargoController::class, 'formCargo']);
+    Route::get('/editarCargo/{id}', [CargoController::class, 'mostrarCargo']);
+    Route::get('/buscarC', function (Request $request){
         $BuscarC = $request->query('query');
         return view('admin.buscarCar', compact('BuscarC'));
     })->name('buscarC');
@@ -350,6 +323,37 @@ Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function
         $BuscarCP= $request->query('query');
         return view('analista.buscarCuentasxPagar', compact('BuscarCP'));
     })->name('buscarCP');
+});
+
+Route::middleware([VerificarRol::class . ':Gerente'])->group(function (){
+    Route::get('/gerente/inicioGerente', function () {
+        return view('gerente.inicioGerente');
+    }); 
+    
+    //EMPLEADOS
+    Route::get('/gerente/empleados', function () {
+        return view('gerente.empleados');
+    }); 
+
+    //PEDIDOS
+    Route::get('/gerente/pedidos', function () {
+        return view('gerente.pedidos');
+    }); 
+
+    //COMPRAS
+    Route::get('/gerente/compras', function () {
+        return view('gerente.compras');
+    }); 
+
+    //STOCK
+        Route::get('/gerente/laboratorios', function () {
+        return view('gerente.laboratorios');
+    }); 
+
+    //CUENTAS POR PAGAR
+    Route::get('/gerente/cuentasxpagar', function () {
+        return view('gerente.cuentasxpagar');
+    }); 
 });
 
 //Get:Redirigir hacia pagina

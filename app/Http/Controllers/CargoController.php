@@ -11,6 +11,7 @@ class CargoController extends Controller
     public function index()
     {
         $cargos = Cargo::all();
+
         return view('admin.cargo', compact('cargos'));
     }
 
@@ -18,7 +19,13 @@ class CargoController extends Controller
     public function mostrarCargo($cargo)
     {
         $cargo = Cargo::findOrFail($cargo);
-        return $cargo;
+
+        return view('admin.editFormCarg', compact('cargo'));
+    }
+
+    public function formCargo(){
+
+        return view('admin.formCarg');
     }
 
     public function buscarCargo(Request $request){
@@ -27,12 +34,6 @@ class CargoController extends Controller
         $cargos = Cargo::where('nombre', 'LIKE', '%' . $query . '%')->get();
 
         return view('admin.cargo', compact('cargos'));
-    }
-
-    //vista para crear un nuevo cargo
-    public function crearCargo()
-    {
-        return view('cargos.create');
     }
 
     //guardar un nuevo cargo
@@ -45,27 +46,20 @@ class CargoController extends Controller
         $cargo = new Cargo();
         $cargo->nombre = $request->input('nombre');
         $cargo->save(); // Guarda el registro en la tabla
-        return redirect('/cargos');
-    }
-
-    //vista para editar un cargo
-    public function editarCargo($cargo)
-    {
-        $cargo = Cargo::findOrFail($cargo);
-        return view('cargos.edit', compact('cargo'));
+        return redirect('/admin/cargo');
     }
 
     //actualizar un cargo
     public function actualizarCargo(Request $request, $cargo)
     {
         $request->validate([
-            'nombre' => 'required|unique:cargos'
+            'nombre' => "required|unique:cargos,nombre,{$cargo}"
         ]);
 
         $cargo = Cargo::findOrFail($cargo);
         $cargo->nombre = $request->input('nombre');
         $cargo->save(); // Guarda el registro en la tabla
-        return redirect('/cargos');
+        return redirect('/admin/cargo');
     }
 
     //eliminar un cargo
@@ -73,7 +67,7 @@ class CargoController extends Controller
     {
         $cargo = Cargo::findOrFail($cargo);
         $cargo->delete();
-        return redirect('/cargos');
+        return redirect('/admin/cargo');
     }
 
     //devuelve todos los empleados que están asociados a un cargo

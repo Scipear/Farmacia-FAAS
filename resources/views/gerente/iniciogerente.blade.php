@@ -56,14 +56,14 @@
     
     -->
     
-    <a class="botonIr" href="/gerente/empleados">Gestionar empleados</a><br><br>
+    <a class="botonIr" href="/gerente/empleados">Gestionar empleados</a><br><br><br>
 
-    <a class="botonIr" href="/gerente/pedidos">Gestionar pedidos</a><br><br>
+    <a class="botonIr" href="/gerente/pedidos">Gestionar pedidos</a><br><br><br>
 
-    <a class="botonIr" href="/gerente/compras">Gestionar compras</a><br><br>
+    <a class="botonIr" href="/gerente/compras">Gestionar compras</a><br><br><br>
 
-    <a class="botonIr" href="/gerente/laboratorios">Gestionar laboratorios</a><br><br>
+    <a class="botonIr" href="/gerente/laboratorios">Gestionar laboratorios</a><br><br><br>
 
-    <a class="botonIr" href="/gerente/cuentasxpagar">Ver cuentas por pagar</a><br><br>
+    <a class="botonIr" href="/gerente/cuentasxpagar">Ver cuentas por pagar</a><br><br><br>
 
 @endsection
