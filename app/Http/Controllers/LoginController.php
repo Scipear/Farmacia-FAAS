@@ -27,7 +27,7 @@ class LoginController extends Controller
                 case 2:
                     return redirect('/gerente/informes');
                 case 3:
-                    return redirect('/farmaceutico/inventario');
+                    return redirect('/farmaceutico/inicioFarmaceutico');
                 case 4:
                     return redirect('/analista/pedidos');
                 default:
