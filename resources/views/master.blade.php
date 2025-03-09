@@ -178,7 +178,7 @@
     .botonVer{
             padding: 10px 20px;
             font-size: 16px;
-            background: #29a15f;
+            background:rgb(42, 97, 67);
             ;
             color: white;
             border: none;
@@ -191,7 +191,21 @@
     .botonPDF{
             padding: 10px 20px;
             font-size: 16px;
-            background: #29a15f;
+            background:rgb(55, 41, 248);
+            ;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 1425px;
+    }
+
+
+    .botonRep{
+            padding: 10px 20px;
+            font-size: 16px;
+            background:rgb(55, 41, 248);
             ;
             color: white;
             border: none;
@@ -205,7 +219,7 @@
     .botonEd{
             padding: 10px 20px;
             font-size: 16px;
-            background: #29a15f;
+            background:rgb(42, 97, 67);
             ;
             color: white;
             border: none;

@@ -42,7 +42,7 @@
         <center>
             <table>
                 <tr>
-                    <th>Nombre</th>
+                    <th>Nombre del laboratorio</th>
                     <th>Sucursal</th>
                     <th>Opción</th>
                 </tr>
