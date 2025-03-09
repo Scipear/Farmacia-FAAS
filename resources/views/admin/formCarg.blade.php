@@ -14,10 +14,10 @@
 </header>
 @section('contenido')
     <h1>Formulario para crear un Cargo </h1>
-    <form>
+    <form method="POST" action="/cargos">
         @csrf
 
-        <label>Cargo</label>
+        <label>Nombre</label>
         <input type="text" id ="nombre" name="nombre" required><br><br>
 
         <button>Enviar</button>

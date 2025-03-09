@@ -45,8 +45,8 @@ class SucursalController extends Controller
             'direccion' => 'required',
             'status' => 'required',
             'telefonos' => 'required|array',
-            'telefonos.*.tipo' => 'required',
-            'telefonos.*.numero' => 'required',
+            'telefonos.0.tipo' => 'required',
+            'telefonos.0.numero' => 'required',
 
         ]);
 
@@ -63,11 +63,13 @@ class SucursalController extends Controller
 
         if($request->has('telefonos')){
             foreach($request->telefonos as $telefono){
-                $sucursal->telefonos()->create([
-                    'sucursal_id' => $sucursal->id,
-                    'tipo' => $telefono['tipo'],
-                    'numero' => $telefono['numero']
-                ]);
+                if($telefono['tipo'] && $telefono['numero']){
+                    $sucursal->telefonos()->create([
+                        'sucursal_id' => $sucursal->id,
+                        'tipo' => $telefono['tipo'],
+                        'numero' => $telefono['numero']
+                    ]);
+                }
             }
         }
 
@@ -93,8 +95,8 @@ class SucursalController extends Controller
             'direccion' => 'required',
             'status' => 'required',
             'telefonos' => 'required|array',
-            'telefonos.*.tipo' => 'required',
-            'telefonos.*.numero' => 'required',
+            'telefonos.0.tipo' => 'required',
+            'telefonos.0.numero' => 'required',
 
         ]);
 
@@ -112,10 +114,11 @@ class SucursalController extends Controller
 
         if($request->has('telefonos')){
             foreach($request->telefonos as $telefono){
-                if($telefono['numero']){ // Añade el teléfono solo si tiene número
+                if($telefono['tipo'] && $telefono['numero']){
                     $sucursal->telefonos()->create([
+                        'sucursal_id' => $sucursal->id,
                         'tipo' => $telefono['tipo'],
-                        'numero' => $telefono['numero'],
+                        'numero' => $telefono['numero']
                     ]);
                 }
             }
