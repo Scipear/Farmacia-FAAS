@@ -314,6 +314,10 @@ Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function
         return view('analista.buscarPedidos', compact('BuscarP'));
     })->name('buscarP');
 
+    Route::get('analista/formPedido', function () {
+        return view('analista.formPedido');
+    });
+
     //Rutas para Gestionar compras
     Route::get('analista/compras', function () {
          return view('analista.compras');
@@ -323,8 +327,8 @@ Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function
         return view('analista.compraMedicina');
     });
 
-    Route::get('analista/formMedicina', function () {
-        return view('analista.formMedicina');
+    Route::get('analista/formCompraMedicina', function () {
+        return view('analista.formCompraMedicina');
     });
 
     Route::get('/buscarCompraM', function (Request $request) {

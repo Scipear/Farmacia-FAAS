@@ -25,7 +25,7 @@
         </form>
         </div>
 
-        <a  class="botonAg" href="formMedicina">Agregar +</a>
+        <a  class="botonAg" href="formCompraMedicina">Agregar +</a>
         <center>
             <table>
                 <tr>

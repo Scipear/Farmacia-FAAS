@@ -46,7 +46,7 @@
                     <td>Genvem</td>
                     <td>
                             <div class="buttonCont">
-                                <button>Editar</button>
+                                <button>Actualizar</button>
                             </div>
                     </td>
                 </tr>

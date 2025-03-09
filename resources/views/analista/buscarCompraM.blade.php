@@ -19,7 +19,8 @@
             <p>Mostrando resultados para: <strong>{{$BuscarCM}}</strong></p>
         </div>
 
-        <a  class="botonAg" href="analista/formMedicina">Agregar +</a>
+        <a  class="botonAg" href="analista/formCompraMedicina">Agregar +</a>
+        <center>
         <table>
                 <tr>
                     <th>Nombre</th>
@@ -38,6 +39,7 @@
                     <td>Genvem</td>
                 </tr>
             </table>
+        <center>
         @else
         <p>No ingresaste un término de búsqueda.</p>
         @endif

@@ -20,7 +20,10 @@
         <div class="container">
             <p>Mostrando resultados para: <strong>{{$BuscarC}}</strong></p>
         </div>
-            <table>
+
+        <a  class="botonPDF">Descargar PDF</a>
+        <center>
+        <table>
                 <tr>
                     <th>Identificador</th>
                     <th>Medicinas</th>
@@ -32,18 +35,20 @@
                 </tr>
                 <tr>
                     <td>Genvem</td>
-                    <td><a  class="botonVer" href="compraMedicina">Ver</a></td>
+                    <td><a  class="botonVer" href="analista/compraMedicina">Ver</a></td>
                     <td>Genvem</td>
                     <td>Genvem</td>
                     <td>Genvem</td>
                     <td>Genvem</td>
                     <td>
                             <div class="buttonCont">
-                                <button>Editar</button>
+                                <button>Actualizar</button>
                             </div>
                     </td>
                 </tr>
             </table>
+        </center>
+
         @else
         <p>No ingresaste un término de búsqueda.</p>
         @endif

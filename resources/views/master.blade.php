@@ -172,7 +172,7 @@
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
-            margin-right: 1450px;
+            margin-right: 1425px;
     }
 
     .botonVer{
@@ -198,7 +198,7 @@
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
-            margin-right: 1400px;
+            margin-right: 1425px;
     }
     
 
@@ -213,6 +213,10 @@
             cursor: pointer;
             text-decoration: none;
             margin-right: 10px;
+    }
+
+    .espacio{
+        margin-top: 40px;
     }
 
     /* .formElim{

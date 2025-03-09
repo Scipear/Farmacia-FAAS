@@ -19,7 +19,7 @@
         @csrf
 
         <label>PedidoID</label>
-        <input type="text" id =" nombre" name="nombre" required><br><br>
+        <input type="text" id ="nombre" name="nombre" required><br><br>
 
         <label>Fecha llegada</label>
         <input type="text" id= "precio" name="precio" required><br><br>

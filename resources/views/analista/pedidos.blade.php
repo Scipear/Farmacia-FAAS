@@ -23,29 +23,38 @@
         </form>
         </div>
         
+        <a  class="botonAg" href="formPedido">Crear pedido +</a><br>
+
+        <div class="espacio">
+        <a  class="botonPDF">Descargar PDF</a>
+        </div>
+
+
         <center>
             <table>
                 <tr>
-
-                <!-- CAMBIAR VALORES DE LA TABLA  -->
-                    <th>Identificador</th>
-                    <th>Medicinas</th>
-                    <th>Fecha de Llegada</th>
-                    <th>Precio a pagar</th>
-                    <th>Observación</th>
+                    <th>Sucursal</th>
+                    <th>Empleado</th>
+                    <th>Laboratorio</th>
+                    <th>Fecha de emisión</th>
+                    <th>Precio total</th>
+                    <th>Forma de pago</th>
                     <th>Status</th>
+                    <th>Observación</th>
                     <th>Opciones</th>
                 </tr>
                 <tr>
                     <td>Genvem</td>
-                    <td><a  class="botonVer" href="compraMedicina">Ver</a></td>
+                    <td>10</td>
+                    <td>Genvem</td>
+                    <td>Genvem</td>
                     <td>Genvem</td>
                     <td>Genvem</td>
                     <td>Genvem</td>
                     <td>Genvem</td>
                     <td>
                             <div class="buttonCont">
-                                <button>Editar</button>
+                                <button>Actualizar</button>
                             </div>
                     </td>
                 </tr>

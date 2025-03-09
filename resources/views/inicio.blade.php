@@ -6,6 +6,7 @@
 @yield('header', 'Farmacias FAAS')
 <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
         <li class="nav-item">
+            <!--ACOMODAR EL LOGIN PARA QUE VAYA AL LOGIN  -->
             <a class="nav-link" href="/login">Login</a>
         </li>  
 </ul>
