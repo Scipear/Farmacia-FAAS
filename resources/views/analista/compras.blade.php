@@ -19,7 +19,7 @@
         <div class="container">
         </div>
         <div>        
-            <form action="{{ route('buscarC') }}" method="GET">
+            <form action="/buscarC" method="GET">
             <input type="text" name="query" placeholder="Buscar compra...">
             <button type="submit">Buscar</button>
         </form>
@@ -30,26 +30,34 @@
             <table>
                 <tr>
                     <th>Identificador</th>
+                    <th>Sucursal</th>
+                    <th>Empleado</th>
+                    <th>Laboratorio</th>
                     <th>Medicinas</th>
-                    <th>Fecha de Llegada</th>
                     <th>Precio A Pagar</th>
+                    <th>Fecha de Llegada</th>
                     <th>Observación</th>
                     <th>Status</th>
                     <th>Opciones</th>
                 </tr>
-                <tr>
-                    <td>Genvem</td>
-                    <td><a  class="botonVer" href="compraMedicina">Ver</a></td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>
-                            <div class="buttonCont">
-                                <button>Actualizar</button>
-                            </div>
-                    </td>
-                </tr>
+                @foreach($compras as $compra)    
+                    <tr>
+                        <td>{{$compra->id}}</td>
+                        <td>{{$compra->pedido->sucursal->nombre}}</td>
+                        <td>{{$compra->pedido->empleado->nombre}} {{$compra->pedido->empleado->apellido}}</td>
+                        <td>{{$compra->pedido->laboratorio->nombre}}</td>
+                        <td><a  class="botonVer" href="/compra/{{$compra->id}}/medicinas">Ver</a></td>
+                        <td>{{$compra->precioPagar}}</td>
+                        <td>{{$compra->fechaLlegada}}</td>
+                        <td>{{$compra->observaciones}}</td>
+                        <td>{{$compra->status}}</td>
+                        <td>
+                                <div class="buttonCont">
+                                    <a  class="botonEd" href="/actualizarCompra/{{$compra->id}}">Actualizar</a>
+                                </div>
+                        </td>
+                    </tr>
+                @endforeach
             </table>
         </center>
 @endsection

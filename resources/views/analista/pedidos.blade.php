@@ -41,8 +41,8 @@
                     <th>Fecha de Emisión</th>
                     <th>Precio A Pagar</th>
                     <th>Forma de Pago</th>
-                    <th>Status</th>
                     <th>Observación</th>
+                    <th>Status</th>
                     <th>Opciones</th>
                 </tr>
                 @foreach ($pedidos as $pedido)    
@@ -55,8 +55,8 @@
                         <td>{{$pedido->fecha_emitida}}</td>
                         <td>{{$pedido->precioTotal}}</td>
                         <td>{{$pedido->tipoPago}}</td>
-                        <td>{{$pedido->status}}</td>
                         <td>{{$pedido->observaciones}}</td>
+                        <td>{{$pedido->status}}</td>
                         <td>
                                 <div class="buttonCont">
                                     <a  class="botonEd" href="/actualizarPedido/{{$pedido->id}}">Actualizar</a>

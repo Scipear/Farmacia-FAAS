@@ -79,9 +79,9 @@
                     });
                 }
 
-                var cantidadInput = document.createElement("input");
-                cantidadInput.type = "text";
-                cantidadInput.name = `medicinas[${medicinaIndex}][cantidad]`;
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = `medicinas[${medicinaIndex}][cantidad]`;
 
                 var medicinaLabel = document.createElement("label");
                 medicinaLabel.textContent = "Medicina y cantidad ";
@@ -92,7 +92,7 @@
                 contenedor.appendChild(medicinaLabel);
                 contenedor.appendChild(select);
                 contenedor.appendChild(cantidadLabel);
-                contenedor.appendChild(cantidadInput);
+                contenedor.appendChild(input);
                 contenedor.appendChild(document.createElement("br"));
                 contenedor.appendChild(document.createElement("br"));
 

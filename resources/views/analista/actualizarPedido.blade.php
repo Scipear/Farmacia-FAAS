@@ -15,7 +15,7 @@
 </header>
 
 @section('contenido')
-    <h1>Formulario de Pedido</h1>
+    <h1>Actualizando el Pedido con codigo {{$pedido->id}}</h1>
 
         <form method="POST" action="/pedido/{{$pedido->id}}">
             @csrf

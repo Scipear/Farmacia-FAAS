@@ -5,6 +5,10 @@
 <header>
     @yield('header', 'Farmacias FAAS')
     <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
+            <li class="nav-item">    
+                <a class="nav-link active" href="/analista/compras">Volver</a>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link active" href="/analista/inicioAnalista">Inicio</a>
             </li>
@@ -15,35 +19,34 @@
 </header>
 
 @section('contenido')
-<h1>Lista de Medicinas</h1>
+<h1>Lista de Medicinas de la Compra con codigo {{$compra->id}}</h1>
         <div class="container">
         </div>
-        <div>        
-            <form action="{{ route('buscarCompraM') }}" method="GET">
-            <input type="text" name="query" placeholder="Buscar medicina...">
-            <button type="submit">Buscar</button>
-        </form>
-        </div>
 
-        <a  class="botonAg" href="formCompraMedicina">Agregar +</a>
+        <a  class="botonAg" href="/analista/compra/{{$compra->id}}/formCompraMedicina">Agregar +</a>
         <center>
             <table>
                 <tr>
-                    <th>Nombre</th>
+                    <th>Medicamento</th>
                     <th>Laboratorio</th>
-                    <th>Tipo de presentación</th>
+                    <th>Presentación</th>
                     <th>Descripción</th>
-                    <th>Precio</th>
                     <th>Cantidad</th>
+                    <th>Precio</th>
                 </tr>
-                <tr>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                </tr>
+                @foreach($medicinas as $medicina)
+                    <tr>
+                        <td>{{$medicina->medicamento->nombre}}</td>
+                        <td>{{$medicina->laboratorio->nombre}}</td>
+                        <td>{{$medicina->presentacion->unidades}} {{$medicina->presentacion->tipo}} {{$medicina->presentacion->cantidad}} {{$medicina->presentacion->medida}}</td>
+                        <td>{{$medicina->descripcion}}</td>
+                        <td>{{$medicina->cantidad}}</td>
+                        <td>${{$medicina->precio}}</td>
+                        
+                        
+                    </tr>
+                @endforeach
+
             </table>
         </center>
 @endsection

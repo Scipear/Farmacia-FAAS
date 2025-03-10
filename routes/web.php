@@ -285,27 +285,10 @@ Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function
 
 
     //Rutas para Gestionar compras
-    Route::get('analista/compras', function () {
-         return view('analista.compras');
-     });
-
-     Route::get('analista/compraMedicina', function () {
-        return view('analista.compraMedicina');
-    });
-
-    Route::get('analista/formCompraMedicina', function () {
-        return view('analista.formCompraMedicina');
-    });
-
-    Route::get('/buscarCompraM', function (Request $request) {
-        $BuscarCM= $request->query('query');
-        return view('analista.buscarCompraM', compact('BuscarCM'));
-    })->name('buscarCompraM');
-
-    Route::get('/buscarC', function (Request $request) {
-        $BuscarC= $request->query('query');
-        return view('analista.buscarCompra', compact('BuscarC'));
-    })->name('buscarC');
+    Route::get('analista/compras', [CompraController::class, 'mostrarCompras']);
+    Route::get('actualizarCompra/{id}', [CompraController::class, 'editarCompra']);
+    Route::get('/analista/compra/{id}/formCompraMedicina', [CompraController::class, 'asignarMedicinas']);
+    Route::get('/buscarC', [CompraController::class, 'obtenerCompraID']);
 
     //Rutas para Ver cuentas por pagar
     Route::get('analista/cuentasxpagar', function () {

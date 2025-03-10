@@ -13,25 +13,24 @@
     </ul>
 </header>
 @section('contenido')
-<h1>Formulario de Compra</h1>
-    <form>
+<h1>Actualizando la Compra con codigo {{$compra->id}}</h1>
+    <form method="POST" action="/compra/{{$compra->id}}">
 
         @csrf
-
-        <label>PedidoID</label>
-        <input type="text" id ="nombre" name="nombre" required><br><br>
-
-        <label>Fecha llegada</label>
-        <input type="text" id= "precio" name="precio" required><br><br>
-
-        <label>Precio pagar</label>
-        <input type="text" id= "cantidad" name="cantidad" required><br><br>
-
-        <label>Observación</label>
-        <input type="text" id= "cantidad" name="cantidad" required><br><br>
+        @method('PUT')
 
         <label>Status</label>
-        <select></select><br><br>
+            <select id="status" name="status">
+                <option value="Pendiente" {{$compra->status == 'Pendiente' ? 'selected' : ''}}>Pendiente</option>
+                <option value="Por Pagar" {{$compra->status == 'Por Pagar' ? 'selected' : ''}}>Por Pagar</option>
+                <option value="Pagada" {{$compra->status == 'Pagada' ? 'selected' : ''}}>Pagada</option> 
+            </select><br><br>
+
+        <label>Fecha llegada</label>
+        <input type="text" id= "fechaLlegada" name="fechaLlegada" value={{$compra->fechaLlegada}}><br><br>
+
+        <label>Observación</label>
+        <input type="text" id= "observaciones" name="observaciones" value={{$compra->observaciones}}><br><br>
 
         <button>Enviar</button>
     </form>
