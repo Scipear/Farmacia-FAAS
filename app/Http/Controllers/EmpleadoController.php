@@ -108,7 +108,7 @@ class EmpleadoController extends Controller
 
         $cargos = Cargo::all();
         
-        if($cargo->nombre == "Administrdor General"){
+        if($cargo->nombre == "Administrador General"){
             $sucursales = Sucursal::all();
             
             return view('admin.formEmp', compact('cargos','sucursales'));
