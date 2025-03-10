@@ -2,10 +2,11 @@
 
 @section('titulo', 'Panel de Gerente')
 
+<header>
 @yield('header', 'Farmacias FAAS')
 <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
         <li class="nav-item">
-            <a class="nav-link active" href="/inicioGerente">Inicio</a>
+            <a class="nav-link active" href="/gerente/inicioGerente">Inicio</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
@@ -16,12 +17,6 @@
 @section('contenido')
     <h1>Información de Empleados</h1>
 
-    <!-- RUTA DE BUSQUEDA 
-    Route::get('/buscarEmpS', function (Request $request) {
-        $BuscarEmpS= $request->query('query');
-        return view('gerente.buscarEmpS', compact('BuscarEmpS'));
-    })->name('buscarEmpS');
-    -->
         <div>        
             <form action="{{ route('buscarEmpS') }}" method="GET">
             <input type="text" name="query" placeholder="Consultar empleados de una sucursal...">
@@ -29,23 +24,12 @@
         </form>
         </div>
 
-        <!-- RUTA PARA CREAR EMPLEADO
-        Route::get('gerente/formEmp', function () {
-            return view('gerente.formEmp');
-        });
-        
-        -->
-
         <a  class="botonAg" href="formEmp">Agregar +</a>
 
-        <!-- RUTA PARA CREAR FICHA HISTORICA
-        Route::get('gerente/fichaHist', function () {
-            return view('gerente.fichaHist');
-        });
-        
-        -->
+        <div class="espacio">
+        <a  class="botonRep" href="fichaHist">Generar ficha historica+</a> 
+        </div>
 
-        <a  class="botonRep" href="fichaHist">Generar ficha historica+</a>
 
         <center>
             <table>

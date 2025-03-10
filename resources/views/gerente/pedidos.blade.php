@@ -2,10 +2,11 @@
 
 @section('titulo', 'Panel de Gerente')
 
+<header>
 @yield('header', 'Farmacias FAAS')
 <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
         <li class="nav-item">
-            <a class="nav-link active" href="/inicioGerente">Inicio</a>
+            <a class="nav-link active" href="/gerente/inicioGerente">Inicio</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
@@ -16,14 +17,8 @@
 @section('contenido')
     <h1>Información de Pedidos</h1>
 
-    <!-- RUTA DE BUSQUEDA 
-    Route::get('/buscarPedS', function (Request $request) {
-        $BuscarPedS= $request->query('query');
-        return view('gerente.buscarPedS', compact('BuscarPedS'));
-    })->name('buscarPedS');
-    -->
         <div>        
-            <form action="{{ route('buscarComS') }}" method="GET">
+            <form action="{{ route('buscarPedS') }}" method="GET">
             <input type="text" name="query" placeholder="Consultar pedidos de una sucursal...">
             <button type="submit">Buscar</button>
         </form>

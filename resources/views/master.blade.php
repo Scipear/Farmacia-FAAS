@@ -81,7 +81,7 @@
             text-align: center;
             /* width: 90%; */
             border-collapse: collapse;
-            padding: 10px;
+            padding: 15px;
             margin: 60px; 
             border: none;
             border-radius: 5px;
@@ -178,7 +178,7 @@
     .botonVer{
             padding: 10px 20px;
             font-size: 16px;
-            background:rgb(42, 97, 67);
+            background: #29a15f;
             ;
             color: white;
             border: none;
@@ -191,7 +191,7 @@
     .botonPDF{
             padding: 10px 20px;
             font-size: 16px;
-            background:rgb(55, 41, 248);
+            background: #29a15f;
             ;
             color: white;
             border: none;
@@ -205,7 +205,7 @@
     .botonRep{
             padding: 10px 20px;
             font-size: 16px;
-            background:rgb(55, 41, 248);
+            background: #29a15f;
             ;
             color: white;
             border: none;
@@ -219,7 +219,7 @@
     .botonEd{
             padding: 10px 20px;
             font-size: 16px;
-            background:rgb(42, 97, 67);
+            background: #29a15f;
             ;
             color: white;
             border: none;

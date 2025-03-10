@@ -13,15 +13,10 @@
     </ul>
 </header>
 @section('contenido')
-        <h1>Información de los Laboratorios</h1>
+        <h1>Afiliar Laboratorios</h1>
 
-        <div>        
-            <form action="/buscarLab" method="GET">
-            <input type="text" name="query" placeholder="Buscar laboratorio...">
-            <button type="submit">Buscar</button>
-        </form>
-        </div>
-
+            <button>Afiliar +</button>
+            
         <center>
             <table>
                 <tr>
