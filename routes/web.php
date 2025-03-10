@@ -76,6 +76,7 @@ Route::put('/compra/{id}', [CompraController::class, 'actualizarCompra']); // Ru
 Route::get('/laboratorios', [LaboratorioController::class, 'mostrarLaboratorios']); //Ruta para obtener laboratorios
 Route::get('/laboratorio/{id}', [LaboratorioController::class, 'obtenerLaboratorioID']); // Ruta para obtener Laboratorios  x ID
 Route::get('/buscarLaboratorio', [LaboratorioController::class, 'buscarLaboratorio']); //Busca laboratorios por el nombre
+Route::get('/laboratorio/{id}/medicinas', [LaboratorioController::class, 'medicinasPorLaboratorio']);
 Route::post('/laboratorio', [LaboratorioController::class, 'crearLaboratorio']); // Ruta para crear medicinas
 Route::put('/laboratorio/{id}', [LaboratorioController::class, 'actualizarLaboratorio']); // Ruta para actualizar 
 Route::delete('/laboratorio/{id}', [LaboratorioController::class, 'eliminarLaboratorio']); // Ruta para eliminar 
@@ -271,25 +272,17 @@ Route::middleware([VerificarRol::class . ':Farmaceutico'])->group(function (){
 
 //Rutas de ANALISTA
 Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function (){
-    
     Route::get('/analista/inicioAnalista', function () {
         return view('analista.inicioanalista');
     });
 
 
     //Rutas para Gestionar pedidos
-    Route::get('/analista/pedidos', function () {
-        return view('analista.pedidos');
-    });
+    Route::get('/analista/pedidos', [PedidoController::class, 'mostrarPedidos']);
+    Route::get('/buscarP', [PedidoController::class, 'obtenerPedidoID']);
+    Route::get('/actualizarPedido/{id}', [PedidoController::class, 'editarPedido']);
+    Route::get('analista/formPedido', [PedidoController::class, 'formPedido']);
 
-    Route::get('/buscarP', function (Request $request) {
-        $BuscarP= $request->query('query');
-        return view('analista.buscarPedidos', compact('BuscarP'));
-    })->name('buscarP');
-
-    Route::get('analista/formPedido', function () {
-        return view('analista.formPedido');
-    });
 
     //Rutas para Gestionar compras
     Route::get('analista/compras', function () {

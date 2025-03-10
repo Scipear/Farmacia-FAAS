@@ -29,7 +29,7 @@ return new class extends Migration
             ->cascadeOnUpdateon()
             ->cascadeOnDelete();
             
-            $table->float('precioTotal');
+            $table->float('precioTotal')->nullable();
             $table->string('tipoPago');
             $table->string('status')->default("Pendiente");
             $table->text('observaciones')->nullable();

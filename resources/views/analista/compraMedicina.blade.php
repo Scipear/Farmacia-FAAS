@@ -15,7 +15,7 @@
 </header>
 
 @section('contenido')
-<h1>Información de Compras de Medicina</h1>
+<h1>Lista de Medicinas</h1>
         <div class="container">
         </div>
         <div>        

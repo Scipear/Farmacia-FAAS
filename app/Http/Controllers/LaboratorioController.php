@@ -134,10 +134,16 @@ class LaboratorioController extends Controller
 
     //Funcion para obtener todas las medicinas que distribuye un laboratorio 
 
-    public function  medicinasPorLaboratorio($laboratioId)
+    public function  medicinasPorLaboratorio($laboratorioId)
     {
-        $laboratorio = Laboratorio::where('laboratorio_id', $laboratioId)->get();
+        $laboratorio = Laboratorio::findOrFail($laboratorioId);
 
-        return $laboratorio->medicinas;
+        $medicinas = $laboratorio->medicinas->map(function ($medicina) {
+            $medicina->load(['medicamento', 'presentacion']); // Cargar las relaciones
+            $medicina->nombre_completo = $medicina->medicamento->nombre . ' ' . $medicina->presentacion->unidades . ' ' . $medicina->presentacion->tipo . ' ' . $medicina->presentacion->cantidad . ' ' . $medicina->presentacion->medida;
+            return $medicina;
+        });
+
+        return response()->json($medicinas);
     }
 }

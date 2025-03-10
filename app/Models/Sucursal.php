@@ -32,7 +32,7 @@ class Sucursal extends Model
     }
 
     public function laboratorios(){
-        return $this->belongsToMany(Laboratorio::class)->using(Sucursal_laboratorio::class)->withPivot('fecha_inicio', 'fecha_final');
+        return $this->belongsToMany(Laboratorio::class, 'sucursal_laboratorio', 'sucursal_id', 'laboratorio_id')->withPivot('fecha_inicio', 'fecha_final');
     }
 
     public function medicinas(){

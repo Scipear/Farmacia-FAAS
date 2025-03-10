@@ -17,23 +17,20 @@
 @section('contenido')
     <h1>Formulario de Pedido</h1>
 
-        <form>
+        <form method="POST" action="/pedido/{{$pedido->id}}">
             @csrf
-            <label>Sucursal</label>
-            <select></select><br><br>
-
-            <label>Empleado</label>
-            <select></select><br><br>
-
-            <label>Laboratorio</label>
-            <select></select><br><br>
+            @method('PUT')
 
             <label>Observación</label>
-            <input type="text" id= "observacion" name="observacion" required><br><br>
+            <input type="text" id= "observaciones" name="observaciones" value="{{$pedido->observaciones}}"><br><br>
 
-
-            <label>Forma de pago</label>
-            <input type="text" id= "formaPago" name="formaPago" required><br><br>
+            <label>Status</label>
+            <select id="status" name="status">
+                <option value="Pendiente" {{$pedido->status == 'Pendiente' ? 'selected' : ''}}>Pendiente</option>
+                <option value="Despachado" {{$pedido->status == 'Despachado' ? 'selected' : ''}}>Despachado</option>
+                <option value="Finalizado" {{$pedido->status == 'Finalizado' ? 'selected' : ''}}>Finalizado</option> 
+                <option value="Cancelado" {{$pedido->status == 'Cancelado' ? 'selected' : ''}}>Cancelado</option>
+            </select><br><br>
 
             <button>Enviar</button>
         </form>
