@@ -6,14 +6,28 @@ use App\Models\Compra;
 use App\Models\Medicina;
 use App\Models\Medicina_compra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CompraController extends Controller
 {
     // Obtiene todas las compras de la tabla
     public function mostrarCompras(){
-        $compras = Compra::all();
+        $user = Auth::user();
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleado->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
 
-        return view('analista.compras', compact('compras'));
+        $compras = Compra::whereHas('pedido', function ($query) use ($sucursal){
+            $query->where('sucursal_id', $sucursal->id);
+        })->get();
+
+        if($cargo->nombre == "Analista de Compra"){
+            return view('analista.compras', compact('compras'));
+
+        }else if($cargo->nombre == "Gerente"){
+            return view('gerente.compras', compact('compras'));
+        }
+
     }
 
     public function obtenerCompraID(Request $request){

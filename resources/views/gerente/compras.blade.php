@@ -11,7 +11,7 @@
             <a class="nav-link active" href="/gerente/inicioGerente">Inicio</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/logout">Cerrar Sesión</a>
         </li>  
 </ul>
 </header>
@@ -31,20 +31,36 @@
             <table>
                 <tr>
                     <th>Identificador</th>
-                    <th>PedidoID</th>
+                    <th>Sucursal</th>
+                    <th>Empleado</th>
+                    <th>Laboratorio</th>
+                    <th>Medicinas</th>
+                    <th>Precio A Pagar</th>
+                    <th>Forma de Pago</th>
                     <th>Fecha de Llegada</th>
-                    <th>Precio a Pagar</th>
                     <th>Observación</th>
                     <th>Status</th>
+                    <th>Opciones</th>
                 </tr>
-                <tr>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                </tr>
+                @foreach($compras as $compra)    
+                    <tr>
+                        <td>{{$compra->id}}</td>
+                        <td>{{$compra->pedido->sucursal->nombre}}</td>
+                        <td>{{$compra->pedido->empleado->nombre}} {{$compra->pedido->empleado->apellido}}</td>
+                        <td>{{$compra->pedido->laboratorio->nombre}}</td>
+                        <td><a  class="botonVer" href="/compra/{{$compra->id}}/medicinas">Ver</a></td>
+                        <td>{{$compra->precioPagar}}</td>
+                        <td>{{$compra->pedido->tipoPago}}</td>
+                        <td>{{$compra->fechaLlegada}}</td>
+                        <td>{{$compra->observaciones}}</td>
+                        <td>{{$compra->status}}</td>
+                        <td>
+                                <div class="buttonCont">
+                                    <a  class="botonEd" href="/actualizarCompra/{{$compra->id}}">Actualizar</a>
+                                </div>
+                        </td>
+                    </tr>
+                @endforeach
             </table>
         </center>
 @endsection

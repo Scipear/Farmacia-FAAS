@@ -332,9 +332,7 @@ Route::middleware([VerificarRol::class . ':Gerente'])->group(function (){
     })->name('buscarPedS');
 
     //COMPRAS
-    Route::get('/gerente/compras', function () {
-        return view('gerente.compras');
-    }); 
+    Route::get('/gerente/compras', [CompraController::class, 'mostrarCompras']); 
 
     Route::get('/buscarCompraS', function (Request $request) {
         $BuscarComS= $request->query('query');
