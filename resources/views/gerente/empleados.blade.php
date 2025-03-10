@@ -17,13 +17,6 @@
 @section('contenido')
     <h1>Información de Empleados</h1>
 
-        <div>        
-            <form action="{{ route('buscarEmpS') }}" method="GET">
-            <input type="text" name="query" placeholder="Consultar empleados de una sucursal...">
-            <button type="submit">Buscar</button>
-        </form>
-        </div>
-
         <a  class="botonAg" href="formEmp">Agregar +</a>
 
         <center>

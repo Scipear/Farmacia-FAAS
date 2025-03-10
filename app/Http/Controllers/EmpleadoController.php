@@ -74,7 +74,7 @@ class EmpleadoController extends Controller
         $cargos = Cargo::all();
         $sucursales = Sucursal::all();
 
-        if($cargo->nombre == "Administrdor General"){   
+        if($cargo->nombre == "Administrador General"){   
             return view('admin.editFormEmp', compact('empleado', 'cargos', 'sucursales'));
 
         }else if($cargo->nombre == "Gerente"){
@@ -173,7 +173,7 @@ class EmpleadoController extends Controller
                         'numero' => $telefono['numero']
                     ]);
                 }
-                }
+            }
         }
         
         if($cargo->nombre == 'Administrador General'){
@@ -200,6 +200,9 @@ class EmpleadoController extends Controller
             'correo' => "required|unique:empleados,correo,{$id}",
             'direccion' => 'required',
             'status' => 'required',
+            'telefonos' => 'required|array',
+            'telefonos.0.tipo' => 'required',
+            'telefonos.0.numero' => 'required',
             'cargo' => 'required|exists:cargos,id',
             'sucursal' => 'required|exists:sucursales,id',
         ]);
@@ -226,8 +229,20 @@ class EmpleadoController extends Controller
         } /* Un empleado solo puede trabajar en una sucursal a la vez por lo que si al actualizar
         un empleado viene con una nueva sucursal realiza el mismo proceso que con el cargo */
 
+        $empleado->telefonos()->delete();
 
-        
+        if($request->has('telefonos')){
+            foreach($request->telefonos as $telefono){
+                if($telefono['tipo'] && $telefono['numero']){
+                    $empleado->telefonos()->create([
+                        'empleado_id' => $empleado->id,
+                        'tipo' => $telefono['tipo'],
+                        'numero' => $telefono['numero']
+                    ]);
+                }
+            }
+        }
+
         $empleado->update($request->only(['cedula', 'nombre', 'apellido', 
         'correo', 'direccion', 'status']));
 

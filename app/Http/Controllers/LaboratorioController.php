@@ -98,8 +98,8 @@ class LaboratorioController extends Controller
             'direccion' => 'required',
             'correo' => "required|unique:laboratorios,correo,{$laboratorio->id}",
             'telefonos' => 'required|array',
-            'telefonos.*.tipo' => 'required',
-            'telefonos.*.numero' => 'required',
+            'telefonos.0.tipo' => 'required',
+            'telefonos.0.numero' => 'required',
         ]);
 
         $laboratorio->update($request->only(['nombre', 'ciudad', 'direccion', 'correo']));
