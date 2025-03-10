@@ -108,7 +108,7 @@ class EmpleadoSeeder extends Seeder
 
             $i = $i + 1;
 
-            if($i == 4){
+            if($i == 5){
                 $i = 1;
                 $j = $j + 1;
             }
