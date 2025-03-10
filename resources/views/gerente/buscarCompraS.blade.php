@@ -15,28 +15,21 @@
 </header>
 
 @section('contenido')
-    <h1>Información de Cuentas por pagar</h1>
+    <h1>Información de Compras de una Sucursal</h1>
 
-    <!-- RUTA DE BUSQUEDA 
-    Route::get('/buscarCP', function (Request $request) {
-        $BuscarCP= $request->query('query');
-        return view('gerente.buscarCuentaxPagar', compact('BuscarCP'));
-    })->name('buscarCP');
-    -->
-        <div>        
-            <form action="{{ route('buscarCP') }}" method="GET">
-            <input type="text" name="query" placeholder="Buscar cuenta por pagar...">
-            <button type="submit">Buscar</button>
-        </form>
+    @if($BuscarComS)
+        <div class="container">
+            <p>Mostrando resultados para: <strong>{{$BuscarComS}}</strong></p>
         </div>
 
+        <a  class="botonPDF">Descargar PDF</a>
         <center>
             <table>
                 <tr>
                     <th>Identificador</th>
+                    <th>PedidoID</th>
                     <th>Fecha de Llegada</th>
                     <th>Precio a Pagar</th>
-                    <th>Forma de Pago</th>
                     <th>Observación</th>
                     <th>Status</th>
                 </tr>
@@ -50,4 +43,7 @@
                 </tr>
             </table>
         </center>
+        @else
+        <p>No ingresaste un término de búsqueda.</p>
+        @endif
 @endsection

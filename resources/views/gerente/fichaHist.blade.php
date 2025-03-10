@@ -15,34 +15,19 @@
 </header>
 
 @section('contenido')
-    <h1>Información de Cuentas por pagar</h1>
+    <h1>Ficha historica de empleados</h1>
 
-    <!-- RUTA DE BUSQUEDA 
-    Route::get('/buscarCP', function (Request $request) {
-        $BuscarCP= $request->query('query');
-        return view('gerente.buscarCuentaxPagar', compact('BuscarCP'));
-    })->name('buscarCP');
-    -->
-        <div>        
-            <form action="{{ route('buscarCP') }}" method="GET">
-            <input type="text" name="query" placeholder="Buscar cuenta por pagar...">
-            <button type="submit">Buscar</button>
-        </form>
-        </div>
-
+    <p>FICHA HISTORICA EMPLEADO CARGO</p>
+        
         <center>
             <table>
                 <tr>
-                    <th>Identificador</th>
-                    <th>Fecha de Llegada</th>
-                    <th>Precio a Pagar</th>
-                    <th>Forma de Pago</th>
-                    <th>Observación</th>
-                    <th>Status</th>
+                    <th>CargoID</th>
+                    <th>EmpleadoID</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha fin</th>
                 </tr>
                 <tr>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
                     <td>Genvem</td>
                     <td>Genvem</td>
                     <td>Genvem</td>
@@ -50,4 +35,25 @@
                 </tr>
             </table>
         </center>
+
+        <p>FICHA HISTORICA EMPLEADO SUCURSAL</p>
+
+        <center>
+            <table>
+            <tr>
+                    <th>SucursalID</th>
+                    <th>EmpleadoID</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha fin</th>
+                </tr>
+                <tr>
+                    <td>Genvem</td>
+                    <td>Genvem</td>
+                    <td>Genvem</td>
+                    <td>Genvem</td>
+                </tr>
+            </table>
+        </center>
+
+
 @endsection

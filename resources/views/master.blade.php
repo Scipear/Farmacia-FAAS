@@ -81,7 +81,7 @@
             text-align: center;
             /* width: 90%; */
             border-collapse: collapse;
-            padding: 10px;
+            padding: 15px;
             margin: 60px; 
             border: none;
             border-radius: 5px;
@@ -189,6 +189,20 @@
     }
 
     .botonPDF{
+            padding: 10px 20px;
+            font-size: 16px;
+            background: #29a15f;
+            ;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-right: 1425px;
+    }
+
+
+    .botonRep{
             padding: 10px 20px;
             font-size: 16px;
             background: #29a15f;

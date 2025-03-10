@@ -15,30 +15,31 @@
 </header>
 
 @section('contenido')
-    <h1>Información de Cuentas por pagar</h1>
+    <h1>Información de Empleados</h1>
 
-    <!-- RUTA DE BUSQUEDA 
-    Route::get('/buscarCP', function (Request $request) {
-        $BuscarCP= $request->query('query');
-        return view('gerente.buscarCuentaxPagar', compact('BuscarCP'));
-    })->name('buscarCP');
-    -->
         <div>        
-            <form action="{{ route('buscarCP') }}" method="GET">
-            <input type="text" name="query" placeholder="Buscar cuenta por pagar...">
+            <form action="{{ route('buscarEmpS') }}" method="GET">
+            <input type="text" name="query" placeholder="Consultar empleados de una sucursal...">
             <button type="submit">Buscar</button>
         </form>
         </div>
+
+        <a  class="botonAg" href="formEmp">Agregar +</a>
+
+        <div class="espacio">
+        <a  class="botonRep" href="fichaHist">Generar ficha historica+</a> 
+        </div>
+
 
         <center>
             <table>
                 <tr>
                     <th>Identificador</th>
-                    <th>Fecha de Llegada</th>
-                    <th>Precio a Pagar</th>
-                    <th>Forma de Pago</th>
-                    <th>Observación</th>
-                    <th>Status</th>
+                    <th>Nombre</th>
+                    <th>Cedula</th>
+                    <th>Apellido</th>
+                    <th>Correo</th>
+                    <th>Dirección</th>
                 </tr>
                 <tr>
                     <td>Genvem</td>

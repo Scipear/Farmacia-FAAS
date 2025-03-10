@@ -20,41 +20,6 @@
             <h1>Bienvenido al Panel de Gerente </h1>
             <p>¡Has iniciado sesión como gerente!</p><br>
         </div>
-
-    <!-- RUTAS PARA COLOCAR EN GERENTE
-    
-    //INICIO
-    Route::get('/gerente/inicioGerente', function () {
-        return view('gerente.inicioGerente');
-    }); 
-    
-    //EMPLEADOS
-    Route::get('/gerente/empleados', function () {
-        return view('gerente.empleados');
-    }); 
-
-    //PEDIDOS
-    Route::get('/gerente/pedidos', function () {
-        return view('gerente.pedidos');
-    }); 
-
-    //COMPRAS
-    Route::get('/gerente/compras', function () {
-        return view('gerente.compras');
-    }); 
-
-    //STOCK
-        Route::get('/gerente/laboratorios, function () {
-        return view('gerente.laboratorios');
-    }); 
-
-    //CUENTAS POR PAGAR
-    Route::get('/gerente/cuentasxpagar', function () {
-        return view('gerente.cuentasxpagar');
-    }); 
-
-    
-    -->
     
     <a class="botonIr" href="/gerente/empleados">Gestionar empleados</a><br><br><br>
 
@@ -63,6 +28,10 @@
     <a class="botonIr" href="/gerente/compras">Gestionar compras</a><br><br><br>
 
     <a class="botonIr" href="/gerente/laboratorios">Gestionar laboratorios</a><br><br><br>
+
+    <a class="botonIr" href="/gerente/laboratoriosAfi">Laboratorios afiliados</a><br><br><br>
+
+    <a class="botonIr" href="/gerente/afiliarlab">Afiliar labortorio</a><br><br><br>
 
     <a class="botonIr" href="/gerente/cuentasxpagar">Ver cuentas por pagar</a><br><br><br>
 

@@ -13,7 +13,7 @@
     </ul>
 </header>
 @section('contenido')
-    <h1>Actualizando Medicamento {{$medicamento-nombre}}</h1>
+    <h1>Actualizando Medicamento {{$medicamento->nombre}}</h1>
 
     <form method="POST" action="/medicamento/{{$medicamento->id}}">
         @csrf

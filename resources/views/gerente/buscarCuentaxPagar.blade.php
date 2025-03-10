@@ -2,10 +2,11 @@
 
 @section('titulo', 'Panel de Gerente')
 
+<header>
 @yield('header', 'Farmacias FAAS')
 <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
         <li class="nav-item">
-            <a class="nav-link active" href="/inicioGerente">Inicio</a>
+            <a class="nav-link active" href="/gerente/inicioGerente">Inicio</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/login">Login</a>
@@ -14,16 +15,18 @@
 </header>
 
 @section('contenido')
-<h1>Información de las Cuentas por pagar</h1>
+<h1>Información de Cuentas por pagar</h1>
         @if($BuscarCP)
         <div class="container">
             <p>Mostrando resultados para: <strong>{{$BuscarCP}}</strong></p>
         </div>
-            <table>
+        <center>
+        <table>
                 <tr>
                     <th>Identificador</th>
                     <th>Fecha de Llegada</th>
                     <th>Precio a Pagar</th>
+                    <th>Forma de Pago</th>
                     <th>Observación</th>
                     <th>Status</th>
                 </tr>
@@ -33,8 +36,10 @@
                     <td>Genvem</td>
                     <td>Genvem</td>
                     <td>Genvem</td>
+                    <td>Genvem</td>
                 </tr>
             </table>
+        </center>
         @else
         <p>No ingresaste un término de búsqueda.</p>
         @endif

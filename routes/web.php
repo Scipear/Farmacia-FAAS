@@ -318,7 +318,10 @@ Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function
     })->name('buscarCP');
 });
 
+
+//RUTAS DE GERENTE
 Route::middleware([VerificarRol::class . ':Gerente'])->group(function (){
+
     Route::get('/gerente/inicioGerente', function () {
         return view('gerente.inicioGerente');
     }); 
@@ -328,25 +331,71 @@ Route::middleware([VerificarRol::class . ':Gerente'])->group(function (){
         return view('gerente.empleados');
     }); 
 
+    Route::get('/buscarEmpS', function (Request $request) {
+         $BuscarEmpS= $request->query('query');
+         return view('gerente.buscarEmpS', compact('BuscarEmpS'));
+    })->name('buscarEmpS');
+
+    Route::get('gerente/fichaHist', function () {
+        return view('gerente.fichaHist');
+    });
+
+    Route::get('gerente/formEmp', function () {
+        return view('gerente.formEmp');
+    });
+
     //PEDIDOS
     Route::get('/gerente/pedidos', function () {
         return view('gerente.pedidos');
     }); 
+
+    Route::get('/buscarPedS', function (Request $request) {
+        $BuscarPedS= $request->query('query');
+        return view('gerente.buscarPedS', compact('BuscarPedS'));
+    })->name('buscarPedS');
 
     //COMPRAS
     Route::get('/gerente/compras', function () {
         return view('gerente.compras');
     }); 
 
+    Route::get('/buscarCompraS', function (Request $request) {
+        $BuscarComS= $request->query('query');
+        return view('gerente.buscarCompraS', compact('BuscarComS'));
+    })->name('buscarCompraS');
+
     //STOCK
-        Route::get('/gerente/laboratorios', function () {
+    Route::get('/gerente/laboratorios', function () {
         return view('gerente.laboratorios');
     }); 
+
+    Route::get('/buscarLab', function (Request $request) {
+    $BuscarL= $request->query('query');
+    return view('gerente.buscarLab', compact('BuscarL'));
+    })->name('buscarLab');
+
+    Route::get('/gerente/laboratoriosAfi', function () {
+        return view('gerente.laboratoriosAfi');
+    }); 
+
+    Route::get('/gerente/afiliarlab', function () {
+        return view('gerente.afiliarlab');
+    }); 
+
+    Route::get('gerente/formLab', function () {
+        return view('gerente.formLab');
+    });
 
     //CUENTAS POR PAGAR
     Route::get('/gerente/cuentasxpagar', function () {
         return view('gerente.cuentasxpagar');
     }); 
+
+    Route::get('/buscarCP', function (Request $request) {
+        $BuscarCP= $request->query('query');
+        return view('gerente.buscarCuentaxPagar', compact('BuscarCP'));
+    })->name('buscarCP');
+
 });
 
 //Get:Redirigir hacia pagina

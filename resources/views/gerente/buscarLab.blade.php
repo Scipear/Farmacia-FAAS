@@ -19,39 +19,23 @@
             <p>Mostrando resultados para: <strong>{{$BuscarL}}</strong></p>
         </div>
 
-        <a  class="botonAg" href="/gerente/formLab">Afiliar +</a>
-
         <center>
-            <table>
+        <table>
                 <tr>
                     <th>Nombre</th>
-                    <th>Sucursal</th>
-                    <th>Opción</th>
+                    <th>Telefono(s)</th>
+                    <th>Ciudad</th>
+                    <th>Dirección</th>
+                    <th>Correo</th>
                 </tr>
 
                 <tr>
-                    <td>{{$laboratorio->nombre}}</td>
+                    <td>gfdfgf</td>
                     <td>Lomalinfda</td>
-                    <td>
-                        <div class="buttonCont">
-                        <a  class="botonEd" href="/editarLaboratorio/{{$laboratorio->id}}">Editar</a>
-
-                            <button popovertarget="popup{{$laboratorio->id}}">Desafiliar</button>
-
-                            <div popover id="popup{{$laboratorio->id}}">
-                                ¿Estás seguro que quieres eliminar este registro?<br><br>
-                                <form method="POST" action="/laboratorio/{{$laboratorio->id}}">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button popovertarget="popup{{$laboratorio->id}}">Aceptar</button>
-                                </form>
-                                <button popovertarget="popup{{$laboratorio->id}}">Desafiliar</button>
-                            </div>
-                        </div>
-                    </td>
+                    <td>gfdfgf</td>
+                    <td>Lomalinfda</td>
+                    <td>Lomalinfda</td>
                 </tr>
-                @endforeach
             </table>
         </center>
         @else
