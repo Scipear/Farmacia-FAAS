@@ -10,8 +10,16 @@ class Compra extends Model
     use HasFactory;
 
     protected $table = 'compras';
-    protected $fillable = ['pedido_id', 'precioPagar', 'observaciones', 'status', 'fechaLlegada'];
+    protected $fillable = ['pedido_id', 'observaciones', 'status'];
     public $timestamps = false;
+
+    public function setStatusAttribute($value){
+        $this->attributes['status'] = $value;
+
+        if($value === 'Pagada'){
+            $this->attributes['fechaLlegada'] = now();
+        }
+    }
 
     public function pedido()
     {

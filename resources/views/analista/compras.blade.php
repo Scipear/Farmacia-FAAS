@@ -35,6 +35,7 @@
                     <th>Laboratorio</th>
                     <th>Medicinas</th>
                     <th>Precio A Pagar</th>
+                    <th>Forma de Pago</th>
                     <th>Fecha de Llegada</th>
                     <th>Observación</th>
                     <th>Status</th>
@@ -48,6 +49,7 @@
                         <td>{{$compra->pedido->laboratorio->nombre}}</td>
                         <td><a  class="botonVer" href="/compra/{{$compra->id}}/medicinas">Ver</a></td>
                         <td>{{$compra->precioPagar}}</td>
+                        <td>{{$compra->pedido->tipoPago}}</td>
                         <td>{{$compra->fechaLlegada}}</td>
                         <td>{{$compra->observaciones}}</td>
                         <td>{{$compra->status}}</td>

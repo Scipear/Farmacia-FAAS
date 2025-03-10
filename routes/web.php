@@ -291,14 +291,8 @@ Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function
     Route::get('/buscarC', [CompraController::class, 'obtenerCompraID']);
 
     //Rutas para Ver cuentas por pagar
-    Route::get('analista/cuentasxpagar', function () {
-        return view('analista.cuentasxpagar');
-    });
-
-    Route::get('/buscarCP', function (Request $request) {
-        $BuscarCP= $request->query('query');
-        return view('analista.buscarCuentasxPagar', compact('BuscarCP'));
-    })->name('buscarCP');
+    Route::get('/analista/cuentasxpagar', [CompraController::class, 'obtenerCuentasPorPagar']);
+    Route::get('/buscarCuentaP', [CompraController::class, 'buscarCuentas']);
 });
 
 

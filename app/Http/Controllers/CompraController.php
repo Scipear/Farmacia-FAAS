@@ -24,6 +24,12 @@ class CompraController extends Controller
         return view('analista.compras', compact('compras'));
     }
 
+    public function obtenerCuentasPorPagar(){
+        $cuentas = Compra::where('status', 'Por Pagar')->get();
+
+        return view('analista.cuentasxpagar', compact('cuentas'));
+    }
+
     public function editarCompra($id){
         $compra = Compra::findOrFail($id);
 
@@ -65,7 +71,6 @@ class CompraController extends Controller
         $request->validate([
             'observaciones' => 'nullable',
             'status' => 'required',
-            'fechaLlegada' => 'nullable',
         ]); // Validaciones para los campos del registro
 
         $compra->update($request->all());

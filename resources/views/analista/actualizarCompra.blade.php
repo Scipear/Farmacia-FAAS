@@ -26,9 +26,6 @@
                 <option value="Pagada" {{$compra->status == 'Pagada' ? 'selected' : ''}}>Pagada</option> 
             </select><br><br>
 
-        <label>Fecha llegada</label>
-        <input type="text" id= "fechaLlegada" name="fechaLlegada" value={{$compra->fechaLlegada}}><br><br>
-
         <label>Observación</label>
         <input type="text" id= "observaciones" name="observaciones" value={{$compra->observaciones}}><br><br>
 

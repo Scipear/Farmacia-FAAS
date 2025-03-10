@@ -18,30 +18,32 @@
 <h1>Información de las Cuentas por Pagar</h1>
         <div class="container">
         </div>
-        <div>        
-            <form action="{{ route('buscarCP') }}" method="GET">
-            <input type="text" name="query" placeholder="Buscar cuenta por pagar...">
-            <button type="submit">Buscar</button>
-        </form>
-        </div>
-
-            <!-- <a  class="botonAg" href="/admin/formMedicamento">Agregar +</a> -->
-        <center>
-            <table>
-                <tr>
-                    <th>Identificador</th>
-                    <th>Fecha de Llegada</th>
-                    <th>Precio a Pagar</th>
-                    <th>Observación</th>
-                    <th>Status</th>
-                </tr>
-                <tr>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                </tr>
-            </table>
-        </center>
+            <center>
+                <table>
+                    <tr>
+                        <th>Identificador</th>
+                        <th>Sucursal</th>
+                        <th>Empleado</th>
+                        <th>Laboratorio</th>
+                        <th>Precio A Pagar</th>
+                        <th>Fecha de Llegada</th>
+                        <th>Observación</th>
+                        <th>Status</th>
+                        <th>Opciones</th>
+                    </tr>
+                    @foreach($cuentas as $cuenta)    
+                        <tr>
+                            <td>{{$cuenta->id}}</td>
+                            <td>{{$cuenta->pedido->sucursal->nombre}}</td>
+                            <td>{{$cuenta->pedido->empleado->nombre}} {{$cuenta->pedido->empleado->apellido}}</td>
+                            <td>{{$cuenta->pedido->laboratorio->nombre}}</td>
+                            <td>{{$cuenta->precioPagar}}</td>
+                            <td>{{$cuenta->fechaLlegada}}</td>
+                            <td>{{$cuenta->pedido->tipoPago}}</td>
+                            <td>{{$cuenta->observaciones}}</td>
+                            <td>{{$cuenta->status}}</td>
+                        </tr>
+                    @endforeach
+                </table>
+            </center>
 @endsection
