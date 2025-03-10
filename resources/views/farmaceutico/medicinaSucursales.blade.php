@@ -24,7 +24,6 @@
         <div class="container">
         </div>
 
-        <a class="botonAg" href="/farmaceutico/{{$medicina->id}}/formMedicinaSucursal">Agregar +</a>
         <center>
             <table>
                 <tr>
