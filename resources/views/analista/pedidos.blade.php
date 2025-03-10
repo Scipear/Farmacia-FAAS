@@ -26,38 +26,37 @@
         <a  class="botonAg" href="formPedido">Crear pedido +</a><br>
 
         <div class="espacio">
-        <a  class="botonPDF">Descargar PDF</a>
+        <a class="botonPDF">Descargar PDF </a> 
         </div>
-
-
-        <center>
-            <table>
-                <tr>
-                    <th>Sucursal</th>
-                    <th>Empleado</th>
-                    <th>Laboratorio</th>
-                    <th>Fecha de emisión</th>
-                    <th>Precio total</th>
-                    <th>Forma de pago</th>
-                    <th>Status</th>
-                    <th>Observación</th>
-                    <th>Opciones</th>
-                </tr>
-                <tr>
-                    <td>Genvem</td>
-                    <td>10</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>
-                            <div class="buttonCont">
-                                <button>Actualizar</button>
-                            </div>
-                    </td>
-                </tr>
-            </table>
-        </center>
+        
+            <center>
+                <table>
+                    <tr>
+                        <th>Sucursal</th>
+                        <th>Empleado</th>
+                        <th>Laboratorio</th>
+                        <th>Fecha de emisión</th>
+                        <th>Precio total</th>
+                        <th>Forma de pago</th>
+                        <th>Status</th>
+                        <th>Observación</th>
+                        <th>Opciones</th>
+                    </tr>
+                    <tr>
+                        <td>Genvem</td>
+                        <td>10</td>
+                        <td>Genvem</td>
+                        <td>Genvem</td>
+                        <td>Genvem</td>
+                        <td>Genvem</td>
+                        <td>Genvem</td>
+                        <td>Genvem</td>
+                        <td>
+                                <div class="buttonCont">
+                                    <button>Actualizar</button>
+                                </div>
+                        </td>
+                    </tr>
+                </table>
+            </center>
 @endsection
