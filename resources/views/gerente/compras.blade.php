@@ -21,7 +21,7 @@
 
 
         <div>        
-            <form action="{{ route('buscarCompraS') }}" method="GET">
+            <form action="/buscarCompraS" method="GET">
             <input type="text" name="query" placeholder="Consultar compras de una sucursal...">
             <button type="submit">Buscar</button>
         </form>

@@ -14,17 +14,38 @@ class PedidoController extends Controller
 {
     // Obtiene todos los pedidos de la tabla
     public function mostrarPedidos(){
-        $pedidos = Pedido::all();
+        $user = Auth::user();
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleado->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
 
-        return view('analista.pedidos', compact('pedidos'));
+        $pedidos = Pedido::where('sucursal_id', $sucursal->id)->get();
+
+        if($cargo->nombre == "Analista de Compra"){
+            return view('analista.pedidos', compact('pedidos'));
+
+        }else if($cargo->nombre == "Gerente"){
+            return view('gerente.pedidos', compact('pedidos'));
+        }
     }
 
     public function obtenerPedidoID(Request $request){
+        $user = Auth::user();
         $query = $request->input('query');
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleado->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
 
-        $pedidos = Pedido::where('id', 'LIKE', '%' . $query . '%')->get();
-        
-        return view('analista.pedidos', compact('pedidos'));
+        $pedidos = Pedido::where('sucursal_id', $sucursal->id)
+        ->where('id', 'LIKE', '%' . $query . '%')
+        ->get();
+
+        if($cargo->nombre == "Analista de Compra"){
+            return view('analista.pedidos', compact('pedidos'));
+
+        }else if($cargo->nombre == "Gerente"){
+            return view('gerente.pedidos', compact('pedidos'));
+        }
     }
 
     public function editarPedido($id){

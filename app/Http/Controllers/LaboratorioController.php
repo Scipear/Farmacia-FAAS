@@ -5,13 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Laboratorio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LaboratorioController extends Controller
 {
     public function mostrarLaboratorios()
     {
         $laboratorios = Laboratorio::all();
-        return view('admin.laborat', compact('laboratorios'));
+        
+        $user = Auth::user();
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleado->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
+
+        if($cargo->nombre == "Administrador General"){
+            return view('admin.laborat', compact('laboratorios'));
+
+        }else if($cargo->nombre == "Gerente"){
+            return view('gerente.laboratorios', compact('laboratorios', 'sucursal'));
+        }
     }
 
     public function obtenerLaboratorioID($id)
@@ -22,11 +34,23 @@ class LaboratorioController extends Controller
     }
 
     public function buscarLaboratorio(Request $request){
+
         $query = $request->input('query');
+
+        $user = Auth::user();
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleado->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
 
         $laboratorios = Laboratorio::where('nombre', 'LIKE', '%' . $query . '%')->get();
 
-        return view('admin.laborat', compact('laboratorios'));
+        if($cargo->nombre == "Administrador General"){
+            return view('admin.laborat', compact('laboratorios'));
+
+        }else if($cargo->nombre == "Gerente"){
+            return view('gerente.laboratorios', compact('laboratorios', 'sucursal'));
+            
+        }
     }
 
     // Crea un nuevo registro de laboratorio a traves de una peticion
@@ -95,6 +119,20 @@ class LaboratorioController extends Controller
         }
 
         return redirect('/admin/laborat');
+    }
+
+    public function afiliarSucursal($laboratorioId, $sucursalId){
+        $laboratorio = Laboratorio::findOrFail($laboratorioId);
+        $laboratorio->sucursales()->attach($sucursalId);
+
+        return redirect()->back();
+    }
+
+    public function desafiliarSucursal($laboratorioId, $sucursalId){
+        $laboratorio = Laboratorio::findOrFail($laboratorioId);
+        $laboratorio->sucursales()->updateExistingPivot($sucursalId, ['fecha_final' => now()]);
+
+        return redirect()->back();
     }
 
     public function eliminarLaboratorio($id){

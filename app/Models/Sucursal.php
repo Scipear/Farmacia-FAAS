@@ -28,7 +28,7 @@ class Sucursal extends Model
     // relaciones muchos a muchos
 
     public function empleados(){
-        return $this->belongsToMany(Empleado::class)->using(Empleado_sucursal::class)->withPivot('fecha_inicio', 'fecha_salida');
+        return $this->belongsToMany(Empleado::class, 'empleado_sucursal', 'sucursal_id', 'empleado_id')->withPivot('fecha_inicio', 'fecha_salida');
     }
 
     public function laboratorios(){

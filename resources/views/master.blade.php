@@ -201,6 +201,13 @@
             margin-right: 1425px;
     }
 
+        p {
+            color: rgb(0, 0, 0);
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
 
     .botonRep{
             padding: 10px 20px;

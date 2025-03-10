@@ -24,6 +24,7 @@ use App\Http\Controllers\SucursalController;
 use App\Http\Controllers\TelefonoEmpleadoController;
 use App\Http\Middleware\VerificarRol;
 use App\Models\AccionTerapeutica;
+use App\Models\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -272,10 +273,7 @@ Route::middleware([VerificarRol::class . ':Farmaceutico'])->group(function (){
 
 //Rutas de ANALISTA
 Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function (){
-    Route::get('/analista/inicioAnalista', function () {
-        return view('analista.inicioanalista');
-    });
-
+    Route::get('/analista/inicioAnalista', [EmpleadoController::class, 'obtenerSucursal']);
 
     //Rutas para Gestionar pedidos
     Route::get('/analista/pedidos', [PedidoController::class, 'mostrarPedidos']);
@@ -298,78 +296,36 @@ Route::middleware([VerificarRol::class . ':Analista de Compra'])->group(function
 
 //RUTAS DE GERENTE
 Route::middleware([VerificarRol::class . ':Gerente'])->group(function (){
-
-    Route::get('/gerente/inicioGerente', function () {
-        return view('gerente.inicioGerente');
-    }); 
+    Route::get('/gerente/inicioGerente', [EmpleadoController::class, 'obtenerSucursal']); 
     
     //EMPLEADOS
-    Route::get('/gerente/empleados', function () {
-        return view('gerente.empleados');
-    }); 
+    Route::get('/gerente/empleados', [EmpleadoController::class, 'mostrarEmpleados']);
+    Route::get('/editarEmpleado/{id}', [EmpleadoController::class, 'obtenerEmpleadoID']); 
 
     Route::get('/buscarEmpS', function (Request $request) {
          $BuscarEmpS= $request->query('query');
          return view('gerente.buscarEmpS', compact('BuscarEmpS'));
     })->name('buscarEmpS');
 
-    Route::get('gerente/fichaHist', function () {
-        return view('gerente.fichaHist');
-    });
-
-    Route::get('gerente/formEmp', function () {
-        return view('gerente.formEmp');
-    });
+    Route::get('gerente/fichaHist/{id}', [EmpleadoController::class, 'fichaHistorica']);
+    Route::get('gerente/formEmp', [EmpleadoController::class, 'formEmpleado']);
 
     //PEDIDOS
-    Route::get('/gerente/pedidos', function () {
-        return view('gerente.pedidos');
-    }); 
-
-    Route::get('/buscarPedS', function (Request $request) {
-        $BuscarPedS= $request->query('query');
-        return view('gerente.buscarPedS', compact('BuscarPedS'));
-    })->name('buscarPedS');
+    Route::get('/gerente/pedidos',[PedidoController::class, 'mostrarPedidos']); 
+    Route::get('/buscarPedS', [PedidoController::class, 'obtenerPedidoID']);
 
     //COMPRAS
     Route::get('/gerente/compras', [CompraController::class, 'mostrarCompras']); 
+    Route::get('/buscarCompraS', [CompraController::class, 'obtenerCompraID']);
 
-    Route::get('/buscarCompraS', function (Request $request) {
-        $BuscarComS= $request->query('query');
-        return view('gerente.buscarCompraS', compact('BuscarComS'));
-    })->name('buscarCompraS');
-
-    //STOCK
-    Route::get('/gerente/laboratorios', function () {
-        return view('gerente.laboratorios');
-    }); 
-
-    Route::get('/buscarLab', function (Request $request) {
-    $BuscarL= $request->query('query');
-    return view('gerente.buscarLab', compact('BuscarL'));
-    })->name('buscarLab');
-
-    Route::get('/gerente/laboratoriosAfi', function () {
-        return view('gerente.laboratoriosAfi');
-    }); 
-
-    Route::get('/gerente/afiliarlab', function () {
-        return view('gerente.afiliarlab');
-    }); 
-
-    Route::get('gerente/formLab', function () {
-        return view('gerente.formLab');
-    });
+    //LABORATOIOS
+    Route::get('/gerente/laboratorios', [LaboratorioController::class, 'mostrarLaboratorios']);
+    Route::put('/afiliarLaboratorio/{laboratorioId}/sucursal/{sucursalId}', [LaboratorioController::class, 'afiliarSucursal']);
+    Route::put('/desafiliarLaboratorio/{laboratorioId}/sucursal/{sucursalId}', [LaboratorioController::class, 'desafiliarSucursal']);
+    Route::get('/buscarLab', [LaboratorioController::class, 'buscarLaboratorio']);
 
     //CUENTAS POR PAGAR
-    Route::get('/gerente/cuentasxpagar', function () {
-        return view('gerente.cuentasxpagar');
-    }); 
-
-    Route::get('/buscarCP', function (Request $request) {
-        $BuscarCP= $request->query('query');
-        return view('gerente.buscarCuentaxPagar', compact('BuscarCP'));
-    })->name('buscarCP');
+    Route::get('/gerente/cuentasxpagar', [CompraController::class, 'obtenerCuentasPorPagar']); 
 
 });
 

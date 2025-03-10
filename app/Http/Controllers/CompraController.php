@@ -32,16 +32,43 @@ class CompraController extends Controller
 
     public function obtenerCompraID(Request $request){
         $query = $request->input('query');
+        $user = Auth::user();
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleado->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
 
-        $compras = Compra::where('id', 'LIKE', '%' . $query . '%')->get();
-        
-        return view('analista.compras', compact('compras'));
+        $compras = Compra::whereHas('pedido', function ($q) use ($sucursal) {
+            $q->where('sucursal_id', $sucursal->id);
+        })
+        ->where('id', 'LIKE', '%' . $query . '%')
+        ->get();
+
+        if($cargo->nombre == "Analista de Compra"){
+            return view('analista.compras', compact('compras'));
+
+        }else if($cargo->nombre == "Gerente"){
+            return view('gerente.compras', compact('compras'));
+        }
     }
 
     public function obtenerCuentasPorPagar(){
-        $cuentas = Compra::where('status', 'Por Pagar')->get();
+        $user = Auth::user();
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleado->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
 
-        return view('analista.cuentasxpagar', compact('cuentas'));
+        $cuentas = Compra::whereHas('pedido', function ($q) use ($sucursal) {
+            $q->where('sucursal_id', $sucursal->id);
+        })
+        ->where('status', 'Por Pagar')
+        ->get();
+
+        if($cargo->nombre == "Analista de Compra"){
+            return view('analista.cuentasxpagar', compact('cuentas'));
+
+        }else if($cargo->nombre == "Gerente"){
+            return view('gerente.cuentasxpagar', compact('cuentas'));
+        }
     }
 
     public function editarCompra($id){

@@ -17,7 +17,7 @@
 @section('contenido')
 
         <div class="container">
-            <h1>Bienvenido al Panel de Analista de compras</h1>
+            <h1>Bienvenido al Panel de Analista de compras de la Sucursal {{$sucursal->nombre}}</h1>
             <p>¡Has iniciado sesión como Analista de compras!</p>
         </div>
 

@@ -17,22 +17,14 @@
 @section('contenido')
 
         <div class="container">
-            <h1>Bienvenido al Panel de Gerente </h1>
+            <h1>Bienvenido al Panel de Gerente de la Sucursal {{$sucursal->nombre}}</h1>
             <p>¡Has iniciado sesión como gerente!</p><br>
         </div>
     
     <a class="botonIr" href="/gerente/empleados">Gestionar empleados</a><br><br><br>
-
     <a class="botonIr" href="/gerente/pedidos">Gestionar pedidos</a><br><br><br>
-
     <a class="botonIr" href="/gerente/compras">Gestionar compras</a><br><br><br>
-
     <a class="botonIr" href="/gerente/laboratorios">Gestionar laboratorios</a><br><br><br>
-
-    <a class="botonIr" href="/gerente/laboratoriosAfi">Laboratorios afiliados</a><br><br><br>
-
-    <a class="botonIr" href="/gerente/afiliarlab">Afiliar labortorio</a><br><br><br>
-
     <a class="botonIr" href="/gerente/cuentasxpagar">Ver cuentas por pagar</a><br><br><br>
 
 @endsection
