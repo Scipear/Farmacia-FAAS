@@ -13,7 +13,7 @@
     </ul>
 </header>
 @section('contenido')
-<h1>Formulario para crear un Cargo </h1>
+<h1>Formulario para actualizar un Cargo </h1>
 <form method="POST" action="/cargos/{{$cargo->id}}">
     @csrf
     @method('PUT')
