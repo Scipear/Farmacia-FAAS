@@ -6,9 +6,8 @@
     @yield('header', 'Farmacias FAAS')
     <ul class="nav-tabs"> <!-- Pestañas dentro del header -->
             <li class="nav-item">    
-                <a class="nav-link active" href="/analista/compras">Volver</a>
+                <a class="nav-link active" href="/analista/pedidos">Volver</a>
             </li>
-
             <li class="nav-item">
                 <a class="nav-link active" href="/analista/inicioAnalista">Inicio</a>
             </li>
@@ -19,11 +18,13 @@
 </header>
 
 @section('contenido')
-<h1>Lista de Medicinas de la Compra con codigo {{$compra->id}}</h1>
+<h1>Lista de Medicinas</h1>
         <div class="container">
         </div>
+        <div>        
+ 
+        </div>
 
-        <a  class="botonAg" href="/analista/compra/{{$compra->id}}/formCompraMedicina">Agregar +</a>
         <center>
             <table>
                 <tr>

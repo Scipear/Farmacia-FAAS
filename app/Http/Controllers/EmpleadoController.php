@@ -7,13 +7,19 @@ use App\Models\Empleado;
 use App\Models\Sucursal;
 use App\Models\TelefonoEmpleado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmpleadoController extends Controller
 {
     // Obtiene todos los empleados de la tabla
     public function mostrarEmpleados(){
+        $user = Auth::user();
+        
+        $empleadoLogged = $user->empleado;
+        $sucursal = $empleadoLogged->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleadoLogged->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
         $empleados = Empleado::all();
-
+        
         foreach($empleados as $empleado){
             $cargoActual = $empleado->cargos()->whereNull('cargo_empleado.fechaFin')->first();
             $sucursalActual = $empleado->sucursales()->whereNull('empleado_sucursal.fecha_salida')->first();
@@ -21,11 +27,44 @@ class EmpleadoController extends Controller
             $empleado->cargoActual = $cargoActual ? $cargoActual->nombre : "No";
             $empleado->sucursalActual = $sucursalActual ? $sucursalActual->nombre : "No";
         }
+        
+        
+        if($cargo->nombre == "Administrador General"){
+            return view('admin.empleados', compact('empleados'));
 
-        return view('admin.empleados', compact('empleados'));
+        }else if($cargo->nombre == "Gerente"){
+            $empleadosSucursal = $empleados->where('sucursalActual', '=', $sucursal->nombre);
+            return view('gerente.empleados', compact('empleadosSucursal', 'sucursal'));
+        }
+    }
+
+    public function obtenerSucursal(){
+        $user = Auth::user();
+
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleado->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
+
+        if($cargo->nombre == "Analista de Compra"){
+
+            return view('analista.inicioAnalista', compact('sucursal'));
+
+        }else if($cargo->nombre == "Gerente"){
+
+            return view('gerente.inicioGerente', compact('sucursal'));
+
+        }else if($cargo->nombre == "Farmaceutico"){
+            return view('farmaceutico.inicioFarmaceutico', compact('sucursal'));
+
+        }
     }
 
     public function obtenerEmpleadoID($id){
+        $user = Auth::user();
+        
+        $empleadoLogged = $user->empleado;
+        $cargo = $empleadoLogged->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
+
         $empleado = Empleado::findOrFail($id);
         $cargoActual = $empleado->cargos()->whereNull('cargo_empleado.fechaFin')->first();
         $sucursalActual = $empleado->sucursales()->whereNull('empleado_sucursal.fecha_salida')->first();
@@ -34,8 +73,14 @@ class EmpleadoController extends Controller
         $empleado->sucursalActual = $sucursalActual;
         $cargos = Cargo::all();
         $sucursales = Sucursal::all();
+
+        if($cargo->nombre == "Administrdor General"){   
+            return view('admin.editFormEmp', compact('empleado', 'cargos', 'sucursales'));
+
+        }else if($cargo->nombre == "Gerente"){
+            return view('gerente.editFormEmp', compact('empleado', 'cargos', 'sucursales'));
+        }
         
-        return view('admin.editFormEmp', compact('empleado', 'cargos', 'sucursales'));
     }
 
     public function buscarEmpleado(Request $request){
@@ -55,10 +100,22 @@ class EmpleadoController extends Controller
     }
 
     public function formEmpleado(){
-        $cargos = Cargo::all();
-        $sucursales = Sucursal::all();
+        $user = Auth::user();
+        
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleado->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
 
-        return view('admin.formEmp', compact('cargos','sucursales'));
+        $cargos = Cargo::all();
+        
+        if($cargo->nombre == "Administrdor General"){
+            $sucursales = Sucursal::all();
+            
+            return view('admin.formEmp', compact('cargos','sucursales'));
+
+        }else if($cargo->nombre == "Gerente"){
+            return view('gerente.formEmp', compact('cargos','sucursal'));
+        }
     }
 
     public function obtenerTelefonosdeEmpleado($id){
@@ -67,8 +124,22 @@ class EmpleadoController extends Controller
         return response()->json($telefonos, 200);
     }
 
+    public function fichaHistorica($id){
+        $empleado = Empleado::findOrFail($id);
+
+        $cargos = $empleado->cargos()->get();
+        $sucursales = $empleado->sucursales()->get();
+
+        return view('gerente.fichaHist', compact('empleado','cargos','sucursales'));
+    }
+
     // Crea un nuevo registro de empleado a traves de una peticion
     public function crearEmpleado(Request $request){
+        $user = Auth::user();
+
+        $empleadoLogged = $user->empleado;
+        $cargo = $empleadoLogged->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
+
         $request->validate([
             'cedula' => 'required|unique:empleados|max:8',
             'nombre' => 'required',
@@ -104,12 +175,21 @@ class EmpleadoController extends Controller
                 }
                 }
         }
-    
-        return redirect('/admin/empleados'); // Respuesta en formato JSON implementada por ahora
+        
+        if($cargo->nombre == 'Administrador General'){
+            return redirect('/admin/empleados');
+        
+        }else if($cargo->nombre == 'Gerente'){
+            return redirect('/gerente/empleados');
+        }
     }
 
     // Actualiza los datos de un empleado
     public function actualizarEmpleado(Request $request, $id){
+        $user = Auth::user();
+
+        $empleadoLogged = $user->empleado;
+        $cargo = $empleadoLogged->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
 
         $empleado = Empleado::findOrFail($id); // Busca a un empleado por su ID
 
@@ -124,9 +204,7 @@ class EmpleadoController extends Controller
             'sucursal' => 'required|exists:sucursales,id',
         ]);
         if($request->status == 'Retirado' || $request->status == 'Jubilado' || $request->status == 'Despedido'){
-            $this->desasignarEmpleado($request, $id);
-
-            return redirect('/admin/empleados');
+            $this->desasignarEmpleado($request, $id, $cargo);
         }
 
         $cargoActual = $empleado->cargos()->whereNull('cargo_empleado.fechaFin')->first();
@@ -153,10 +231,15 @@ class EmpleadoController extends Controller
         $empleado->update($request->only(['cedula', 'nombre', 'apellido', 
         'correo', 'direccion', 'status']));
 
-        return redirect('/admin/empleados');
+        if($cargo->nombre == 'Administrador General'){
+            return redirect('/admin/empleados');
+        
+        }else if($cargo->nombre == 'Gerente'){
+            return redirect('/gerente/empleados');
+        }
     }
 
-    public function desasignarEmpleado(Request $request, $id){
+    public function desasignarEmpleado(Request $request, $id, $cargo){
         $empleado = Empleado::findOrFail($id);
         
         $request->validate([
@@ -170,6 +253,13 @@ class EmpleadoController extends Controller
         if($cargoActual && $sucursalActual){
             $empleado->cargos()->updateExistingPivot($cargoActual->id, ['fechaFin' => now()]);
             $empleado->sucursales()->updateExistingPivot($sucursalActual->id, ['fecha_salida' => now()]);
+        }
+
+        if($cargo->nombre == 'Administrador General'){
+            return redirect('/admin/empleados');
+        
+        }else if($cargo->nombre == 'Gerente'){
+            return redirect('/gerente/empleados');
         }
     }
 

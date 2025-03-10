@@ -15,8 +15,8 @@
 </header>
 @section('contenido')
         <div class="container">
-            <h1>Bienvenido al Panel de Farmaceutico</h1>
-            <p>¡Has iniciado sesión como farmaceutico!</p><br>
+            <h1>Bienvenido al Panel de Farmaceutico de la Sucursal {{$sucursal->nombre}}</h1>
+            <p>¡Has iniciado sesión como Farmaceutico!</p><br>
         </div>
         <a  class="botonIr" href="/farmaceutico/medicina">Gestionar Medicinas</a><br><br><br>
         <a  class="botonIr" href="/farmaceutico/medicamento">Gestionar Medicamentos</a><br><br><br>

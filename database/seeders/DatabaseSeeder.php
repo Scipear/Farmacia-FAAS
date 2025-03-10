@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Medicina;
+use App\Models\Medicina_sucursal;
 use App\Models\Sucursal;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,7 +16,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         $this->call(CargoSeeder::class);
         $this->call(MonodrogaSeeder::class);
         $this->call(AccionTSeeder::class);
@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RolSeeder::class);
         $this->call(SucursalSeeder::class);
         $this->call(EmpleadoSeeder::class);
+        Medicina_sucursal::factory(150)->create();
 
         // User::factory(10)->create();
 

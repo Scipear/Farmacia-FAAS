@@ -9,7 +9,7 @@
             <a class="nav-link active" href="/gerente/inicioGerente">Inicio</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/logout">Cerrar Sesión</a>
         </li>  
 </ul>
 </header>
@@ -26,29 +26,46 @@
 
         <a  class="botonAg" href="formEmp">Agregar +</a>
 
-        <div class="espacio">
-        <a  class="botonRep" href="fichaHist">Generar ficha historica+</a> 
-        </div>
-
-
         <center>
             <table>
                 <tr>
-                    <th>Identificador</th>
-                    <th>Nombre</th>
                     <th>Cedula</th>
+                    <th>Nombre</th>
                     <th>Apellido</th>
+                    <th>Teléfono(s)</th>
                     <th>Correo</th>
                     <th>Dirección</th>
+                    <th>Status</th>
+                    <th>Cargo</th>
+                    <th>Sucursal</th>
+                    <th>Opciones</th>
                 </tr>
-                <tr>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                </tr>
+
+                @foreach($empleadosSucursal as $empleado)
+                    <tr>
+                        <td>{{$empleado->cedula}}</td>
+                        <td>{{$empleado->nombre}}</td>
+                        <td>{{$empleado->apellido}}</td>
+                        <td>             
+                            @foreach($empleado->telefonos as $telefono)
+                                {{$telefono->numero}}<br>
+                            @endforeach
+                        </td>
+                        <td>{{$empleado->correo}}</td>
+                        <td>{{$empleado->direccion}}</td>
+                        <td>{{$empleado->status}}</td>
+                        <td>{{$empleado->cargoActual}}</td>
+                        <td>{{$empleado->sucursalActual}}</td>
+                        <td>
+                        <div class="buttonCont">
+                            <a  class="botonEd" href="/editarEmpleado/{{$empleado->id}}">Editar</a>
+                            
+                            <a  class="botonEd" href="/gerente/fichaHist/{{$empleado->id}}">Ver ficha historica</a>
+                        </div>
+                        </td>
+                        
+                    </tr>
+                @endforeach
             </table>
         </center>
 @endsection

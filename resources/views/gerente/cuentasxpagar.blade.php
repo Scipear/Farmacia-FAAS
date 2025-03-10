@@ -9,7 +9,7 @@
             <a class="nav-link active" href="/gerente/inicioGerente">Inicio</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link" href="/logout">Cerrar Sesión</a>
         </li>  
 </ul>
 </header>
@@ -17,37 +17,32 @@
 @section('contenido')
     <h1>Información de Cuentas por pagar</h1>
 
-    <!-- RUTA DE BUSQUEDA 
-    Route::get('/buscarCP', function (Request $request) {
-        $BuscarCP= $request->query('query');
-        return view('gerente.buscarCuentaxPagar', compact('BuscarCP'));
-    })->name('buscarCP');
-    -->
-        <div>        
-            <form action="{{ route('buscarCP') }}" method="GET">
-            <input type="text" name="query" placeholder="Buscar cuenta por pagar...">
-            <button type="submit">Buscar</button>
-        </form>
-        </div>
-
-        <center>
-            <table>
+    <center>
+        <table>
+            <tr>
+                <th>Identificador</th>
+                <th>Sucursal</th>
+                <th>Empleado</th>
+                <th>Laboratorio</th>
+                <th>Precio A Pagar</th>
+                <th>Fecha de Llegada</th>
+                <th>Observación</th>
+                <th>Status</th>
+                <th>Opciones</th>
+            </tr>
+            @foreach($cuentas as $cuenta)    
                 <tr>
-                    <th>Identificador</th>
-                    <th>Fecha de Llegada</th>
-                    <th>Precio a Pagar</th>
-                    <th>Forma de Pago</th>
-                    <th>Observación</th>
-                    <th>Status</th>
+                    <td>{{$cuenta->id}}</td>
+                    <td>{{$cuenta->pedido->sucursal->nombre}}</td>
+                    <td>{{$cuenta->pedido->empleado->nombre}} {{$cuenta->pedido->empleado->apellido}}</td>
+                    <td>{{$cuenta->pedido->laboratorio->nombre}}</td>
+                    <td>{{$cuenta->precioPagar}}</td>
+                    <td>{{$cuenta->fechaLlegada}}</td>
+                    <td>{{$cuenta->pedido->tipoPago}}</td>
+                    <td>{{$cuenta->observaciones}}</td>
+                    <td>{{$cuenta->status}}</td>
                 </tr>
-                <tr>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                    <td>Genvem</td>
-                </tr>
-            </table>
-        </center>
+            @endforeach
+        </table>
+    </center>
 @endsection

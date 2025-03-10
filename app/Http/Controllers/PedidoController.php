@@ -5,27 +5,77 @@ namespace App\Http\Controllers;
 use App\Models\Pedido;
 use App\Models\Medicina_pedido;
 use App\Models\Compra;
+use App\Models\Laboratorio;
+use App\Models\Medicina;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PedidoController extends Controller
 {
     // Obtiene todos los pedidos de la tabla
     public function mostrarPedidos(){
-        $pedidos = Pedido::all();
+        $user = Auth::user();
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleado->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
 
-        return response()->json($pedidos, 200);
+        $pedidos = Pedido::where('sucursal_id', $sucursal->id)->get();
+
+        if($cargo->nombre == "Analista de Compra"){
+            return view('analista.pedidos', compact('pedidos'));
+
+        }else if($cargo->nombre == "Gerente"){
+            return view('gerente.pedidos', compact('pedidos'));
+        }
     }
 
-    public function obtenerPedidoID($id){
+    public function obtenerPedidoID(Request $request){
+        $user = Auth::user();
+        $query = $request->input('query');
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $cargo = $empleado->cargos->whereNull('cargo_sucursal.fechaFinal')->first();
+
+        $pedidos = Pedido::where('sucursal_id', $sucursal->id)
+        ->where('id', 'LIKE', '%' . $query . '%')
+        ->get();
+
+        if($cargo->nombre == "Analista de Compra"){
+            return view('analista.pedidos', compact('pedidos'));
+
+        }else if($cargo->nombre == "Gerente"){
+            return view('gerente.pedidos', compact('pedidos'));
+        }
+    }
+
+    public function editarPedido($id){
         $pedido = Pedido::findOrFail($id);
-        
-        return response()->json($pedido, 200);
+
+        return view('analista.actualizarPedido', compact('pedido'));
     }
 
     public function obtenerMedicinas($id){
-        $medicinas = Medicina_pedido::where('pedido_id', $id)->get();
+        $pedido = Pedido::findOrFail($id);
+        $medicinas = $pedido->medicinas;
+
+        $medicinas->each(function ($medicina) {
+            $medicina->precio = $medicina->pivot->precio;
+            $medicina->cantidad = $medicina->pivot->cantidad;
+        });
         
-        return response()->json($medicinas, 200);
+        return view('analista.pedidoMedicina', compact('medicinas'));
+    }
+
+    public function formPedido(){
+        $user = Auth::user();
+
+        $empleado = $user->empleado;
+        $sucursal = $empleado->sucursales->whereNull('empleado_sucursal.fecha_salida')->first();
+        $laboratorios = $sucursal->laboratorios()
+                        ->wherePivot('fecha_final', null)
+                        ->get();
+
+        return view('analista.formPedido', compact('sucursal', 'empleado', 'laboratorios'));
     }
 
     // Crea un nuevo registro de pedido a traves de una peticion
@@ -34,43 +84,47 @@ class PedidoController extends Controller
             'sucursal_id' => 'required|exists:sucursales,id',
             'empleado_id' => 'required|exists:empleados,id',
             'laboratorio_id' => 'required|exists:laboratorios,id',
-            'precioTotal' => 'required',
             'tipoPago' => 'required',
-            'status' => 'required',
             'observaciones' => 'nullable',
             'medicinas' => 'required|array',
             'medicinas.*.medicina_id' => 'required|exists:medicinas,id',
-            'medicinas.*.precio' => 'required|numeric',
             'medicinas.*.cantidad' => 'required|numeric',
         ]); // Validaciones para los campos del registro
 
+        
         $pedido = Pedido::create($request->only(['sucursal_id', 'empleado_id', 'laboratorio_id', 
-        'precioTotal', 'tipoPago', 'status', 'observaciones']));
-
-        $compra = new Compra([
-            'precioPagar' => $request->precioTotal,
-            'observaciones' => 'nada',
-            'status' => 'Pendiente', // Quitar luego de refrescar la base de datos
-        ]);
-
-
-        $pedido->compras()->save($compra);
+        'tipoPago', 'observaciones']));
+        
         $this->guardarMedicinas($request->medicinas, $pedido);
 
-        return response()->json($pedido, 200); // Respuesta en formato JSON implementada por ahora
+        $compra = new Compra([
+            'precioPagar' => $pedido->precioTotal,
+            'observaciones' => '',
+        ]);
+
+        $pedido->compra()->save($compra);
+
+        return redirect('/analista/pedidos'); // Respuesta en formato JSON implementada por ahora
     }
 
     public function guardarMedicinas($medicinas, $pedido){
         $medicinasPedido = [];
+        $precioTotal = 0;
 
         foreach($medicinas as $medicina){
+            $medicinaAux = Medicina::find($medicina['medicina_id']);
+
             $medicinasPedido[$medicina['medicina_id']] = [
-                'precio' => $medicina['precio'],
-                'cantidad' => $medicina['cantidad']
+                'cantidad' => $medicina['cantidad'],
+                'precio' => $medicinaAux->precio_compra,
             ];
+
+            $precioTotal += $medicinaAux->precio_compra * $medicina['cantidad'];
         }
 
-        $pedido->medicinas()->sync($medicinasPedido);
+        $pedido->update(['precioTotal' => $precioTotal]);
+
+        $pedido->medicinas()->attach($medicinasPedido);
     }
 
     // Actualiza los datos de un pedido
@@ -85,7 +139,7 @@ class PedidoController extends Controller
 
         $pedido->update(['status' => $request->status, 'observaciones' => $request->observaciones]);
 
-        return response()->json($pedido, 200);
+        return redirect('/analista/pedidos');
     }
 
 }

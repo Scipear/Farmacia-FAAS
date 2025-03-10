@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function rol(){
         return $this->belongsTo(Rol::class);
     }
+
+    public function empleado(){
+        return $this->belongsTo(Empleado::class);
+    }
 }

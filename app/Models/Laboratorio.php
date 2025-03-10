@@ -33,6 +33,6 @@ class Laboratorio extends Model
     //Relaciones muchos a muchos
 
     public function sucursales(){
-        return $this->belongsToMany(Sucursal::class)->using(Sucursal_laboratorio::class)->withPivot('fecha_inicio', 'fecha_final');
+        return $this->belongsToMany(Sucursal::class, 'sucursal_laboratorio', 'laboratorio_id', 'sucursal_id')->withPivot('fecha_inicio', 'fecha_final');
     }
 }

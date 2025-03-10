@@ -83,15 +83,23 @@ class MedicinaController extends Controller
         if($sucursal_id && $presentacion_id){
             $medicinas->whereHas('sucursales', function ($query) use ($sucursal_id) {
                     $query->where('sucursal_id', $sucursal_id);
+                    })->whereHas('medicamento', function ($q) use ($busqueda) {
+                        $q->where('nombre', 'LIKE', '%' . $busqueda . '%');
                     })->where('presentacion_id', $presentacion_id);
+
         }else if($sucursal_id){
             // Solo filtro de sucursal
-            $medicinas->whereHas('sucursales', function ($query) use ($sucursal_id) {
+            $medicinas->whereHas('medicamento', function ($q) use ($busqueda) {
+                $q->where('nombre', 'LIKE', '%' . $busqueda . '%');
+            })->whereHas('sucursales', function ($query) use ($sucursal_id) {
                     $query->where('sucursal_id', $sucursal_id);
             });
+            
         }else if($presentacion_id){
             // Solo filtro de presentación
-            $medicinas->where('presentacion_id', $presentacion_id);
+            $medicinas->whereHas('medicamento', function ($q) use ($busqueda) {
+                $q->where('nombre', 'LIKE', '%' . $busqueda . '%');
+            })->where('presentacion_id', $presentacion_id);
         }
 
         $medicinas = $medicinas->get();

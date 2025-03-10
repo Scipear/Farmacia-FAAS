@@ -37,7 +37,7 @@ class Pedido extends Model
     }
     
     //relacion uno a uno
-    public function compras()
+    public function compra()
     {
         return $this->hasOne(Compra::class);
     }

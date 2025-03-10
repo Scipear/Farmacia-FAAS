@@ -17,7 +17,7 @@
     <form method="POST" action="/empleado">
         @csrf
 
-        <label>Cédula</label>
+        <label>Cédula (MAX: 8 digitos)</label>
         <input type="text" id="cedula" name="cedula" required><br><br>
 
         <label>Nombre</label>
