@@ -227,9 +227,7 @@ Route::middleware([VerificarRol::class . ':Administrador general'])->group(funct
 
 // RUTAS PARA FARMACEUTICO
 Route::middleware([VerificarRol::class . ':Farmaceutico'])->group(function (){
-    Route::get('/farmaceutico/inicioFarmaceutico', function () {
-        return view('farmaceutico.inicioFarmaceutico');
-});
+    Route::get('/farmaceutico/inicioFarmaceutico', [EmpleadoController::class, 'obtenerSucursal']);
 
    //RUTAS PARA FARMACEUTICO MEDICINA
     Route::get('/farmaceutico/medicina', [MedicinaController::class, 'mostrarMedicinas']);

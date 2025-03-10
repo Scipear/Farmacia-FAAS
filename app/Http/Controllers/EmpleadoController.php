@@ -47,7 +47,7 @@ class EmpleadoController extends Controller
 
         if($cargo->nombre == "Analista de Compra"){
 
-            return view('analista.inicioanalista', compact('sucursal'));
+            return view('analista.inicioAnalista', compact('sucursal'));
 
         }else if($cargo->nombre == "Gerente"){
 
